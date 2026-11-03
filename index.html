@@ -73,6 +73,13 @@ button.btn{border:0;cursor:pointer;font-size:.95rem;padding:10px 16px}.btn.alt{b
 .pk .fit{background:var(--bg);border-radius:8px;padding:8px 10px;margin:8px 0;font-size:.9rem}.fxl{display:grid;gap:6px}.fxl .fx summary{padding:9px 10px 9px 32px}.fxl .fx summary b{font-size:.88rem;font-weight:600}.fxl .fx summary:before{top:8px}.fxl .fxb{padding-left:12px}.fxl .fxb h4{margin:8px 0 2px}.fxl .fxb p{font-size:.9rem}
 .lbx{position:fixed;inset:0;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;z-index:60;padding:12px;cursor:zoom-out}.lbx img{max-width:100%;max-height:100%;border-radius:8px}
 .tp h3{display:flex;align-items:center;gap:8px}.tp p{margin:6px 0 0}.tipn{display:inline-flex;min-width:28px;height:28px;border-radius:50%;background:var(--ac);color:var(--on);align-items:center;justify-content:center;font-weight:800;font-size:.85rem}
+.dh{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap}.dh h2{margin:0}.chipp{background:var(--bg);border:1px solid var(--bd);border-radius:99px;padding:6px 13px;font-size:.84rem;font-weight:600}
+.dstat{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:14px}.dstat button{text-align:left;border:1px solid var(--bd);background:var(--card);border-radius:12px;padding:14px;cursor:pointer;color:var(--tx);box-shadow:var(--sh)}.dstat button:hover,.tile:hover{border-color:var(--ac)}.dstat b{display:block;font-size:1.8rem;color:var(--ac);line-height:1.1}.dstat small{color:var(--mu)}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:14px;margin-top:14px;align-items:start}.dgrid>.card{margin-top:0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin-top:10px}.tile{text-align:left;border:1px solid var(--bd);background:var(--card);border-radius:12px;padding:14px;cursor:pointer;color:var(--tx);box-shadow:var(--sh);transition:transform .12s}.tile:hover{transform:translateY(-2px)}.tile .ti{font-size:1.5rem}.tile b{display:block;margin-top:4px}.tile small{color:var(--mu);line-height:1.35;display:block;margin-top:2px}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:12px;margin-top:10px}.flow>div{background:var(--bg);border:1px solid var(--bd);border-radius:12px;padding:12px}.flow .n{display:inline-flex;width:26px;height:26px;border-radius:50%;background:var(--ac);color:var(--on);align-items:center;justify-content:center;font-weight:800;font-size:.8rem;margin-right:6px}.flow p{margin:6px 0 8px;font-size:.88rem;color:var(--mu)}
+.ev{display:flex;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid var(--bd)}.ev:last-of-type{border-bottom:0}.evd{width:50px;flex:none;text-align:center;background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:4px 0}.evd b{display:block;font-size:.68rem;text-transform:uppercase;color:var(--ac);letter-spacing:.04em}.evd span{font-size:1.2rem;font-weight:800;line-height:1.1}.evt{flex:1;min-width:0}.evt small{color:var(--mu);display:block}
+.dq label{display:block;font-size:.8rem;color:var(--mu);margin:8px 0 3px}.dq select,.dq input{width:100%}.dq .row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 footer{color:var(--mu);font-size:.78rem;margin-top:28px}
 /* ===== Layout optimisation: desktop + mobile ===== */
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}body{overflow-x:hidden}
@@ -262,6 +269,7 @@ amOld(){return `<h2>Business portfolio &amp; daily routines</h2><p class="sub">O
 <div class="card"><h3>Daily check (10 minutes)</h3><ol><li>Set the date range to the last 3 days and compare with the last 7.</li><li>Sort by amount spent; look at cost per result first.</li><li>Open any ad above your target and run the diagnosis tab.</li><li>Check frequency and rankings; pause obvious losers.</li><li>Reply to every new inquiry; note the quality of leads.</li></ol></div>
 <div class="card"><h3>Setup checklist</h3><ul><li>Business verification and a payment method on file.</li><li>Pixel and Conversions API installed; test events.</li><li>Domain verified; priority events configured.</li><li>Page roles: admins limited, staff given only the access they need.</li><li>Two-factor authentication on every admin.</li></ul></div>
 <div class="card"><h3>Learning phase rules</h3><ul><li>Each ad set needs about 50 results in 7 days to leave the learning phase.</li><li>Avoid edits to budget (over 20%), audience or creative in the first 3 days.</li><li>Budget per ad set should be at least 5–10× your target cost per result per day.</li></ul></div></div>`},
+dash(){return `<div id="dash"></div>`},
 ads(){return `<div class="banner">${art.ads}<h2>Ads Packages</h2></div><div id="aroot"></div>`},
 pb(){return `<div class="banner">${art.pb}<h2>Pro playbook</h2></div><p class="sub">A repeatable process for running social ads professionally.</p>
 <div class="two"><div class="card"><h3>1. Campaign structure</h3><ul><li>One goal per campaign: messages, leads or sales.</li><li>1–3 ad sets (broad, interest, retargeting) with 3–5 ads each.</li><li>Name clearly: Goal_Audience_Offer_Date.</li></ul></div>
@@ -521,7 +529,7 @@ $('tkr').onclick=()=>{dn.clear();boxes.forEach(c=>c.checked=false);ls.s('am_task
 $('fpl').onclick=e=>{const b=e.target.closest('button');if(b){FP=b.dataset.k;featRender()}};$('fq2').oninput=featRender;
 $('fall').onclick=()=>$('fbd').querySelectorAll('details').forEach(d=>d.open=true);$('fnone').onclick=()=>$('fbd').querySelectorAll('details').forEach(d=>d.open=false);
 featRender()}
-const tabs=[['bench','Benchmarks','📊'],['sim','Simulator','🧮'],['dx','Diagnose','🩺'],['rep','Reports','📝'],['am','Ads Manager','⚙️'],['ads','Ads','📣'],['pb','Playbook','🚀']];
+const tabs=[['dash','Dashboard','🏠'],['bench','Benchmarks','📊'],['sim','Simulator','🧮'],['dx','Diagnose','🩺'],['rep','Reports','📝'],['am','Ads Manager','⚙️'],['ads','Ads','📣'],['pb','Playbook','🚀']];
 const nav=$('nav'),out=$('out');
 let smV='f',smSC=null;
 const snf=(x,d)=>isFinite(x)?x.toFixed(d):'—',snn=x=>isFinite(x)?n0(x):'—',spp=x=>isFinite(x)?pso(x):'—';
@@ -1046,6 +1054,40 @@ $('aroot').onclick=e=>{const b=e.target.closest('[data-act]');if(!b)return;const
 if(a==='l'||a==='v'){if(a==='l')ADL=+v;else ADV=v;try{localStorage.setItem('ad_l',ADL);localStorage.setItem('ad_v',ADV)}catch(x){}adsRender()}
 else if(a==='p'){ADP=v;adsRender()}else if(a==='ex'||a==='co')$('aroot').querySelectorAll('.pkgs details').forEach(d=>d.open=a==='ex');
 else if(a==='view')adsLbx(ADIMG[ADS[ADP].img]);else if(a==='dl')adsDl(ADS[ADP].img)};adsRender()}
+function dashEv(T){const o=[],nth=(y,m,dw,n)=>{const d=new Date(y,m,1);let c=0;for(;;d.setDate(d.getDate()+1))if(d.getDay()===dw&&++c===n)return new Date(d)},
+easter=y=>{const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=(h+l-7*m+114)%31+1;return new Date(y,mo-1,da)};
+[T.getFullYear(),T.getFullYear()+1].forEach(y=>{for(let m=0;m<12;m++){const big=m>=8;o.push({n:`${m+1}.${m+1} ${big?'mega sale':'double-date sale'}`,d:new Date(y,m,m+1),l:big?14:7})}
+const e=easter(y),hw=new Date(e);hw.setDate(e.getDate()-7);const bf=nth(y,10,4,4);bf.setDate(bf.getDate()+1);
+o.push({n:'Holy Week begins',d:hw,l:21},{n:'Valentine’s Day',d:new Date(y,1,14),l:14},{n:'Mother’s Day',d:nth(y,4,0,2),l:21},{n:'Father’s Day',d:nth(y,5,0,3),l:14},{n:'Black Friday',d:bf,l:10},{n:'Christmas Day',d:new Date(y,11,25),l:30})});
+return o.filter(x=>x.d>=T).sort((a,b)=>a.d-b.d)}
+function dashVat(){const d=parseFloat($('dv_d').value),n=parseFloat($('dv_n').value),r=(parseFloat($('dv_r').value)||0)/100,o=$('dv_o');
+if(!(d>0&&n>0)){o.innerHTML='<span class="note">Enter a daily budget and number of days.</span>';return}
+const b=d*n,v=b*r,t=b+v;o.innerHTML=`<ol><li>${pso(d)} per day × ${n} days = <b>${pso(b)}</b></li><li>${pso(b)} × ${(r*100).toFixed(0)}% VAT = <b>${pso(v)}</b></li><li>${pso(b)} + ${pso(v)} = <b>${pso(t)}</b> total for ${n} days</li></ol>`}
+function dashHc(){const p=$('dh_p').value,m=$('dh_m').value,v=parseFloat($('dh_v').value),M={msg:['inq','l','₱'],ctr:['ctr','h','%'],cpc:['cpc','l','₱']}[m],t=R[p]&&R[p][M[0]],o=$('dh_o');
+if(!t){o.innerHTML='<span class="note">No benchmark for this combination yet.</span>';return}
+const sg=M[1]==='l'?'≤':'≥',rg=`Excellent ${sg} ${fm(M[2],t[0])} · Good ${sg} ${fm(M[2],t[1])} · Average ${sg} ${fm(M[2],t[2])}`;
+if(isNaN(v)){o.innerHTML=`<span class="note">${rg}</span>`;return}
+const r=rr(M[1],t,v);o.innerHTML=`<div class="verd ${C[r]}">${fm(M[2],v)} is ${T[r]}</div><p class="note" style="margin:6px 0">${rg}</p>${r>=2?'<button class="btn alt" data-go="dx">Diagnose why →</button>':''}`}
+function dashInit(){const now=new Date(),T=new Date(now.getFullYear(),now.getMonth(),now.getDate()),ev=dashEv(T),dd=d=>Math.round((d-T)/864e5),fmt=d=>d.toLocaleDateString('en-PH',{month:'short',day:'numeric'}),dl=n=>n===0?'today':n===1?'tomorrow':`in ${n} days`,
+ld=(y,m)=>new Date(y,m+1,0).getDate(),Y=T.getFullYear(),Mo=T.getMonth(),pd=[new Date(Y,Mo,15),new Date(Y,Mo,Math.min(30,ld(Y,Mo))),new Date(Y,Mo+1,15)].find(d=>d>=T),
+h=now.getHours(),gr=h<12?'Good morning':h<18?'Good afternoon':'Good evening',ns=ev[0];let lt=null;try{lt=localStorage.getItem('last_tab')}catch(e){}
+const tn=k=>{const t=tabs.find(x=>x[0]===k);return t?t[2]+' '+t[1]:''},nf=Object.values(FEAT).reduce((a,x)=>a+x.g.reduce((b,g)=>b+g[1].length,0),0),npk=Object.values(ADS).reduce((a,x)=>a+x.pk.length,0),
+ST=[['Platforms benchmarked',Object.keys(P).length,'bench'],['Platform features explained',nf,'am'],['Business strategies',BIZ.length,'pb'],['Ads packages',npk,'ads'],['Report types',3,'rep'],['Languages for packages',3,'ads']],
+TL=[['bench','📊','Benchmarks','What good looks like in pesos for each platform.'],['sim','🧮','Simulator','Forecast results, plan a budget from a goal, compare scenarios.'],['dx','🩺','Diagnose','Find the weak link in a campaign and what to fix first.'],['rep','📝','Reports','Weekly, monthly and detailed client reports with charts.'],['am','⚙️','Ads Manager','Tasks, platform features explained, and the VAT budget.'],['ads','📣','Ads','Service packages, explanations and sales scripts.'],['pb','🚀','Playbook',`Strategies and budgets for ${BIZ.length} business types.`]],
+FL=[['1','Benchmark','See what a good cost per message, CTR and CPC look like.','bench'],['2','Plan the budget','Forecast results and add 12% VAT to the budget.','sim'],['3','Launch and manage','Follow the Ads Manager tasks and the business playbook.','am'],['4','Monitor and report','Diagnose problems and send clear client reports.','rep']],
+bt=Object.keys(PN).map(k=>{const r=R[k],c=(key,sg,u)=>r[key]?`${sg} ${fm(u,r[key][1])} <small class="note">excellent ${fm(u,r[key][0])}</small>`:'—';return `<tr><td><b>${PN[k]}</b></td><td>${c('inq','≤','₱')}</td><td>${c('ctr','≥','%')}</td><td>${c('cpc','≤','₱')}</td></tr>`}).join(''),
+pk=Object.keys(ADS).map(k=>{const a=ADS[k],ps=a.pk.map(x=>x.price);return `<button class="tile" data-pk="${k}"><span class="ti">${a.i}</span><b>${a.n}</b><small>${a.pk.length} packages · ₱${Math.min(...ps).toLocaleString()} to ₱${Math.max(...ps).toLocaleString()}</small></button>`}).join('');
+$('dash').innerHTML=`<div class="card"><div class="dh"><div><h2>${gr} 👋</h2><p class="sub" style="margin:2px 0 0">${T.toLocaleDateString('en-PH',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}</p></div><div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span class="chipp">💰 Next payday: ${fmt(pd)} (${dl(dd(pd))})</span><span class="chipp">🛒 Next sale: ${ns.n} (${dl(dd(ns.d))})</span>${lt&&lt!=='dash'&&tn(lt)?`<button class="btn" data-go="${lt}">Continue: ${tn(lt)} →</button>`:''}</div></div></div>
+<div class="dstat">${ST.map(x=>`<button data-go="${x[2]}"><b>${x[1]}</b><small>${x[0]}</small></button>`).join('')}</div>
+<div class="dgrid"><div class="card"><h3>📅 Upcoming dates to plan for</h3>${ev.slice(0,6).map(x=>{const pb=new Date(x.d);pb.setDate(pb.getDate()-x.l);const n=dd(x.d),soon=dd(pb)<=0;return `<div class="ev"><div class="evd"><b>${x.d.toLocaleDateString('en-PH',{month:'short'})}</b><span>${x.d.getDate()}</span></div><div class="evt"><b>${esc(x.n)}</b><small>${dl(n)} · ${soon?'start preparing now':'start preparing by '+fmt(pb)}</small></div><span class="badge">${n<=14?'soon':'later'}</span></div>`}).join('')}<p class="note" style="margin-top:8px">Typical marketplace and seasonal dates. Confirm exact campaign dates in each platform’s seller or ads portal.</p></div>
+<div class="card dq"><h3>💰 Quick budget with VAT</h3><div class="row"><div><label>Daily budget (₱)</label><input type="number" id="dv_d" value="200" step="any" min="0"></div><div><label>Days</label><input type="number" id="dv_n" value="7" step="1" min="1"></div></div><label>VAT rate (%)</label><input type="number" id="dv_r" value="12" step="any" min="0"><div id="dv_o" style="margin-top:8px"></div><button class="btn alt" data-go="am">Open the full VAT calculator →</button></div>
+<div class="card dq"><h3>🩺 Quick health check</h3><div class="row"><div><label>Platform</label><select id="dh_p">${Object.keys(PN).map(k=>`<option value="${k}">${PN[k]}</option>`).join('')}</select></div><div><label>Metric</label><select id="dh_m"><option value="msg">Cost per message (CPM)</option><option value="ctr">CTR (%)</option><option value="cpc">Cost per click (₱)</option></select></div></div><label>Your number</label><input type="number" id="dh_v" step="any" placeholder="e.g. 18"><div id="dh_o" style="margin-top:8px"></div></div></div>
+<h2>Jump to a section</h2><div class="tiles">${TL.map(x=>`<button class="tile" data-go="${x[0]}"><span class="ti">${x[1]}</span><b>${x[2]}</b><small>${x[3]}</small></button>`).join('')}</div>
+<div class="dgrid"><div class="card"><h3>📊 Benchmark snapshot</h3><div class="sc"><table><tr><th>Platform</th><th>Cost per message</th><th>CTR</th><th>Cost per click</th></tr>${bt}</table></div><p class="note" style="margin-top:6px">“Good” levels for the Philippines. Open Benchmarks for every tier and goal.</p></div>
+<div class="card"><h3>📣 Ads packages at a glance</h3><div class="tiles" style="margin-top:0">${pk}</div></div></div>
+<h2>How to use this guide</h2><div class="flow">${FL.map(x=>`<div><b><span class="n">${x[0]}</span>${x[1]}</b><p>${x[2]}</p><button class="btn alt" data-go="${x[3]}">Open →</button></div>`).join('')}</div>`;
+$('dash').onclick=e=>{const b=e.target.closest('[data-go],[data-pk]');if(!b)return;if(b.dataset.pk)ADP=b.dataset.pk;show(b.dataset.go||'ads')};
+['dv_d','dv_n','dv_r'].forEach(i=>$(i).oninput=dashVat);['dh_p','dh_m','dh_v'].forEach(i=>{$(i).oninput=dashHc;$(i).onchange=dashHc});dashVat();dashHc()}
 const num=x=>{const v=parseFloat(String(x==null?'':x).replace(/[^0-9.\-]/g,''));return isNaN(v)?NaN:v},nz=s=>String(s).toLowerCase().replace(/[^a-z0-9]/g,'');
 const COL={name:[/^campaignname$/,/^adsetname$/,/^adname$/],acct:[/^accountname$/],st:[/^reportingstarts$/],en:[/^reportingends$/],sp:[/^amountspent/,/^spend/],im:[/^impressions$/],rc:[/^reach$/],ct:[/^ctrlinkclick/,/^ctrall/],ck:[/^linkclicks$/],rs:[/^results$/],rv:[/^purchasesconversionvalue/,/^websitepurchasesconversionvalue/,/^conversionvalue/],pu:[/^purchases$/,/^websitepurchases$/],mg:[/^messagingconversationsstarted$/],age:[/^age$/],gender:[/^gender$/],placement:[/^placement$/],platform:[/^platform$/]};
 function parseCSV(t){t=t.replace(/^\uFEFF/,'');const f=t.split('\n')[0],dl=[',','\t',';'].map(x=>[x,f.split(x).length]).sort((a,b)=>b[1]-a[1])[0][0],rows=[];let r=[],c='',q=false;
@@ -1096,15 +1138,15 @@ function show(k){nav.querySelectorAll('button').forEach(b=>b.classList.toggle('o
 out.innerHTML=V[k]()+`<footer>Benchmarks are directional, not guarantees. Facebook figures: Spiralytics 2026 PH data; Google: Truelogic PH data; TikTok converted from 2026 global USD ranges at about ₱58 per $1; Shopee sources disagree; Instagram and the engagement/inquiry tiers are working estimates. Break-even ROAS = 1 ÷ margin.</footer>`;
 if(k==='bench'){$('pk').onchange=bench;bench()}
 if(k==='sim')smInit();
-if(k==='dx')dxInit();if(k==='rep')repInit();if(k==='pb')bizInit();if(k==='ads')adsInit();if(k==='am')amInit();
-try{history.replaceState(null,'','#'+k)}catch(e){}window.scrollTo(0,0)}
+if(k==='dx')dxInit();if(k==='rep')repInit();if(k==='pb')bizInit();if(k==='dash')dashInit();if(k==='ads')adsInit();if(k==='am')amInit();
+try{history.replaceState(null,'','#'+k)}catch(e){}try{if(k!=='dash')localStorage.setItem('last_tab',k)}catch(e){}window.scrollTo(0,0)}
 tabs.forEach(([k,n,ic])=>{const b=document.createElement('button');b.innerHTML=`<span aria-hidden="true">${ic}</span>${n}`;b.dataset.k=k;b.onclick=()=>show(k);nav.appendChild(b)});
 const root=document.documentElement,tb=$('th');
 function setTheme(t){root.dataset.theme=t;tb.textContent=t==='dark'?'☀ Light':'☾ Dark';try{localStorage.setItem('theme',t)}catch(e){}}
 let st=null;try{st=localStorage.getItem('theme')}catch(e){}
 setTheme(st||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
 tb.onclick=()=>setTheme(root.dataset.theme==='dark'?'light':'dark');
-$('hl').src=LOGO;const h0=location.hash.slice(1);show(tabs.some(t=>t[0]===h0)?h0:'bench');
+$('hl').src=LOGO;const h0=location.hash.slice(1);show(tabs.some(t=>t[0]===h0)?h0:'dash');
 </script>
 </body>
 </html>
