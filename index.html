@@ -2195,28 +2195,30 @@ const PC=x=>F(x)?(+x.toFixed(1))+'%':'—';
 const X1=x=>F(x)?(+x.toFixed(2))+'x':'—';
 const E=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const KEY='ptb_dx_v2';
-const EX={pl:'fb',val:'1800',mar:'40',cr:'',ads:[
+const CB=()=>({cpm:'',msg:'',ctr:'',fq:'',cpc:'',ql:'',od:'',rv:''});
+const EX={pl:'fb',val:'1800',mar:'40',cr:'',camp:CB(),ads:[
  {f:'image',nm:'Promo photo',cpm:'18',msg:'42',ctr:'1.1',fq:'2.4',cpc:'8',ql:'20',od:'5'},
  {f:'video',nm:'15s UGC video',cpm:'11',msg:'96',ctr:'2.3',fq:'2.0',cpc:'4.5',ql:'18',od:'3'},
  {f:'carousel',nm:'Package carousel',cpm:'42',msg:'28',ctr:'0.9',fq:'3.2',cpc:'12',ql:'20',od:'7'}],ex:true};
-const blank=()=>({f:'image',nm:'',cpm:'',msg:'',ctr:'',fq:'',cpc:'',ql:'',od:''});
+const blank=()=>({f:'image',nm:'',cpm:'',msg:'',ctr:'',fq:'',cpc:'',ql:'',od:'',rv:''});
 let S=null;
 try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
 if(!S||!Array.isArray(S.ads)||!S.ads.length)S=JSON.parse(JSON.stringify(EX));
+if(!S.camp)S.camp=CB();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 
 /* ---------- metrics ---------- */
-function mkAd(a){const cpmsg=num(a.cpm),msg=num(a.msg),ctr=num(a.ctr),fq=num(a.fq),cpc=num(a.cpc),od=num(a.od),ql=num(a.ql);
+function mkAd(a){const cpmsg=num(a.cpm),msg=num(a.msg),ctr=num(a.ctr),fq=num(a.fq),cpc=num(a.cpc),od=num(a.od),ql=num(a.ql),rv=num(a.rv);
  const spend=(F(cpmsg)&&F(msg))?cpmsg*msg:NaN,clicks=(F(spend)&&cpc>0)?spend/cpc:NaN,impr=(F(clicks)&&ctr>0)?clicks/(ctr/100):NaN,reach=(F(impr)&&fq>0)?impr/fq:NaN;
- return{spend,msg,cpmsg,ctr,fq,cpc,od,ql,clicks,impr,reach}}
+ return{spend,msg,cpmsg,ctr,fq,cpc,od,ql,rv,clicks,impr,reach}}
 function agg(list){const s=k=>{const v=list.map(x=>x[k]).filter(F);return v.length?v.reduce((a,b)=>a+b,0):NaN};
  const spend=s('spend'),msg=s('msg'),clicks=s('clicks'),impr=s('impr'),reach=s('reach');
- return{spend,msg,od:s('od'),ql:s('ql'),clicks,impr,reach,cpmsg:msg>0?spend/msg:NaN,ctr:impr>0?clicks/impr*100:NaN,cpc:clicks>0?spend/clicks:NaN,fq:reach>0?impr/reach:NaN,n:list.length}}
+ return{spend,msg,od:s('od'),ql:s('ql'),rv:s('rv'),clicks,impr,reach,cpmsg:msg>0?spend/msg:NaN,ctr:impr>0?clicks/impr*100:NaN,cpc:clicks>0?spend/clicks:NaN,fq:reach>0?impr/reach:NaN,n:list.length}}
 function fin(m,c){m.cpk=(F(m.spend)&&m.impr>0)?m.spend/m.impr*1000:NaN;m.cm=(m.clicks>0&&F(m.msg))?m.msg/m.clicks*100:NaN;
  m.close=(F(m.od)&&m.msg>0)?m.od/m.msg*100:NaN;m.qr=(F(m.ql)&&m.msg>0)?m.ql/m.msg*100:NaN;
  m.cps=m.od>0?m.spend/m.od:NaN;m.cpq=m.ql>0?m.spend/m.ql:NaN;m.rev=(F(m.od)&&F(c.val))?m.od*m.val_:NaN;
- m.rev=(F(m.od)&&F(c.val))?m.od*c.val:NaN;m.roas=(F(m.rev)&&m.spend>0)?m.rev/m.spend:NaN;
- m.profit=(F(m.od)&&F(c.pps)&&F(m.spend))?m.od*c.pps-m.spend:NaN;
+ m.rev=F(m.rv)?m.rv:((F(m.od)&&F(c.val))?m.od*c.val:NaN);m.roas=(F(m.rev)&&m.spend>0)?m.rev/m.spend:NaN;
+ m.profit=!F(m.spend)?NaN:(F(m.rv)&&F(c.mar)?m.rv*c.mar/100-m.spend:((F(m.od)&&F(c.pps))?m.od*c.pps-m.spend:NaN));
  const cl=F(m.close)?m.close:c.cr;m.bem=(F(c.pps)&&F(cl))?c.pps*cl/100:NaN;return m}
 
 /* ---------- classification: cost level x quality level ---------- */
@@ -2277,15 +2279,17 @@ function diagAd(a,m,lv,c){const pl=c.pl,I=[],R={};
 
 /* ---------- UI ---------- */
 const fld=(i,k,l,ph,u)=>`<div><label for="dxf${i}${k}">${l}</label><input id="dxf${i}${k}" data-i="${i}" data-k="${k}" inputmode="decimal" autocomplete="off" placeholder="${ph}" value="${E(S.ads[i][k])}"></div>`;
+const cfld=(k,l,ph)=>`<div><label for="dxc${k}">${l}</label><input id="dxc${k}" data-c="${k}" inputmode="decimal" autocomplete="off" placeholder="${ph}" value="${E(S.camp[k])}"></div>`;
 function adHTML(i){const a=S.ads[i];return`<div class="dxad" data-i="${i}"><div class="dxh"><b>Ad ${i+1}</b><select data-i="${i}" data-k="f" aria-label="Creative format of ad ${i+1}">${Object.keys(FM).map(k=>`<option value="${k}"${a.f===k?' selected':''}>${FM[k][1]} ${FM[k][0]}</option>`).join('')}</select><input data-i="${i}" data-k="nm" placeholder="Ad name (optional)" value="${E(a.nm)}" aria-label="Name of ad ${i+1}"><button type="button" class="dxrm" data-rm="${i}" aria-label="Remove ad ${i+1}"${S.ads.length<2?' disabled':''}>✕</button></div>
-<div class="ff">${fld(i,'cpm','Cost per message (₱)','e.g. 18')}${fld(i,'msg','Number of messages','e.g. 42')}${fld(i,'ctr','Click-through rate (%)','e.g. 1.2')}${fld(i,'fq','Frequency','e.g. 2.4')}${fld(i,'cpc','Cost per click (₱)','e.g. 8')}${fld(i,'ql','Qualified leads (optional)','e.g. 20')}${fld(i,'od','Orders / sales (optional)','e.g. 5')}</div></div>`}
+<div class="ff">${fld(i,'cpm','Cost per message (₱)','e.g. 18')}${fld(i,'msg','Number of messages','e.g. 42')}${fld(i,'ctr','Click-through rate (%)','e.g. 1.2')}${fld(i,'fq','Frequency','e.g. 2.4')}${fld(i,'cpc','Cost per click (₱)','e.g. 8')}${fld(i,'ql','Qualified leads (optional)','e.g. 20')}${fld(i,'od','Orders / sales (optional)','e.g. 5')}${fld(i,'rv','Exact sales amount (₱, optional)','e.g. 9000')}</div></div>`}
 function ctxHTML(){return`<div class="ff"><div><label for="dxpl">Platform</label><select id="dxpl">${Object.keys(PLN2).map(k=>`<option value="${k}"${S.pl===k?' selected':''}>${PLN2[k]}</option>`).join('')}</select></div>
 <div><label for="dxval">Average sale value (₱, optional)</label><input id="dxval" inputmode="decimal" placeholder="e.g. 1800" value="${E(S.val)}"></div>
 <div><label for="dxmar">Profit margin (%, optional)</label><input id="dxmar" inputmode="decimal" placeholder="e.g. 40" value="${E(S.mar)}"></div>
 <div><label for="dxcr">Usual close rate (%, optional)</label><input id="dxcr" inputmode="decimal" placeholder="messages that buy, e.g. 15" value="${E(S.cr)}"></div></div><p class="note" id="dxec" style="margin-top:8px"></p>`}
 V.dx=()=>`<div class="banner">${art.dx}<h2>Diagnose your ads</h2></div><p class="sub">Enter the real numbers for each ad and pick its format (static image, video or carousel). The tool rates every ad, compares your format mix and tells you what to scale, fix or pause. It judges cost per message by what a message is worth to <b>your</b> business, not by a fixed peso target.</p>
 <div class="card"><h3>1. Your campaign</h3>${ctxHTML()}</div>
-<div class="card"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center"><h3 style="margin:0">2. Your ads</h3><div class="dxbt"><button class="btn alt" type="button" id="dxadd">+ Add ad</button><button class="btn alt" type="button" id="dxex">Load example</button><button class="btn alt" type="button" id="dxclr">Clear all</button></div></div><p class="note" id="dxexn" style="margin:6px 0 10px"></p><div id="dxads">${S.ads.map((a,i)=>adHTML(i)).join('')}</div></div>
+<div class="card"><h3>2. Overall campaign results <small style="font-weight:400">(optional)</small></h3><p class="note" style="margin:0 0 8px">Enter the campaign totals from Ads Manager here. Leave it blank and the tool adds up your ads below. Sales, orders and exact amounts are only needed if you have them.</p><div class="ff">${cfld('cpm','Cost per message (₱)','e.g. 18')}${cfld('msg','Number of messages','e.g. 166')}${cfld('ctr','Click-through rate (%)','e.g. 1.4')}${cfld('fq','Frequency','e.g. 2.4')}${cfld('cpc','Cost per click (₱)','e.g. 6')}${cfld('ql','Qualified leads (optional)','e.g. 58')}${cfld('od','Orders / sales (optional)','e.g. 15')}${cfld('rv','Exact sales amount (₱, optional)','e.g. 27000')}</div></div>
+<div class="card"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center"><h3 style="margin:0">3. Your ads</h3><div class="dxbt"><button class="btn alt" type="button" id="dxadd">+ Add ad</button><button class="btn alt" type="button" id="dxex">Load example</button><button class="btn alt" type="button" id="dxclr">Clear all</button></div></div><p class="note" id="dxexn" style="margin:6px 0 10px"></p><div id="dxads">${S.ads.map((a,i)=>adHTML(i)).join('')}</div></div>
 <div id="dxr" aria-live="polite"></div>
 <p class="note">Cost per click and CTR are used to estimate clicks and views, so enter them from the same ad and date range. The more ads and orders you enter, the more reliable the comparison. Fewer than 15 messages or 3 orders per ad is directional only.</p>`;
 
@@ -2294,20 +2298,22 @@ function run(){const c=ctxOf(),out=$('dxr');if(!out)return;
  const ec=$('dxec');if(ec){let t='';if(F(c.pps)){t='Profit per sale: <b>'+P0(c.pps)+'</b>.';if(F(c.cr)&&c.cr>0)t+=' At a '+PC(c.cr)+' close rate you can spend up to <b>'+P0(c.pps*c.cr/100)+' per message</b> and still break even.';else t+=' Add your usual close rate to see the most you can afford to pay per message.'}else t='Add your average sale value and profit margin so a message is judged by what it is worth to you. You can also leave them blank.';ec.innerHTML=t}
  const exn=$('dxexn');if(exn)exn.textContent=S.ex?'Example numbers are loaded so you can see how it works. Replace them with your real data or press Clear all.':'';
  const ads=S.ads.map(a=>({a,m:mkAd(a)})).filter(x=>F(x.m.spend)&&x.m.msg>0);
- if(!ads.length){out.innerHTML='<div class="card"><h3>Your diagnosis</h3><p>Enter at least <b>cost per message</b> and <b>number of messages</b> for one ad to start.</p></div>';return}
+ const cm0=mkAd(S.camp),campOk=F(cm0.spend)&&cm0.msg>0;
+ if(!ads.length&&!campOk){out.innerHTML='<div class="card"><h3>Your diagnosis</h3><p>Enter <b>cost per message</b> and <b>number of messages</b> for your overall campaign or for at least one ad to start.</p></div>';return}
  /* campaign refs */
- const tot=agg(ads.map(x=>x.m));fin(tot,c);
+ const at=ads.length?agg(ads.map(x=>x.m)):agg([cm0]);fin(at,c);
+ const tot=campOk?fin(cm0,c):at;const hasOdA=F(at.od);
  const withOd=ads.filter(x=>F(x.m.od)&&x.m.msg>=1);
- const ref={n:ads.length,avgCost:tot.cpmsg,nc:withOd.length,avgClose:withOd.length?withOd.reduce((s,x)=>s+x.m.od,0)/withOd.reduce((s,x)=>s+x.m.msg,0)*100:NaN};
+ const ref={n:Math.max(ads.length,campOk?2:0),avgCost:tot.cpmsg,nc:withOd.length,avgClose:withOd.length?withOd.reduce((s,x)=>s+x.m.od,0)/withOd.reduce((s,x)=>s+x.m.msg,0)*100:NaN};
  ads.forEach(x=>{fin(x.m,c);x.lv=level(x.m,c,ref);x.d=diagAd(x.a,x.m,x.lv,c)});
  /* formats */
  const fmts=Object.keys(FM).map(k=>{const g=ads.filter(x=>x.a.f===k);if(!g.length)return null;const m=fin(agg(g.map(x=>x.m)),c);const lv=level(m,c,ref);return{k,g,m,lv}}).filter(Boolean);
  const tlv=level(tot,c,ref);
  const hasOd=F(tot.od),hasP=F(tot.profit);
  /* efficiency per format */
- const eff=f=>hasOd&&f.m.od>0?f.m.od/f.m.spend:(hasOd?0:(F(f.m.ql)&&f.m.ql>0?f.m.ql/f.m.spend:f.m.msg/f.m.spend));
+ const eff=f=>hasOdA&&f.m.od>0?f.m.od/f.m.spend:(hasOdA?0:(F(f.m.ql)&&f.m.ql>0?f.m.ql/f.m.spend:f.m.msg/f.m.spend));
  const effMax=Math.max(...fmts.map(eff),1e-9);
- fmts.forEach(f=>{f.eff=eff(f)/effMax;f.sp=f.m.spend/tot.spend});
+ fmts.forEach(f=>{f.eff=eff(f)/effMax;f.sp=f.m.spend/at.spend});
  const best=fmts.slice().sort((a,b)=>hasP?(b.m.profit||-1e9)-(a.m.profit||-1e9):b.eff-a.eff)[0],worst=fmts.slice().sort((a,b)=>a.eff-b.eff)[0];
  /* verdict */
  let vt,vtone,vtxt;
@@ -2317,20 +2323,20 @@ function run(){const c=ctxOf(),out=$('dxr');if(!out)return;
  /* conclusion */
  const sc=[];
  sc.push(`You spent about <b>${P0(tot.spend)}</b> and got <b>${N0(tot.msg)} messages</b> at <b>${P0(tot.cpmsg)}</b> each${hasOd?`, which became <b>${N0(tot.od)} order${tot.od===1?'':'s'}</b> (${PC(tot.close)} close rate, ${F(tot.cps)?P0(tot.cps)+' per sale':'no cost per sale yet'})`:''}.`);
- if(fmts.length>1&&hasOd&&tot.od>0){const cheap=fmts.slice().sort((a,b)=>a.m.cpmsg-b.m.cpmsg)[0];
+ if(fmts.length>1&&hasOdA&&at.od>0){const cheap=fmts.slice().sort((a,b)=>a.m.cpmsg-b.m.cpmsg)[0];
   if(cheap.k!==best.k)sc.push(`<b>${FM[cheap.k][0]}</b> gives the cheapest messages (${P0(cheap.m.cpmsg)}) but <b>${FM[best.k][0]}</b> ${hasP?'earns the most profit ('+P0(best.m.profit)+')':'brings the most sales per peso'}${F(best.m.cps)?' at '+P0(best.m.cps)+' per sale':''}. Cheap messages are not the same as good customers.`);
   else sc.push(`<b>${FM[best.k][0]}</b> leads on both cost and results.`)}
- else if(fmts.length>1)sc.push(`${hasOd?'No format has produced a sale yet, so':'With cost per message only,'} <b>${FM[fmts.slice().sort((a,b)=>a.m.cpmsg-b.m.cpmsg)[0].k][0]}</b> looks cheapest, but that does not prove it brings buyers. Add orders to confirm.`);
+ else if(fmts.length>1)sc.push(`${hasOdA?'No format has produced a sale yet, so':'With cost per message only,'} <b>${FM[fmts.slice().sort((a,b)=>a.m.cpmsg-b.m.cpmsg)[0].k][0]}</b> looks cheapest, but that does not prove it brings buyers. Add orders to confirm.`);
  if(F(c.pps)&&F(tot.bem)&&tot.cpmsg>tot.bem)sc.push(`Your average cost per message (${P0(tot.cpmsg)}) is above the ${P0(tot.bem)} you can afford at the current close rate, so improve closing or lower the cost.`);
  else if(F(c.pps)&&F(tot.bem))sc.push(`You can afford up to <b>${P0(tot.bem)}</b> per message at the current close rate, so a higher cost per message is acceptable as long as buyers keep coming.`);
  /* suggested mix */
  let mix=null,mixNote='';
  if(fmts.length>1){const raw=fmts.map(f=>.7*(f.eff/fmts.reduce((s,x)=>s+x.eff,0)||0)+.3*f.sp);let r=raw.map(v=>Math.min(.7,Math.max(.1,v)));const sm=r.reduce((a,b)=>a+b,0);r=r.map(v=>v/sm);
   let p=r.map(v=>Math.round(v*20)*5);const d=100-p.reduce((a,b)=>a+b,0);p[p.indexOf(Math.max(...p))]+=d;mix=fmts.map((f,i)=>({f,p:p[i]}));
-  const lowc=ads.some(x=>x.m.msg<15)||(hasOd&&tot.od<5);mixNote=lowc?'Directional only: some ads have very little data, so test for 3–5 more days before moving large budgets.':''}
+  const lowc=ads.some(x=>x.m.msg<15)||(hasOdA&&at.od<5);mixNote=lowc?'Directional only: some ads have very little data, so test for 3–5 more days before moving large budgets.':''}
  /* recommendations */
  const rec={fix:[],scale:[],test:[],data:[]};
- ads.forEach(x=>{const nm=(x.a.nm||'Ad '+(S.ads.indexOf(x.a)+1))+' ('+FM[x.a.f][0]+')',share=x.m.spend/tot.spend;
+ ads.forEach(x=>{const nm=(x.a.nm||'Ad '+(S.ads.indexOf(x.a)+1))+' ('+FM[x.a.f][0]+')',share=x.m.spend/at.spend;
   if(x.lv.key==='rebuild')rec.fix.push([share,`<b>${E(nm)}</b> takes ${PC(share*100)} of spend but is not bringing buyers. Pause or rebuild it with a new hook and a clearer offer.`]);
   if(x.lv.key==='cheaplow')rec.fix.push([share*.8,`<b>${E(nm)}</b> gets cheap messages (${P0(x.m.cpmsg)}) that rarely buy (${PC(x.m.close)}). Add price and who-it-is-for to the ad and a qualifying question in the welcome message instead of chasing a lower cost.`]);
   if(x.d.I.length&&(x.lv.key==='scale'||x.lv.key==='premium'||x.lv.key==='healthy')){const t=x.d.I.find(i=>/fatigue|climbing/.test(i[0]));if(t)rec.fix.push([share*.5,`<b>${E(nm)}</b> is working but shows ${t[0].toLowerCase()}. Prepare a fresh version before costs rise.`])}
@@ -2352,16 +2358,16 @@ function run(){const c=ctxOf(),out=$('dxr');if(!out)return;
  /* render */
  const tone=t=>`<span class="dxt ${t}">`;
  const kp=(l,v,s,t)=>`<div class="kpi"><small>${l}</small><b class="${t||''}">${v}</b>${s?`<small>${s}</small>`:''}</div>`;
- let h=`<div class="card"><h3>3. Campaign diagnosis</h3><div class="dxv ${vtone}"><b>${vt}</b><span>${vtxt}</span></div><div class="grid">${kp('Total spend',P0(tot.spend))}${kp('Messages',N0(tot.msg),P0(tot.cpmsg)+' each')}${F(tot.od)?kp('Orders',N0(tot.od),PC(tot.close)+' close rate'):''}${F(tot.cps)?kp('Cost per sale',P0(tot.cps)):''}${F(tot.roas)?kp('ROAS',X1(tot.roas),'',tot.roas>=1?'e':'p'):''}${F(tot.profit)?kp('Profit after ads',P0(tot.profit),'',tot.profit>=0?'e':'p'):''}${kp('Overall',tlv.label,'',tlv.tone)}</div>
+ let h=`<div class="card"><h3>4. Campaign diagnosis</h3><div class="dxv ${vtone}"><b>${vt}</b><span>${vtxt}</span></div><div class="grid">${kp('Total spend',P0(tot.spend))}${kp('Messages',N0(tot.msg),P0(tot.cpmsg)+' each')}${F(tot.od)?kp('Orders',N0(tot.od),PC(tot.close)+' close rate'):''}${F(tot.cps)?kp('Cost per sale',P0(tot.cps)):''}${F(tot.roas)?kp('ROAS',X1(tot.roas),'',tot.roas>=1?'e':'p'):''}${F(tot.profit)?kp('Profit after ads',P0(tot.profit),'',tot.profit>=0?'e':'p'):''}${kp('Overall',tlv.label,'',tlv.tone)}</div>
 <h4>Conclusion</h4><p>${sc.join(' ')}</p></div>`;
  /* format comparison */
- h+=`<div class="card"><h3>Creative format comparison</h3><div class="sc"><table><tr><th>Format</th><th>Spend</th><th>Messages</th><th>Cost / message</th><th>CTR</th><th>Close rate</th><th>Cost / sale</th><th>Profit</th><th>Verdict</th></tr>${fmts.map(f=>`<tr><td><b>${FM[f.k][1]} ${FM[f.k][0]}</b> (${f.g.length})</td><td>${P0(f.m.spend)}</td><td>${N0(f.m.msg)}</td><td>${P0(f.m.cpmsg)}</td><td>${PC(f.m.ctr)}</td><td>${PC(f.m.close)}</td><td>${F(f.m.cps)?P0(f.m.cps):'—'}</td><td>${F(f.m.profit)?`<span class="${f.m.profit>=0?'e':'p'}">${P0(f.m.profit)}</span>`:'—'}</td><td><span class="dxt ${f.lv.tone}">${f.lv.label}</span></td></tr>`).join('')}</table></div>
-<h4>Share of spend vs share of ${hasOd?'sales':F(tot.ql)?'qualified leads':'messages'}</h4>${fmts.map(f=>{const tr=hasOd?f.m.od/tot.od:F(tot.ql)?f.m.ql/tot.ql:f.m.msg/tot.msg;return`<div class="dxbr"><span>${FM[f.k][1]} ${FM[f.k][0]}</span><div><i class="s" style="width:${Math.max(2,f.sp*100)}%"></i><em>${PC(f.sp*100)} of spend</em></div><div><i class="r" style="width:${Math.max(2,(F(tr)?tr:0)*100)}%"></i><em>${PC((F(tr)?tr:0)*100)} of ${hasOd?'sales':F(tot.ql)?'leads':'messages'}</em></div></div>`}).join('')}
+ if(ads.length)h+=`<div class="card"><h3>Creative format comparison</h3><div class="sc"><table><tr><th>Format</th><th>Spend</th><th>Messages</th><th>Cost / message</th><th>CTR</th><th>Close rate</th><th>Cost / sale</th><th>Profit</th><th>Verdict</th></tr>${fmts.map(f=>`<tr><td><b>${FM[f.k][1]} ${FM[f.k][0]}</b> (${f.g.length})</td><td>${P0(f.m.spend)}</td><td>${N0(f.m.msg)}</td><td>${P0(f.m.cpmsg)}</td><td>${PC(f.m.ctr)}</td><td>${PC(f.m.close)}</td><td>${F(f.m.cps)?P0(f.m.cps):'—'}</td><td>${F(f.m.profit)?`<span class="${f.m.profit>=0?'e':'p'}">${P0(f.m.profit)}</span>`:'—'}</td><td><span class="dxt ${f.lv.tone}">${f.lv.label}</span></td></tr>`).join('')}</table></div>
+<h4>Share of spend vs share of ${hasOdA?'sales':F(at.ql)?'qualified leads':'messages'}</h4>${fmts.map(f=>{const tr=hasOdA?f.m.od/at.od:F(at.ql)?f.m.ql/at.ql:f.m.msg/at.msg;return`<div class="dxbr"><span>${FM[f.k][1]} ${FM[f.k][0]}</span><div><i class="s" style="width:${Math.max(2,f.sp*100)}%"></i><em>${PC(f.sp*100)} of spend</em></div><div><i class="r" style="width:${Math.max(2,(F(tr)?tr:0)*100)}%"></i><em>${PC((F(tr)?tr:0)*100)} of ${hasOdA?'sales':F(at.ql)?'leads':'messages'}</em></div></div>`}).join('')}
 <p class="note">A format whose result share is bigger than its spend share is earning its budget; a smaller share means it is taking money from better formats.</p>`;
- if(mix)h+=`<h4>Suggested budget mix for your next round</h4><div class="dxmix">${mix.map(x=>`<div><b>${FM[x.f.k][1]} ${FM[x.f.k][0]}</b><span>${x.p}%</span><small>now ${PC(x.f.sp*100)}</small></div>`).join('')}</div>${mixNote?`<p class="note">${mixNote}</p>`:''}`;
- h+='</div>';
+ if(mix&&ads.length)h+=`<h4>Suggested budget mix for your next round</h4><div class="dxmix">${mix.map(x=>`<div><b>${FM[x.f.k][1]} ${FM[x.f.k][0]}</b><span>${x.p}%</span><small>now ${PC(x.f.sp*100)}</small></div>`).join('')}</div>${mixNote?`<p class="note">${mixNote}</p>`:''}`;
+ if(ads.length)h+='</div>';
  /* per ad */
- h+=`<div class="card"><h3>Ad-by-ad diagnosis</h3>${ads.map(x=>{const m=x.m,d=x.d,nm=x.a.nm||'Ad '+(S.ads.indexOf(x.a)+1);const chip=(l,v,r)=>`<span class="dxc${r!=null?' '+CC[r]:''}"><small>${l}</small><b>${v}</b>${r!=null?`<em>${LAB[r]}</em>`:''}</span>`;
+ if(ads.length)h+=`<div class="card"><h3>Ad-by-ad diagnosis</h3>${ads.map(x=>{const m=x.m,d=x.d,nm=x.a.nm||'Ad '+(S.ads.indexOf(x.a)+1);const chip=(l,v,r)=>`<span class="dxc${r!=null?' '+CC[r]:''}"><small>${l}</small><b>${v}</b>${r!=null?`<em>${LAB[r]}</em>`:''}</span>`;
   return`<details class="dxdet"${x.lv.tone==='p'||x.lv.key==='scale'||x.lv.key==='premium'?' open':''}><summary><span>${FM[x.a.f][1]} <b>${E(nm)}</b> <small>${FM[x.a.f][0]}</small></span><span class="dxt ${x.lv.tone}">${x.lv.label}</span>${x.lv.low?'<span class="dxt a">Low data</span>':''}</summary>
 <div class="dxchips">${chip('Cost / message',P0(m.cpmsg))}${chip('Messages',N0(m.msg))}${chip('CTR',PC(m.ctr),d.R.ctr)}${chip('Frequency',F(m.fq)?(+m.fq.toFixed(1)):'—',d.R.fq)}${chip('CPC',P0(m.cpc),d.R.cpc)}${F(m.cpk)?chip('Cost / 1,000 views',P0(m.cpk),d.R.cpk):''}${F(m.cm)?chip('Click → message',PC(m.cm)):''}${F(m.close)?chip('Close rate',PC(m.close)):''}${F(m.cps)?chip('Cost / sale',P0(m.cps)):''}${F(m.profit)?chip('Profit',P0(m.profit)):''}</div>
 <p><b>What it means:</b> ${x.lv.key==='premium'?'Messages cost more here, but they turn into buyers. This is a quality-over-volume ad.':x.lv.key==='scale'?'Cost and quality are both good. This is your best candidate to scale.':x.lv.key==='cheaplow'?'The cost per message is low, but those messages rarely become sales. You are paying for attention, not intent.':x.lv.key==='rebuild'?'Cost is not justified by the results it brings.':x.lv.key==='watch'?'Results are acceptable but not strong. Improve before scaling.':x.lv.key==='healthy'?'Results are healthy against '+(x.lv.qb||'your numbers')+'.':'Quality cannot be judged yet.'}${x.lv.basis?` <small>(Cost judged against ${x.lv.basis}${x.lv.qb?'; quality against '+x.lv.qb:''}.)</small>`:''}</p>
@@ -2377,13 +2383,14 @@ window.dxInit=function(){const root=$('out');
  $('dxpl').onchange=e=>{S.pl=e.target.value;S.ex=false;upd()};
  [['dxval','val'],['dxmar','mar'],['dxcr','cr']].forEach(([id,k])=>{$(id).oninput=e=>{S[k]=e.target.value;S.ex=false;upd()}});
  const ads=$('dxads');
+ $('dxr').parentNode.querySelectorAll('[data-c]').forEach(i=>{i.oninput=e=>{S.camp[i.dataset.c]=i.value;S.ex=false;upd()}});
  ads.oninput=ads.onchange=e=>{const t=e.target;if(t.dataset.i==null)return;S.ads[+t.dataset.i][t.dataset.k]=t.value;S.ex=false;upd()};
  ads.onclick=e=>{const b=e.target.closest('[data-rm]');if(b&&S.ads.length>1){S.ads.splice(+b.dataset.rm,1);S.ex=false;redraw()}};
  $('dxadd').onclick=()=>{if(S.ads.length>=9)return;S.ads.push(blank());S.ex=false;redraw();const last=ads.querySelector('.dxad:last-child input[data-k=cpm]');if(last)last.focus()};
  $('dxex').onclick=()=>{S=JSON.parse(JSON.stringify(EX));save();redraw();rebindCtx()};
- $('dxclr').onclick=()=>{S={pl:S.pl,val:'',mar:'',cr:'',ads:[blank()],ex:false};save();redraw();rebindCtx()};
+ $('dxclr').onclick=()=>{S={pl:S.pl,val:'',mar:'',cr:'',camp:CB(),ads:[blank()],ex:false};save();redraw();rebindCtx()};
  function redraw(){ads.innerHTML=S.ads.map((a,i)=>adHTML(i)).join('');save();run()}
- function rebindCtx(){$('dxpl').value=S.pl;$('dxval').value=S.val;$('dxmar').value=S.mar;$('dxcr').value=S.cr;run()}
+ function rebindCtx(){document.querySelectorAll('[data-c]').forEach(i=>i.value=S.camp[i.dataset.c]||'');$('dxpl').value=S.pl;$('dxval').value=S.val;$('dxmar').value=S.mar;$('dxcr').value=S.cr;run()}
  run()};
 })();
 
