@@ -161,6 +161,46 @@ td,th{overflow-wrap:anywhere}
 @media(max-width:420px){.srb .srt{display:none}}
 @media(prefers-reduced-motion:reduce){.srp,.srk,.sr-flash{transition:none;animation:none}}
 @media print{.srb,.srp,.srk{display:none!important}}
+/* ===== AI assistant ===== */
+.ailog{max-height:64vh;min-height:240px;overflow:auto;display:flex;flex-direction:column;gap:10px;padding:12px 2px;margin-top:10px;border-top:1px solid var(--bd)}
+.aim{max-width:94%;border-radius:14px;padding:10px 14px;line-height:1.5;font-size:.95rem;word-break:break-word}
+.aim p{margin:0 0 6px}.aim p:last-child{margin-bottom:0}.aim ul,.aim ol{margin:4px 0 8px 20px;padding:0}.aim li{margin:2px 0}
+.aim.me{align-self:flex-end;background:var(--ac);color:#fff}
+.aim.bot{align-self:flex-start;background:var(--bg);border:1px solid var(--bd);width:min(100%,780px)}
+.aim.bot.typ{display:flex;gap:5px;width:auto;padding:12px 14px}.aim.bot.typ span{width:7px;height:7px;border-radius:50%;background:var(--mu);animation:aib 1s infinite ease-in-out}.aim.bot.typ span:nth-child(2){animation-delay:.15s}.aim.bot.typ span:nth-child(3){animation-delay:.3s}
+@keyframes aib{0%,80%,100%{opacity:.25;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+.aiv{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 12px;border-radius:10px;margin-bottom:8px;border-left:5px solid var(--bd);background:var(--card)}.aiv span{font-size:.8rem;color:var(--mu)}
+.aiv.r0{border-color:var(--ex)}.aiv.r1{border-color:var(--go)}.aiv.r2{border-color:var(--av)}.aiv.r3{border-color:var(--po)}
+.rtg{display:inline-block;padding:1px 9px;border-radius:99px;font-size:.74rem;font-weight:700;color:#fff;white-space:nowrap}.rtg.r0{background:var(--ex)}.rtg.r1{background:var(--go)}.rtg.r2{background:var(--av)}.rtg.r3{background:var(--po)}.rtg.rn{background:var(--bd);color:var(--mu)}
+:root[data-theme=dark] .rtg{color:#10151c}
+.ait{width:100%;border-collapse:collapse;font-size:.86rem;margin:4px 0 8px}.ait th,.ait td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--bd);vertical-align:top}.ait th{color:var(--mu);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
+.aiac{margin-top:10px}.aiac button{font-size:.82rem;padding:6px 12px;min-height:0}
+.aiin textarea{width:100%;resize:vertical;min-height:58px;border:1px solid var(--bd);border-radius:12px;background:var(--bg);color:var(--tx);padding:10px 12px;font:inherit}
+.aiin textarea:focus{outline:2px solid var(--ac);outline-offset:1px}
+.aibt{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+@media(max-width:480px){.aibt .btn{flex:1 1 40%}.aim{max-width:100%}}
+/* ===== Floating AI widget ===== */
+.aifab{position:fixed;right:18px;bottom:18px;z-index:50;display:flex;align-items:center;gap:8px;border:0;border-radius:99px;padding:12px 20px 12px 14px;background:var(--ac);color:#fff;font:inherit;font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 8px 26px rgba(0,0,0,.32);transition:transform .15s,opacity .15s}
+.aifab:hover{transform:translateY(-2px)}.aifab.hide{opacity:0;visibility:hidden;transform:scale(.8)}
+.aifab::after{content:"";position:absolute;inset:0;border-radius:99px;box-shadow:0 0 0 0 var(--ac);animation:aipulse 2.6s infinite;pointer-events:none}
+@keyframes aipulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--ac) 55%,transparent)}70%,100%{box-shadow:0 0 0 16px transparent}}
+.aifi{font-size:1.45rem;line-height:1}
+.aitip{position:fixed;right:18px;bottom:82px;z-index:50;max-width:250px;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:14px;padding:12px 34px 12px 14px;box-shadow:0 10px 30px rgba(0,0,0,.25);font-size:.88rem;cursor:pointer}
+.aitip[hidden]{display:none}.aitip b{display:block;margin-bottom:2px}.aitip span{color:var(--mu)}
+.aitip button{position:absolute;top:6px;right:6px;border:0;background:transparent;color:var(--mu);cursor:pointer;width:26px;height:26px;border-radius:6px;font-size:.85rem}
+.aipan{position:fixed;right:16px;bottom:16px;z-index:55;width:min(420px,calc(100vw - 32px));height:min(690px,calc(100vh - 32px));display:flex;flex-direction:column;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:18px;box-shadow:0 18px 60px rgba(0,0,0,.35);opacity:0;visibility:hidden;transform:translateY(24px) scale(.98);transform-origin:bottom right;transition:opacity .18s,transform .18s,visibility .18s;overflow:hidden}
+.aipan.open{opacity:1;visibility:visible;transform:none}
+.aihd{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 14px;background:var(--ac);color:#fff}.aihd b{font-size:1rem}.aihd small{display:block;opacity:.85;font-size:.72rem;margin-top:1px}
+.aihx{display:flex;gap:6px}.aihx button{background:rgba(255,255,255,.2);border:0;color:#fff;width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:1rem}.aihx button:hover,.aihx button:focus-visible{background:rgba(255,255,255,.35)}
+.aibd{flex:1;min-height:0;display:flex;flex-direction:column;padding:10px 12px 12px}
+.aipan .ailog{flex:1;max-height:none;min-height:0;border-top:0;margin-top:0;padding-top:4px}
+.aipan .aipl,.aipan .aisg{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;margin-top:6px;scrollbar-width:thin}.aipan .aipl button,.aipan .aisg button{flex:none;white-space:nowrap;font-size:.8rem;padding:5px 11px;min-height:0}
+.aipan .aiin textarea{min-height:46px}.aipan .aibt{margin-top:6px}.aipan .aibt .btn{padding:7px 12px;min-height:0;font-size:.82rem;width:auto}
+.aipan .aim.bot{width:100%}.aipan .ait{font-size:.78rem}.aipan .ait th,.aipan .ait td{padding:5px 6px}
+body.onai .aifab,body.onai .aipan,body.onai .aitip{display:none!important}
+@media(max-width:760px){.aipan{inset:0;width:auto;height:auto;border-radius:0}.aihd{padding-top:max(12px,env(safe-area-inset-top))}.aifab{right:14px;bottom:14px;padding:12px 16px 12px 12px}.aitip{right:14px;bottom:76px}}
+@media(prefers-reduced-motion:reduce){.aifab::after{animation:none}.aipan,.aifab{transition:none}}
+@media print{.aifab,.aipan,.aitip{display:none!important}}
 </style>
 </head>
 <body>
@@ -583,7 +623,7 @@ $('tkr').onclick=()=>{dn.clear();boxes.forEach(c=>c.checked=false);ls.s('am_task
 $('fpl').onclick=e=>{const b=e.target.closest('button');if(b){FP=b.dataset.k;featRender()}};$('fq2').oninput=featRender;
 $('fall').onclick=()=>$('fbd').querySelectorAll('details').forEach(d=>d.open=true);$('fnone').onclick=()=>$('fbd').querySelectorAll('details').forEach(d=>d.open=false);
 featRender()}
-const tabs=[['dash','Dashboard','🏠'],['bench','Benchmarks','📊'],['sim','Simulator','🧮'],['dx','Diagnose','🩺'],['rep','Reports','📝'],['am','Ads Manager','⚙️'],['ads','Ads','📣'],['pb','Playbook','🚀'],['tools','Tools','🛠️']];
+const tabs=[['dash','Dashboard','🏠'],['bench','Benchmarks','📊'],['sim','Simulator','🧮'],['dx','Diagnose','🩺'],['rep','Reports','📝'],['am','Ads Manager','⚙️'],['ads','Ads','📣'],['pb','Playbook','🚀'],['tools','Tools','🛠️'],['ai','AI Assistant','🤖']];
 const nav=$('nav'),out=$('out');
 let smV='f',smSC=null,smPf='fb',smRt='lead',smPL=null,smPLr='';
 const snf=(x,d)=>isFinite(x)?x.toFixed(d):'—',snn=x=>isFinite(x)?n0(x):'—',spp=x=>isFinite(x)?pso(x):'—';
@@ -1159,7 +1199,7 @@ ld=(y,m)=>new Date(y,m+1,0).getDate(),Y=T.getFullYear(),Mo=T.getMonth(),pd=[new 
 h=now.getHours(),gr=h<12?'Good morning':h<18?'Good afternoon':'Good evening',ns=ev[0];let lt=null;try{lt=localStorage.getItem('last_tab')}catch(e){}
 const tn=k=>{const t=tabs.find(x=>x[0]===k);return t?t[2]+' '+t[1]:''},nf=Object.values(FEAT).reduce((a,x)=>a+x.g.reduce((b,g)=>b+g[1].length,0),0),npk=Object.values(ADS).reduce((a,x)=>a+x.pk.length,0),
 ST=[['Platforms benchmarked',Object.keys(P).length,'bench'],['Platform features explained',nf,'am'],['Business strategies',BIZ.length,'pb'],['Ads packages',npk,'ads'],['Report types',3,'rep'],['Languages for packages',3,'ads']],
-TL=[['bench','📊','Benchmarks','What good looks like in pesos for each platform.'],['sim','🧮','Simulator','Forecast and compare results on Facebook, TikTok, Shopee and Google, with profit and VAT.'],['dx','🩺','Diagnose','Find the weak link in a campaign and what to fix first.'],['rep','📝','Reports','Weekly, monthly and detailed client reports with charts.'],['am','⚙️','Ads Manager','Tasks, platform features explained, and the VAT budget.'],['ads','📣','Ads','Service packages, explanations and sales scripts.'],['pb','🚀','Playbook',`Strategies and budgets for ${BIZ.length} business types.`],['tools','🛠️','Tools','Ad copy, content calendar, A/B test checker, learning phase and UTM builder.']],
+TL=[['bench','📊','Benchmarks','What good looks like in pesos for each platform.'],['sim','🧮','Simulator','Forecast and compare results on Facebook, TikTok, Shopee and Google, with profit and VAT.'],['dx','🩺','Diagnose','Find the weak link in a campaign and what to fix first.'],['rep','📝','Reports','Weekly, monthly and detailed client reports with charts.'],['am','⚙️','Ads Manager','Tasks, platform features explained, and the VAT budget.'],['ads','📣','Ads','Service packages, explanations and sales scripts.'],['pb','🚀','Playbook',`Strategies and budgets for ${BIZ.length} business types.`],['tools','🛠️','Tools','Ad copy, content calendar, A/B test checker, learning phase and UTM builder.'],['ai','🤖','AI Assistant','Ask questions, paste your numbers or a CSV and get an instant diagnosis.']],
 FL=[['1','Benchmark','See what a good cost per message, CTR and CPC look like.','bench'],['2','Plan the budget','Forecast results and add 12% VAT to the budget.','sim'],['3','Launch and manage','Follow the Ads Manager tasks and the business playbook.','am'],['4','Monitor and report','Diagnose problems and send clear client reports.','rep']],
 bt=Object.keys(PN).map(k=>{const r=R[k],c=(key,sg,u)=>r[key]?`${sg} ${fm(u,r[key][1])} <small class="note">excellent ${fm(u,r[key][0])}</small>`:'—';return `<tr><td><b>${PN[k]}</b></td><td>${c('inq','≤','₱')}</td><td>${c('ctr','≥','%')}</td><td>${c('cpc','≤','₱')}</td></tr>`}).join(''),
 pk=Object.keys(ADS).map(k=>{const a=ADS[k],ps=a.pk.map(x=>x.price);return `<button class="tile" data-pk="${k}"><span class="ti">${a.i}</span><b>${a.n}</b><small>${a.pk.length} packages · ₱${Math.min(...ps).toLocaleString()} to ₱${Math.max(...ps).toLocaleString()}</small></button>`}).join('');
@@ -1350,7 +1390,7 @@ function tlGo(k){TLV=k;TCP=[];$('tlc').querySelectorAll('button').forEach(b=>b.c
 function toolsInit(){$('tlc').innerHTML=TLT.map(t=>`<button data-k="${t[0]}">${t[1]} ${t[2]}</button>`).join('');$('tlc').onclick=e=>{const b=e.target.closest('button');if(b)tlGo(b.dataset.k)};
 $('tres').onclick=e=>{const b=e.target.closest('[data-cp]');if(!b)return;const t=TCP[+b.dataset.cp],o=b.textContent,done=()=>{b.textContent='Copied ✓';setTimeout(()=>b.textContent=o,1200)},fb=()=>{const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');done()}catch(x){}a.remove()};try{navigator.clipboard.writeText(t).then(done,fb)}catch(x){fb()}};tlGo(TLV)}
 
-const MDESC={dash:'Overview, key dates and quick tools',bench:'What good looks like in pesos, by platform',sim:'Forecast, goal planner, compare scenarios and platforms',dx:'Find the weak link in a campaign',rep:'Weekly, monthly and detailed client reports',am:'Tasks, platform features and the VAT budget',ads:'Service packages, explanations and sales scripts',pb:'Strategies and budgets by business type',tools:'Ad copy, calendar, A/B test, learning phase, UTM'};
+const MDESC={dash:'Overview, key dates and quick tools',bench:'What good looks like in pesos, by platform',sim:'Forecast, goal planner, compare scenarios and platforms',dx:'Find the weak link in a campaign',rep:'Weekly, monthly and detailed client reports',am:'Tasks, platform features and the VAT budget',ads:'Service packages, explanations and sales scripts',pb:'Strategies and budgets by business type',tools:'Ad copy, calendar, A/B test, learning phase, UTM',ai:'Ask questions, analyze and diagnose your ad numbers'};
 let mnOpen=false,mnCur='dash';
 function mnPos(){const p=$('mnp');if(!p)return;const r=$('nav').parentElement.parentElement.getBoundingClientRect(),t=Math.max(r.bottom,0);p.style.top=(t+6)+'px';p.style.maxHeight=Math.max(220,innerHeight-t-18)+'px'}
 function mnBuild(){$('mnp').innerHTML='<div class="mnh"><h4>Sections</h4><button type="button" class="mnx" aria-label="Close menu">✕</button></div>'+tabs.map(t=>`<button type="button" class="mni${t[0]===mnCur?' on':''}" data-k="${t[0]}"${t[0]===mnCur?' aria-current="page"':''}><span class="mi" aria-hidden="true">${t[2]}</span><span><b>${t[1]}</b><small>${MDESC[t[0]]||''}</small></span></button>`).join('')}
@@ -1415,15 +1455,489 @@ function show(k){nav.querySelectorAll('button').forEach(b=>b.classList.toggle('o
 out.innerHTML=V[k]()+`<footer>Benchmarks are directional, not guarantees. Facebook figures: Spiralytics 2026 PH data; Google: Truelogic PH data; TikTok converted from 2026 global USD ranges at about ₱58 per $1; Shopee sources disagree; Instagram and the engagement/inquiry tiers are working estimates. Break-even ROAS = 1 ÷ margin.</footer>`;
 if(k==='bench'){$('pk').onchange=bench;bench()}
 if(k==='sim')smInit();
-if(k==='dx')dxInit();if(k==='rep')repInit();if(k==='pb')bizInit();if(k==='dash')dashInit();if(k==='tools')toolsInit();if(k==='ads')adsInit();if(k==='am')amInit();
+if(k==='dx')dxInit();if(k==='rep')repInit();if(k==='pb')bizInit();if(k==='dash')dashInit();if(k==='tools')toolsInit();if(k==='ads')adsInit();if(k==='am')amInit();document.body.classList.toggle('onai',k==='ai'||k==='rep');if(k==='ai')aiInit();
 try{history.replaceState(null,'','#'+k)}catch(e){}try{if(k!=='dash')localStorage.setItem('last_tab',k)}catch(e){}window.scrollTo(0,0)}
-tabs.forEach(([k,n,ic])=>{const b=document.createElement('button');b.innerHTML=`<span aria-hidden="true">${ic}</span>${n}`;b.dataset.k=k;b.onclick=()=>show(k);nav.appendChild(b)});mnInit();
-const root=document.documentElement,tb=$('th');
-function setTheme(t){root.dataset.theme=t;tb.textContent=t==='dark'?'☀ Light':'☾ Dark';try{localStorage.setItem('theme',t)}catch(e){}}
-let st=null;try{st=localStorage.getItem('theme')}catch(e){}
-setTheme(st||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
-tb.onclick=()=>setTheme(root.dataset.theme==='dark'?'light':'dark');
-window.addEventListener('hashchange',()=>{const h=location.hash.slice(1),c=nav.querySelector('button.on');if(tabs.some(t=>t[0]===h)&&(!c||c.dataset.k!==h))show(h)});$('hl').src=LOGO;const h0=location.hash.slice(1);show(tabs.some(t=>t[0]===h0)?h0:'dash');
+/* ===== Ad copy & hooks 2.0: sales and inquiry driven ===== */
+(function(){
+const fill=(t,v)=>t.replace(/\[\[([\s\S]*?)\]\]/g,(m,s)=>[...s.matchAll(/\{(\w+)\}/g)].some(x=>!v[x[1]])?'':s).replace(/\{(\w+)\}/g,(m,k)=>v[k]!=null?v[k]:m);
+/* [English, Taglish, Tagalog] */
+const HOOK={
+ curiosity:['🧠 Curiosity',[
+  ["The one thing most {p} buyers wish they knew sooner.","We almost didn't share this about {p}{in}…","Nobody tells you this before you choose {p}."],
+  ["Ito ang bagay na gustong malaman ng karamihan bago bumili ng {p}.","Muntik na naming hindi i-share ito tungkol sa {p}{in}…","Walang nagsasabi nito bago ka pumili ng {p}."],
+  ["Ito ang bagay na nais malaman ng karamihan bago bumili ng {p}.","Halos hindi na namin ibinahagi ito tungkol sa {p}{in}…","Walang nagsasabi nito bago ka pumili ng {p}."]]],
+ pain:['😩 Pain point',[
+  ["Tired of {pain}? There is a simpler way.","If {pain} is your daily struggle, read this.","Stop {pain}. Do this instead."],
+  ["Sawa ka na ba sa {pain}? May mas madaling paraan.","Kung {pain} ang problema mo araw-araw, basahin mo ito.","Tama na ang {pain}. Gawin mo ito instead."],
+  ["Pagod ka na ba sa {pain}? May mas simpleng paraan.","Kung {pain} ang suliranin mo araw-araw, basahin ito.","Tama na ang {pain}. Ito ang gawin mo."]]],
+ proof:['⭐ Social proof',[
+  ["{proof}","Why people keep coming back to {p}.","Do not take our word for it. Ask people who already tried {p}."],
+  ["{proof}","Bakit bumabalik ang mga tao sa {p}.","Huwag lang kami ang paniwalaan. Tanungin ang mga nakasubok na ng {p}."],
+  ["{proof}","Bakit bumabalik ang mga tao sa {p}.","Huwag lamang kami ang paniwalaan. Tanungin ang mga nakasubok na ng {p}."]]],
+ offer:['🏷️ Offer & price',[
+  ["{o} on {p}.[[ Only {price}.]] Message us to claim it.","[[{price} only! ]]{o}: {p}{in}.","Your sign to try {p}: {o}."],
+  ["{o} sa {p}.[[ {price} lang!]] Mag-message para i-claim.","[[{price} lang! ]]{o}: {p}{in}.","Sign na ito para subukan ang {p}: {o}."],
+  ["{o} sa {p}.[[ {price} lamang!]] Magpadala ng mensahe upang makuha.","[[{price} lamang! ]]{o}: {p}{in}.","Hudyat na ito para subukan ang {p}: {o}."]]],
+ urgency:['⏰ Urgency',[
+  ["{urg}","Last call: {o}. It will not stay long.","Before you scroll past: {urg}"],
+  ["{urg}","Last call: {o}. Hindi ito tatagal.","Bago ka mag-scroll past: {urg}"],
+  ["{urg}","Huling tawag: {o}. Hindi ito magtatagal.","Bago ka magpatuloy sa pag-scroll: {urg}"]]],
+ question:['❓ Question',[
+  ["Do you want {ben}?","What if {ben} took just one message?","Still deciding on {p}? Read this first."],
+  ["Gusto mo ba ng {ben}?","Paano kung {ben} ay isang message lang?","Nag-iisip pa rin sa {p}? Basahin muna ito."],
+  ["Nais mo ba ng {ben}?","Paano kung {ben} ay isang mensahe lamang?","Nag-iisip pa rin tungkol sa {p}? Basahin muna ito."]]],
+ myth:['💥 Myth-buster',[
+  ["Myth: {p} is too expensive. Truth: {pain} costs you more.","\"I will just do it myself.\" Here is why people change their mind about {p}.","Not all {p} is the same. Check this before you pay."],
+  ["Myth: mahal ang {p}. Totoo: mas mahal pa ang {pain}.","\"Ako na lang gagawa.\" Ito ang dahilan kung bakit nagbabago ang isip ng mga tao tungkol sa {p}.","Hindi lahat ng {p} pare-pareho. I-check ito bago ka magbayad."],
+  ["Mito: mahal ang {p}. Totoo: mas mahal pa ang {pain}.","\"Ako na lang ang gagawa.\" Ito ang dahilan kung bakit nagbabago ang isip ng mga tao tungkol sa {p}.","Hindi lahat ng {p} ay magkapareho. Suriin ito bago magbayad."]]],
+ story:['🎬 Story / POV',[
+  ["POV: you finally found {ben}.","Day 1 vs Day 7 with {p}{in}.","A customer asked for {ben}. Here is what happened."],
+  ["POV: nahanap mo na rin ang {ben}.","Day 1 vs Day 7 with {p}{in}.","May customer na nag-ask ng {ben}. Ito ang nangyari."],
+  ["POV: natagpuan mo na rin ang {ben}.","Unang araw laban sa ikapitong araw kasama ang {p}{in}.","May customer na humiling ng {ben}. Ito ang nangyari."]]],
+ local:['📍 Audience callout',[
+  ["Calling {aud}{in}! {p} is here.","{aud}{in}: this {p} offer is for you.","Hey {aud}{in}, you asked, we listened: {p}."],
+  ["Attention, {aud}{in}! Nandito na ang {p}.","Para sa {aud}{in}: ito ang {p} offer para sa iyo.","Hey {aud}{in}, you asked, we listened: {p}."],
+  ["Pansin, {aud}{in}! Narito na ang {p}.","Para sa {aud}{in}: ang alok na {p} ay para sa iyo.","Kayo ang humiling, kami ang tumugon: {p}{in}."]]],
+ objection:['🛡️ Objection-crusher',[
+  ["\"Is it worth it?\" Here is the honest answer about {p}.","Worried about {pain}? Read the guarantee below.","Not sure about {p}? Message your questions first. No pressure."],
+  ["\"Sulit ba talaga?\" Ito ang honest answer tungkol sa {p}.","Nag-aalala sa {pain}? Basahin ang guarantee sa ibaba.","Hindi sigurado sa {p}? I-message muna ang tanong mo. No pressure."],
+  ["\"Sulit ba talaga?\" Ito ang tapat na sagot tungkol sa {p}.","Nag-aalala sa {pain}? Basahin ang garantiya sa ibaba.","Hindi sigurado sa {p}? Magpadala muna ng tanong. Walang pressure."]]],
+ result:['🎯 Result-first',[
+  ["{ben}. That is what {p} is built for.","Get {ben} with {p}{in}.","{ben}, without the hassle."],
+  ["{ben}. Para diyan ginawa ang {p}.","Makuha ang {ben} with {p}{in}.","{ben}, walang hassle."],
+  ["{ben}. Para roon nilikha ang {p}.","Makuha ang {ben} sa {p}{in}.","{ben}, walang abala."]]],
+ compare:['⚖️ Compare & challenge',[
+  ["Compare us with anyone, then message us.","Before you pay more somewhere else, compare {p}.","Try {p}. If it is not for you, tell us and we will make it right."],
+  ["I-compare mo kami sa iba, tapos mag-message ka.","Bago ka magbayad ng mas mahal sa iba, i-compare muna ang {p}.","Subukan ang {p}. Kung hindi bagay sa iyo, sabihin lang at aayusin namin."],
+  ["Ihambing mo kami sa iba, saka magpadala ng mensahe.","Bago magbayad ng mas mahal sa iba, ihambing muna ang {p}.","Subukan ang {p}. Kung hindi bagay sa iyo, sabihin lamang at aayusin namin."]]]
+};
+const HK=Object.keys(HOOK);
+/* Primary text frameworks */
+const FW=[
+ ['PAS · Problem → Agitate → Solve',[
+  "{hook}\n\nYou know the feeling: {pain}. It costs you time, money and peace of mind.\n\nThat is why {p}{in} exists: {ben}.\n\n✔ {o}[[\n✔ Bonus: {bonus}]][[\n✔ Price: {price}]]\n✔ {proof}\n\n{urg}\n👉 {cta}. Or comment \"{kw}\" and we will send the details.",
+  "{hook}\n\nAlam mo ang feeling: {pain}. Nauubos ang oras, pera at peace of mind mo.\n\nKaya nandito ang {p}{in}: {ben}.\n\n✔ {o}[[\n✔ Bonus: {bonus}]][[\n✔ Presyo: {price}]]\n✔ {proof}\n\n{urg}\n👉 {cta}. O mag-comment ng \"{kw}\" at ise-send namin ang details.",
+  "{hook}\n\nAlam mo ang pakiramdam: {pain}. Nauubos ang oras, pera at kapayapaan ng isip mo.\n\nKaya narito ang {p}{in}: {ben}.\n\n✔ {o}[[\n✔ Dagdag: {bonus}]][[\n✔ Presyo: {price}]]\n✔ {proof}\n\n{urg}\n👉 {cta}. O mag-komento ng \"{kw}\" at ipapadala namin ang detalye."]],
+ ['BAB · Before → After → Bridge',[
+  "{hook}\n\nBEFORE: {pain}.\nAFTER: {ben}.\nTHE BRIDGE: {p}{in}.\n\n{o}[[ · {price}]]\n{proof}\n\n👉 {cta}. Type \"{kw}\" to start.",
+  "{hook}\n\nBAGO: {pain}.\nPAGKATAPOS: {ben}.\nANG TULAY: {p}{in}.\n\n{o}[[ · {price}]]\n{proof}\n\n👉 {cta}. I-type ang \"{kw}\" para magsimula.",
+  "{hook}\n\nBAGO: {pain}.\nPAGKATAPOS: {ben}.\nANG TULAY: {p}{in}.\n\n{o}[[ · {price}]]\n{proof}\n\n👉 {cta}. I-type ang \"{kw}\" upang magsimula."]],
+ ['Offer stack · everything they get',[
+  "{hook}\n\nHere is everything you get with {p}{in}:\n✅ {ben}\n✅ {o}[[\n✅ FREE: {bonus}]][[\n✅ Price: {price}]]\n✅ {guar}\n\n{urg}\n👉 Message \"{kw}\" now and we will reply with price, slots and next steps.",
+  "{hook}\n\nIto ang lahat ng makukuha mo sa {p}{in}:\n✅ {ben}\n✅ {o}[[\n✅ FREE: {bonus}]][[\n✅ Presyo: {price}]]\n✅ {guar}\n\n{urg}\n👉 I-message ang \"{kw}\" ngayon at sasagot kami with price, slots at next steps.",
+  "{hook}\n\nNarito ang lahat ng makukuha mo sa {p}{in}:\n✅ {ben}\n✅ {o}[[\n✅ LIBRE: {bonus}]][[\n✅ Presyo: {price}]]\n✅ {guar}\n\n{urg}\n👉 Ipadala ang \"{kw}\" ngayon at sasagot kami ng presyo, puwesto at susunod na hakbang."]],
+ ['FAQ · answers the doubts',[
+  "{hook}\n\nQ: Is {p} worth it?\nA: {proof}\n\nQ: What if I am not sure?\nA: {guar}\n\nQ: How do I start?\nA: {cta}. Just send \"{kw}\".\n\n{o}. {urg}",
+  "{hook}\n\nQ: Sulit ba ang {p}?\nA: {proof}\n\nQ: Paano kung hindi ako sigurado?\nA: {guar}\n\nQ: Paano mag-start?\nA: {cta}. I-send lang ang \"{kw}\".\n\n{o}. {urg}",
+  "{hook}\n\nT: Sulit ba ang {p}?\nS: {proof}\n\nT: Paano kung hindi ako sigurado?\nS: {guar}\n\nT: Paano magsimula?\nS: {cta}. Ipadala lamang ang \"{kw}\".\n\n{o}. {urg}"]],
+ ['Story · relatable customer',[
+  "{hook}\n\nA customer came to us tired of {pain}. After trying {p}{in}, they got {ben}.\n\nYou can too. {o}.\n\n{urg}\n👉 {cta}.",
+  "{hook}\n\nMay customer na lumapit sa amin na pagod na sa {pain}. Pagkatapos subukan ang {p}{in}, nakuha nila ang {ben}.\n\nIkaw din. {o}.\n\n{urg}\n👉 {cta}.",
+  "{hook}\n\nMay customer na lumapit sa amin na pagod na sa {pain}. Matapos subukan ang {p}{in}, nakuha nila ang {ben}.\n\nIkaw rin. {o}.\n\n{urg}\n👉 {cta}."]],
+ ['Comment-to-inquire · highest inquiry volume',[
+  "{hook}\n\nComment \"{kw}\" and we will send the price, details and available slots straight to your inbox.\n\n{o}[[ · {price}]]\n{urg}",
+  "{hook}\n\nMag-comment ng \"{kw}\" at ise-send namin ang price, details at available slots sa inbox mo.\n\n{o}[[ · {price}]]\n{urg}",
+  "{hook}\n\nMag-komento ng \"{kw}\" at ipapadala namin ang presyo, detalye at bakanteng puwesto sa inbox mo.\n\n{o}[[ · {price}]]\n{urg}"]],
+ ['Short & punchy · best for retargeting',[
+  "{hook}\n{p}{in}: {ben}. {o}.\n👉 {cta}",
+  "{hook}\n{p}{in}: {ben}. {o}.\n👉 {cta}",
+  "{hook}\n{p}{in}: {ben}. {o}.\n👉 {cta}"]]
+];
+const HL=[
+ ["{p}: {o}","Get {ben}","[[Only {price} · ]]{p}","Limited Slots This Week","Ask Us Anything. No Pressure","See Why Customers Return","{o} Ends Soon","Message \"{kw}\" Now"],
+ ["{p}: {o}","Makuha ang {ben}","[[{price} lang · ]]{p}","Limited Slots This Week","Mag-ask Lang. No Pressure","Bakit Bumabalik ang Customers","{o} Malapit Nang Matapos","I-message ang \"{kw}\""],
+ ["{p}: {o}","Makuha ang {ben}","[[{price} lamang · ]]{p}","Limitadong Puwesto Ngayong Linggo","Magtanong Lang. Walang Pressure","Bakit Bumabalik ang Customer","{o} Malapit Nang Matapos","Ipadala ang \"{kw}\""]
+];
+const KWC=[
+ ["Comment \"{kw}\" and we will send the details.","Type \"{kw}\" below 👇 We reply fast.","Message \"{kw}\" to reserve your slot.","Tag a friend who needs {p}, then comment \"{kw}\".","Send us \"{kw}\" and ask about {o}."],
+ ["Mag-comment ng \"{kw}\" at ise-send namin ang details.","I-type ang \"{kw}\" sa baba 👇 Mabilis kaming sumagot.","I-message ang \"{kw}\" para ma-reserve ang slot mo.","I-tag ang friend na kailangan ng {p}, tapos mag-comment ng \"{kw}\".","I-send ang \"{kw}\" at itanong ang tungkol sa {o}."],
+ ["Mag-komento ng \"{kw}\" at ipapadala namin ang detalye.","I-type ang \"{kw}\" sa ibaba 👇 Mabilis kaming sumasagot.","Ipadala ang \"{kw}\" upang maitabi ang puwesto mo.","I-tag ang kaibigang nangangailangan ng {p}, saka mag-komento ng \"{kw}\".","Ipadala ang \"{kw}\" at itanong ang tungkol sa {o}."]
+];
+const ICE=[
+ ["How much is {p}?","What is included in {p}?","Is it available{in}?","Can I get {o}?"],
+ ["Magkano ang {p}?","Ano ang kasama sa {p}?","Available ba{in}?","Pwede ko bang makuha ang {o}?"],
+ ["Magkano ang {p}?","Ano ang kasama sa {p}?","Mayroon ba{in}?","Maaari ko bang makuha ang {o}?"]
+];
+const GREET=[
+ "Hi! 👋 Thanks for your interest in {p}. Tell us what you need and we will send the best option, price and next step.",
+ "Hi! 👋 Salamat sa interes sa {p}. Sabihin mo lang kung ano ang kailangan mo at ise-send namin ang best option, price at next step.",
+ "Kumusta! 👋 Salamat sa interes sa {p}. Sabihin lamang kung ano ang kailangan mo at ipapadala namin ang pinakamainam na opsyon, presyo at susunod na hakbang."
+];
+const REPLY=[
+ "Hi! Thanks for messaging {p} 🙌\n\nQuick info:\n✔ {ben}\n✔ {o}[[\n✔ Price: {price}]]\n\nTo recommend the best option, may I ask:\n1) What are you looking for?\n2) When do you need it?\n3) What is your budget?\n\n{urg}",
+ "Hi! Salamat sa pag-message sa {p} 🙌\n\nQuick info:\n✔ {ben}\n✔ {o}[[\n✔ Presyo: {price}]]\n\nPara ma-recommend ang best option, pwede ko bang itanong:\n1) Ano ang hinahanap mo?\n2) Kailan mo kailangan?\n3) Magkano ang budget mo?\n\n{urg}",
+ "Kumusta! Salamat sa pagpapadala ng mensahe sa {p} 🙌\n\nMabilis na impormasyon:\n✔ {ben}\n✔ {o}[[\n✔ Presyo: {price}]]\n\nUpang mairekomenda ang pinakamainam, maaari ko bang itanong:\n1) Ano ang hinahanap mo?\n2) Kailan mo kailangan?\n3) Magkano ang badyet mo?\n\n{urg}"
+];
+const FUP=[
+ [["After 1 hour","Hi! Just checking if you saw the details for {p}. Happy to answer any question. 😊"],["After 24 hours","Quick follow-up on {p}: {o} is still available. {urg} Want me to reserve one for you?"],["After 3 days","Last message from us about {p}! If now is not the right time, no problem. Message us anytime and we will help."]],
+ [["After 1 hour","Hi! Na-see mo na ba ang details ng {p}? Happy to answer any question. 😊"],["After 24 hours","Quick follow-up sa {p}: available pa ang {o}. {urg} Gusto mo bang i-reserve ko para sa iyo?"],["After 3 days","Last message namin tungkol sa {p}! Kung hindi pa ito ang tamang time, okay lang. Mag-message ka lang anytime."]],
+ [["Pagkalipas ng 1 oras","Kumusta! Nakita mo na ba ang detalye ng {p}? Masaya kaming sumagot sa anumang tanong. 😊"],["Pagkalipas ng 24 oras","Mabilis na follow-up tungkol sa {p}: bukas pa ang {o}. {urg} Nais mo bang ireserba ko para sa iyo?"],["Pagkalipas ng 3 araw","Huling mensahe namin tungkol sa {p}! Kung hindi pa tamang panahon, ayos lang. Magpadala lamang ng mensahe anumang oras."]]
+];
+const OBJ=[
+ [["“It is too expensive”","I understand. Here is what {p} includes: {ben}. {proof} [[Right now it is {price} with {o}. ]]Would you like me to show you the best option for your budget?"],["“I need to think about it”","Of course! To help you decide, what is the one thing you are unsure about? {guar} Also, {urg}"],["“Is this legit / can I trust you?”","Fair question. {proof} {guar} You can also message us your questions first and we will answer everything before you pay."],["“How long / how fast?”","Great question. Tell me your location and preferred date and I will confirm the exact timing right away."]],
+ [["“Ang mahal naman”","Naiintindihan ko. Ito ang kasama sa {p}: {ben}. {proof} [[Ngayon, {price} lang with {o}. ]]Gusto mo bang ipakita ko ang best option para sa budget mo?"],["“Pag-iisipan ko muna”","Sige po! Para matulungan ka mag-decide, ano ang isang bagay na hindi ka pa sigurado? {guar} Also, {urg}"],["“Legit ba ito / mapagkakatiwalaan ba kayo?”","Fair na tanong. {proof} {guar} Pwede ka ring mag-message ng questions muna at sasagutin namin lahat bago ka magbayad."],["“Gaano katagal / gaano kabilis?”","Good question. Sabihin mo lang ang location at preferred date mo at kokompirmahin ko agad ang exact timing."]],
+ [["“Mahal naman”","Naiintindihan ko. Narito ang kasama sa {p}: {ben}. {proof} [[Sa ngayon, {price} lamang kasama ang {o}. ]]Nais mo bang ipakita ko ang pinakamainam para sa badyet mo?"],["“Pag-iisipan ko muna”","Sige po! Upang matulungan kang magpasya, ano ang isang bagay na hindi ka pa sigurado? {guar} Gayundin, {urg}"],["“Mapagkakatiwalaan ba kayo?”","Makatwirang tanong. {proof} {guar} Maaari ka ring magpadala ng tanong muna at sasagutin namin lahat bago ka magbayad."],["“Gaano katagal / gaano kabilis?”","Magandang tanong. Sabihin ang lokasyon at nais na petsa at kokompirmahin ko agad ang eksaktong oras."]]
+];
+const RET=[
+ ["Still thinking about {p}? 🤔 Here is a reminder: {ben}. {o}. {urg}\n👉 {cta}","You looked at {p}. Questions? Message us and we will answer in minutes, no pressure.\n👉 {cta}"],
+ ["Iniisip mo pa rin ba ang {p}? 🤔 Reminder lang: {ben}. {o}. {urg}\n👉 {cta}","Tinignan mo ang {p}. May tanong? Mag-message ka at sasagutin namin agad, no pressure.\n👉 {cta}"],
+ ["Iniisip mo pa rin ba ang {p}? 🤔 Paalala lamang: {ben}. {o}. {urg}\n👉 {cta}","Tiningnan mo ang {p}. May tanong? Magpadala ng mensahe at sasagutin namin agad, walang pressure.\n👉 {cta}"]
+];
+const CONCEPT=["Before vs after (split screen) showing the result of {p}","Price reveal in 3 seconds: “How much do you think {p} costs?”","Customer reaction or testimonial video, 15 seconds, handheld and real","Behind the scenes: how {p} is prepared, packed or delivered (builds trust fast)","Myth vs fact text carousel: 3 cards that answer “Is {p} worth it?”","Reply-to-comment video answering the most common question about {p}","Unboxing or first-impression clip with captions on","3-card carousel: problem ({pain}) → solution ({p}) → offer ({o})"];
+const TTS=[
+ [["Problem → Solution",["0–3 s · HOOK (voice + on screen): {hook}","3–8 s · PROBLEM: show the moment of {pain}. Close-up, real setting, no long intro.","8–18 s · SOLUTION: show {p}{in} in action. Say: \"{ben}.\"","18–25 s · PROOF + OFFER: {proof} {o}[[ · {price}]].","25–30 s · CTA: {urg} {cta}. Pin a comment: \"Comment {kw} for details.\"","Tip: captions on, a cut every 2–3 seconds, trending sound at low volume."]],["POV / Story",["0–2 s · TEXT ON SCREEN: \"POV: {pain}\"","2–8 s · Act out the problem in one quick, relatable (a bit funny) scene.","8–18 s · Plot twist: reveal {p}{in}. Show the result: {ben}.","18–25 s · Offer: {o}[[ · {price}]]. {proof}","25–30 s · CTA: {cta}. \"Comment {kw} and I will send you the details.\""]],["Demo + price reveal",["0–3 s · HOOK: \"How much do you think {p} costs? Not what you expect.\"","3–10 s · Show it in 3 quick cuts (best angles, real use).","10–20 s · Price reveal[[: {price}]] and what is included: {ben}. {o}.","20–30 s · Proof: {proof} Then CTA: {cta}. {urg}"]]],
+ [["Problem → Solution",["0–3 s · HOOK (voice + on screen): {hook}","3–8 s · PROBLEM: ipakita ang moment ng {pain}. Close-up, totoong setting, walang mahabang intro.","8–18 s · SOLUTION: ipakita ang {p}{in} in action. Sabihin: \"{ben}.\"","18–25 s · PROOF + OFFER: {proof} {o}[[ · {price}]].","25–30 s · CTA: {urg} {cta}. I-pin ang comment: \"Mag-comment ng {kw} para sa details.\"","Tip: naka-on ang captions, cut kada 2–3 seconds, trending sound na mahina."]],["POV / Story",["0–2 s · TEXT ON SCREEN: \"POV: {pain}\"","2–8 s · I-arte ang problema sa isang quick, relatable (medyo nakakatawa) na scene.","8–18 s · Plot twist: i-reveal ang {p}{in}. Ipakita ang result: {ben}.","18–25 s · Offer: {o}[[ · {price}]]. {proof}","25–30 s · CTA: {cta}. \"Mag-comment ng {kw} at ise-send ko ang details.\""]],["Demo + price reveal",["0–3 s · HOOK: \"Magkano sa tingin mo ang {p}? Hindi ito ang inaasahan mo.\"","3–10 s · Ipakita sa 3 quick cuts (best angles, totoong gamit).","10–20 s · Price reveal[[: {price}]] at kung ano ang kasama: {ben}. {o}.","20–30 s · Proof: {proof} Tapos CTA: {cta}. {urg}"]]],
+ [["Problema → Solusyon",["0–3 s · PANIMULA (boses + teksto): {hook}","3–8 s · PROBLEMA: ipakita ang sandali ng {pain}. Malapitan, totoong lugar, walang mahabang pambungad.","8–18 s · SOLUSYON: ipakita ang {p}{in} habang ginagamit. Sabihin: \"{ben}.\"","18–25 s · PATUNAY + ALOK: {proof} {o}[[ · {price}]].","25–30 s · PANAWAGAN: {urg} {cta}. I-pin ang komento: \"Mag-komento ng {kw} para sa detalye.\"","Payo: bukas ang caption, putol kada 2–3 segundo, mahinang tunog."]],["POV / Kuwento",["0–2 s · TEKSTO SA SCREEN: \"POV: {pain}\"","2–8 s · Isadula ang problema sa isang maikli at relatable na eksena.","8–18 s · Pagbabago: ibunyag ang {p}{in}. Ipakita ang resulta: {ben}.","18–25 s · Alok: {o}[[ · {price}]]. {proof}","25–30 s · PANAWAGAN: {cta}. \"Mag-komento ng {kw} at ipapadala ko ang detalye.\""]],["Demo + pagbunyag ng presyo",["0–3 s · PANIMULA: \"Magkano sa tingin mo ang {p}? Hindi ito ang inaasahan mo.\"","3–10 s · Ipakita sa 3 mabilis na putol (pinakamagandang anggulo, totoong gamit).","10–20 s · Ibunyag ang presyo[[: {price}]] at ang kasama: {ben}. {o}.","20–30 s · Patunay: {proof} Saka panawagan: {cta}. {urg}"]]]
+];
+const GUAR=["Not happy? Tell us and we will make it right.","Hindi ka satisfied? Sabihin lang sa amin at aayusin namin.","Hindi ka nasiyahan? Sabihin lamang sa amin at aayusin namin."];
+const AUD=['everyone','lahat','lahat'];
+const KW={msg:'INFO',sales:'ORDER',book:'BOOK',leads:'QUOTE',aware:'HI'};
+const S=(a,v)=>a.map(x=>fill(x,v));
+
+TLF.copy=()=>`<div class="tf">${tfs('c_lg','Language',[[0,'English'],[1,'Taglish'],[2,'Tagalog']],1)}${tfs('c_pl','Platform',[['fb','Facebook & Instagram ads'],['tt','TikTok / Reels video'],['gg','Google Search ads'],['sh','Shopee listing']],'fb')}${tfs('c_bz','Business type',BIZ.map((b,i)=>[i,b.n]),0)}${tfs('c_gl','Goal',[['msg','Messages / inquiries'],['sales','Sales / orders'],['book','Bookings'],['leads','Leads / quotes'],['aware','Awareness / followers']],'msg')}${tfi('c_p','Product or service name','','text','e.g. Island Hopping Tour')}${tfi('c_pr','Price (optional)','','text','e.g. ₱1,499 only')}${tfi('c_o','Offer (optional)','','text','e.g. 20% off this month')}${tfi('c_bo','Free bonus (optional)','','text','e.g. free delivery')}${tfi('c_l','Location (optional)','','text','e.g. Puerto Princesa')}${tfi('c_au','Who is it for? (optional)','','text','e.g. busy moms, business owners')}${tfi('c_pn','Customer problem (optional)','','text','leave blank for a suggestion')}${tfi('c_bn','Main benefit (optional)','','text','leave blank for a suggestion')}${tfi('c_ga','Reassurance / guarantee (optional)','','text','e.g. Free replacement if damaged')}${tfi('c_kw','Comment / message keyword (optional)','','text','e.g. PRICE')}${tfs('c_an','Hook style',[['mix','Mix of every angle'],...HK.map(k=>[k,HOOK[k][0]])],'mix')}<button class="btn" id="c_re" style="margin-top:12px;width:100%">🔁 Generate again</button><p class="note" style="margin-top:8px">Built to start conversations and close sales: curiosity hooks, offer stacks, comment-to-inquire posts, Messenger scripts, objection replies and follow-ups. Only claim what you can prove (reviews, numbers, delivery times) and follow each platform’s ad policies. Edit before publishing.</p></div>`;
+
+TLR.copy=()=>{const li=+$('c_lg').value,pl=$('c_pl').value,bi=+$('c_bz').value,gl=$('c_gl').value,an=$('c_an').value,T=GT[li],cat=CATD[CATM[BIZ[bi].n]||'shop'],loc=$('c_l').value.trim(),p=$('c_p').value.trim()||BIZ[bi].n,g=id=>$(id).value.trim();
+const v={p,o:g('c_o')||T.o0,in:loc?T.in+loc:'',pain:g('c_pn')||cat.pain[li],ben:g('c_bn')||cat.ben[li],proof:cat.proof[li],urg:cat.urg[li],cta:T.cta[gl],price:g('c_pr'),bonus:g('c_bo'),aud:g('c_au')||AUD[li],guar:g('c_ga')||GUAR[li],kw:(g('c_kw')||KW[gl]).toUpperCase()},r=mulb(TSEED*7919+bi*31+li*7);
+TCP=[];
+/* hooks: one per angle (mix) or all of one angle */
+let hooks=[];
+if(an==='mix'){tpick(HK,HK.length,r).forEach(k=>{const a=HOOK[k][1][li];hooks.push([HOOK[k][0],fill(a[Math.floor(r()*a.length)],v)])})}
+else{HOOK[an][1][li].forEach(t=>hooks.push([HOOK[an][0],fill(t,v)]));tpick(HK.filter(k=>k!==an),3,r).forEach(k=>{const a=HOOK[k][1][li];hooks.push([HOOK[k][0],fill(a[Math.floor(r()*a.length)],v)])})}
+const hx=hooks.map(h=>h[1]);let h='';
+if(pl==='fb'){
+ h+=tsec('🎣 Scroll-stopping hooks (first line of the ad)',hooks.slice(0,10),null,'Each hook uses a different psychology angle. Test 3–4 of them as separate ads with the same offer. The first 125 characters are what people see before “See more”.');
+ h+=tsec('✍️ Primary text, ready to paste',FW.map((f,i)=>[f[0],fill(f[1][li],{...v,hook:hx[(i*2)%hx.length]})]),null,'Seven proven structures. Start with “Comment-to-inquire” and “Offer stack” when your goal is more messages and sales.');
+ h+=tsec('🏷️ Headlines',tpick(HL[li],6,r).map(s=>fill(s,v)),40,'Aim for 40 characters or fewer. Suggested button: <b>'+({msg:'Send Message',sales:'Shop Now',book:'Book Now',leads:'Get Quote',aware:'Follow'})[gl]+'</b>');
+ h+=tsec('💬 Inquiry boosters (comment and DM calls to action)',S(KWC[li],v),null,'Asking for a simple keyword makes it easy to reply and gives the algorithm engagement signals.');
+ h+=tsec('📲 Click-to-Messenger setup',[['Greeting',fill(GREET[li],v)],['Ice-breaker questions (up to 4)',S(ICE[li],v).join('\n')],['Instant first reply',fill(REPLY[li],v)]],null,'In Ads Manager, turn on the Messenger greeting and ice breakers so people can tap a question instead of typing.');
+ h+=tsec('🛡️ Reply scripts for common objections',OBJ[li].map(o=>[o[0],fill(o[1],v)]));
+ h+=tsec('🔔 Follow-up messages for people who did not reply',FUP[li].map(o=>[o[0],fill(o[1],v)]),null,'Most sales come after the first message. Follow up after 1 hour, 24 hours and 3 days.');
+ h+=tsec('🔁 Retargeting ads (people who viewed, messaged or visited)',S(RET[li],v),null,'Use with audiences of video viewers, page engagers and past message senders. Pair with a stronger offer or deadline.');
+ h+=tsec('🎥 Creative ideas to shoot this week',CONCEPT.map(s=>fill(s,v)),null,'The creative earns the click. Make 3 different concepts, each with 2 different hooks, and let results pick the winner.')}
+else if(pl==='tt'){
+ h+=tsec('🎣 Hooks (first 3 seconds)',hooks.slice(0,10),null,'Say the hook out loud and show it as on-screen text in the first second.');
+ TTS[li].forEach((s,i)=>{h+=tsec('🎬 Script '+(i+1)+': '+s[0],[fill(s[1].join('\n'),{...v,hook:hx[i%hx.length]})])});
+ const tg=[...cat.tag,'#fyp','#'+p.replace(/[^\p{L}\p{N}]/gu,'').toLowerCase()].filter(x=>x.length>1).join(' ');
+ h+=tsec('📝 Captions with hashtags',[...T.cap.map((c,i)=>fill(c,{...v,hook:hx[(i+3)%hx.length]})),...S(KWC[li].slice(0,2),v)].map(c=>c+'\n'+tg));
+ h+=tsec('💬 Pinned comment and reply ideas',S(KWC[li],v),null,'Pin one of these, then answer every comment with a question to keep the thread alive.');
+ h+=tsec('🎥 Creative ideas to shoot this week',CONCEPT.map(s=>fill(s,v)))}
+else if(pl==='gg'){
+ const extra=li===0?['Free Quote: {p}','Top-Rated {p}','[[From {price}]]','Book Online in Minutes','Ask Us Anything Today']:li===1?['Free Quote: {p}','Top-Rated {p}','[[From {price}]]','Mag-book Online in Minutes','Mag-ask Anytime']:['Libreng Presyo: {p}','Mataas ang Rating: {p}','[[Mula {price}]]','Mag-book Online Agad','Magtanong Anumang Oras'];
+ h+=tsec('🔎 Headlines (up to 30 characters each, use up to 15)',[...tpick(T.gh,10,r),...extra].map(s=>fill(s,v)).filter(Boolean),30,'Google Responsive Search Ads take up to 15 headlines. Edit any that run over the limit.');
+ h+=tsec('📄 Descriptions (up to 90 characters each)',[...T.gd.map(s=>fill(s,v)),fill(li===0?'Questions? Message us anytime. {cta}.':li===1?'May tanong? Mag-message anytime. {cta}.':'May tanong? Magpadala ng mensahe anumang oras. {cta}.',v)],90);
+ h+=tsec('🗝️ Keyword ideas by buyer intent',[`${p.toLowerCase()} price\n${p.toLowerCase()}${loc?' '+loc.toLowerCase():' near me'}\nbest ${p.toLowerCase()}\naffordable ${p.toLowerCase()}\n${p.toLowerCase()} for sale / booking / quote`],null,'Use phrase and exact match. Add negatives such as: free, diy, jobs, salary, course, wholesale (if you do not offer it).');
+ h+=tsec('➕ Callouts and sitelink ideas',['Callouts (25 characters each):\nFree Quote\nFast Reply\nTrusted Local Service\nEasy Payment Options','Sitelinks:\nPrices & Packages\nCustomer Reviews\nHow to Order\nContact Us']) }
+else{
+ h+=tsec('🛍️ Product titles (up to 120 characters)',[...T.st.map(s=>fill(s,v)),fill('{p} [[{price} · ]]{o} | Authentic | Ships Fast | COD Available',v),fill('NEW {p} - {ben} | Best Seller | Free Shipping Available',v)],120,'Put the main keyword first and keep claims you can prove.');
+ h+=tsec('📋 Description bullets',[T.sb.map(s=>fill(s,v)).join('\n')]);
+ h+=tsec('💬 Shopee chat auto-reply and follow-up',[['Auto-reply',fill(REPLY[li],v)],['Follow-up (24 hours)',fill(FUP[li][1][1],v)]]);
+ h+=tsec('🎟️ Voucher and promo lines',S(li===0?['{o}: ends soon','Follow our shop and collect the voucher','Bundle and save[[ · {price}]]','Free shipping minimum spend available','Order before the next sale day']:li===1?['{o}: malapit nang matapos','I-follow ang shop at i-collect ang voucher','Bundle and save[[ · {price}]]','May free shipping min. spend','Umorder bago ang next sale day']:['{o}: malapit nang matapos','I-follow ang tindahan at kunin ang voucher','Bundle at makatipid[[ · {price}]]','May libreng padala sa minimum na gastos','Umorder bago ang susunod na sale'],v),null,'Shoppers on Shopee compare price, shipping and reviews. Vouchers and bundles lift conversion.')}
+$('tres').innerHTML=h};
+})();
+
+/* ===== AI Ads Assistant: answers questions, analyses pasted numbers or CSV, diagnoses campaigns ===== */
+(function(){
+const PLN={fb:'Facebook',ig:'Instagram',tt:'TikTok',sh:'Shopee',gg:'Google Ads'};
+let AIH=[],AIP='',AIL=null;
+art.ai=art.dx||'';
+const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9%]+/g,' ').trim();
+const STOP=new Set('a an the of to for and or in on at my me i we you is are do does how what why when where can should would could will with from this that it be am im our your have has had get got just about please tell explain'.split(' '));
+const words=s=>norm(s).split(' ').filter(Boolean);
+function lev(a,b,max){if(Math.abs(a.length-b.length)>max)return max+1;let p=[];for(let j=0;j<=b.length;j++)p[j]=j;for(let i=1;i<=a.length;i++){let c=[i],m=i;for(let j=1;j<=b.length;j++){c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));if(c[j]<m)m=c[j]}if(m>max)return max+1;p=c}return p[b.length]}
+function ts(t,ws){let b=0;for(const w of ws){let s=0;if(w===t)s=10;else if(t.length>=3&&w.startsWith(t))s=7;else if(w.length>=4&&t.startsWith(w))s=6;else if(t.length>=5&&w.length>=5&&lev(t,w,1)<=1)s=5;if(s>b)b=s;if(b===10)break}return b}
+const esc3=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function md(t){const L=esc3(t).split('\n');let h='',ul=false,ol=false;const cl=()=>{if(ul){h+='</ul>';ul=false}if(ol){h+='</ol>';ol=false}};
+ const inl=s=>s.replace(/\*\*(.+?)\*\*/g,'<b>$1</b>');
+ L.forEach(l=>{let m;if((m=/^\s*[-•]\s+(.*)$/.exec(l))){if(!ul){cl();h+='<ul>';ul=true}h+='<li>'+inl(m[1])+'</li>'}else if((m=/^\s*(\d+)[.)]\s+(.*)$/.exec(l))){if(!ol){cl();h+='<ol>';ol=true}h+='<li>'+inl(m[2])+'</li>'}else if(!l.trim()){cl()}else{cl();h+='<p>'+inl(l)+'</p>'}});cl();return h}
+
+/* ---------- Knowledge base ---------- */
+const KB=[];const K=(pl,t,k,a,f)=>KB.push({pl,t,k,a,f:f||[]});
+K('fb ig','Why is my cost per message high?','high cost per message expensive messages inquiries cpr cost per result costly mahal mataas cost per conversation','A high cost per message usually comes from one of four places. Check them in this order:\n- **Expensive delivery** (CPM above about ₱120): audience too narrow, peak season (ber months, 9.9–12.12, paydays) or a weak ad. Broaden targeting or use Advantage+ audience.\n- **Low CTR** (below 1%): the hook or offer is not interesting. Test 3 new hooks with a clear price or offer in the first line.\n- **Low click-to-message rate**: the message flow does not match the ad promise. Use a Messenger greeting with ice-breaker questions and reply within minutes.\n- **Too little data**: give each ad set about 3 days before judging.\nPaste your numbers here and I will find the exact weak link.',['Analyze my numbers','What is a good CTR on Facebook?']);
+K('fb ig tt sh gg','My ads get clicks but no sales or messages','clicks no sales no messages no inquiries no orders traffic not converting not buying landing page nothing','If people click but do not buy or message, the problem is after the click:\n- **Message mismatch**: the ad promises one thing and the page or chat shows another. Match the headline, photo and price.\n- **Friction**: slow page (over 3 seconds), too many steps, no price shown, no clear button.\n- **Trust**: add reviews, real photos, delivery and return terms, and a face or shop name.\n- **Tracking**: confirm the pixel and events fire. Results shown as zero can be a tracking gap.\n- **Wrong audience**: cheap clicks from curious people. Use a stronger offer and a qualifying line in the ad.\nTest one change at a time for 3 days.',['Why do I have inquiries but no sales?','How do I check my pixel works?']);
+K('all','Why do I have inquiries but no sales?','inquiries but no sales messages no sales leads not closing not buying nag-message pero hindi bumibili close rate follow up','Plenty of messages but few sales is a **follow-up and qualification** problem, not an ad problem:\n- Reply in under 5 minutes. Speed alone can double the close rate.\n- Send price, what is included and the next step in the first reply.\n- Ask 2 qualifying questions (location, quantity or date, budget).\n- Follow up after 1 hour, 24 hours and 3 days.\n- Make the ad say the price range so only serious people message.\n- Track messages → qualified → paid, so you know your real cost per customer.\nThe Tools tab has ready-made reply and follow-up scripts.',['Write follow-up messages','How do I get more qualified leads?']);
+K('fb ig','What is a good CTR and what if it is low?','good ctr low ctr click through rate improve ctr clicks few','On Facebook and Instagram a link CTR above **1–2%** is healthy for the Philippines; below 0.7% usually means the creative is not stopping the scroll.\nTo raise CTR:\n- Put the hook in the first 3 seconds or first line.\n- Show the product in use, not a logo.\n- Add a concrete offer or price.\n- Use 9:16 video for Reels and Stories.\n- Rotate creatives, since CTR drops as frequency rises.');
+K('fb ig tt','What is ad fatigue and frequency?','ad fatigue frequency high frequency creative fatigue same people seeing ad repeated tired audience','Frequency is the average number of times a person saw your ad. Above about **3.5** (on a cold audience) people get tired, CTR falls and cost per result rises.\nFix it by:\n- Uploading 3–5 fresh creatives or new hooks.\n- Widening the audience.\n- Excluding people who already messaged or bought.\n- Pausing the tired ad instead of raising budget.\nFor retargeting audiences a higher frequency (4–6) can be fine for a short time.');
+K('fb ig','What is the learning phase and why am I Learning limited?','learning phase learning limited 50 results ad set stuck not exiting delivery','An ad set needs about **50 optimisation events in 7 days** to leave the learning phase. “Learning limited” means it is not getting enough results.\n- Raise the budget so it can reach 50 events (budget of at least 5–10× your target cost per result per day).\n- Merge similar ad sets so data is not split.\n- Avoid big edits (budget over 20%, audience, creative) in the first 3 days.\n- Optimise for a more frequent event (messages instead of purchases) if volume is low.');
+K('fb ig tt sh gg','How much budget should I start with?','how much budget start daily budget minimum budget how much spend magkano budget starting budget','A simple rule: daily budget per ad set should be **5–10× your target cost per result**. If a message costs about ₱20, start at ₱100–200 a day per ad set.\n- Under ₱30,000/month: one main platform, 70% on proven ads and 30% on tests.\n- Test each idea with ₱300–500 a day for 3 days.\n- Add 12% VAT when you quote a client.\nTell me your goal and cost per result and I can calculate a budget.',['How many messages can I get with ₱5,000?','Calculate VAT for ₱200 per day for 7 days']);
+K('fb ig','Which campaign objective should I choose?','campaign objective which objective messages leads sales traffic engagement awareness choose','Pick the objective that matches the action you want:\n- **Messages / Engagement (Messenger)**: local services, bookings, price inquiries.\n- **Leads**: quotes and sign-ups with a form.\n- **Sales**: online stores with a pixel and at least a few purchases a week.\n- **Traffic**: only when you need website visits, since it brings clicks, not buyers.\n- **Awareness**: launches or brand reach, not direct sales.\nOne goal per campaign.');
+K('fb ig','Advantage+ audience or interest targeting?','advantage audience interest targeting broad targeting lookalike narrow audience','For most Philippine accounts, **broad or Advantage+ audience with strong creative** now beats narrow interest stacks, because the creative does the targeting.\n- Start broad (age and location only, or Advantage+).\n- Use interests only as suggestions, or for tiny niches.\n- Use lookalikes and custom audiences from buyers and message senders for retargeting and scaling.\n- Test one audience change at a time.');
+K('fb ig','Boost post or Ads Manager?','boost post boosting vs ads manager difference which better','Use **Ads Manager**. Boosting is limited: fewer objectives, fewer placements, weaker testing and reporting. Ads Manager lets you choose the objective, split-test creatives, set schedules and read breakdowns by age, gender and placement. Boost only for a quick engagement push on a post.');
+K('fb ig','My ad was rejected or my account is restricted','ad rejected disapproved policy account restricted disabled appeal ban violation account quality','Steps:\n1. Open Account Quality in Business Support Home and read the exact reason.\n2. Edit the ad to remove the flagged claim (before/after photos, income or health claims, personal attributes like “Are you overweight?”), then request a review.\n3. Use Request Review/appeal once; repeated resubmits can hurt.\n4. Keep admins limited, use two-factor authentication, verify the business and use a stable payment method.\nAvoid false claims and follow the Data Privacy Act for customer data.');
+K('fb ig tt','What creative works best?','creative best creative video image format reels ugc what content works hook 9:16 length','What reliably works:\n- **9:16 video, 15–30 seconds**, hook in the first 3 seconds, captions on screen.\n- Real people and real use beat polished stock.\n- One clear offer, price or benefit and one call to action.\n- Mix formats: UGC, demo, testimonial, before/after (only if allowed by policy), price reveal.\n- Keep text out of the top and bottom 15% (UI safe zones).\nUse the **Ad copy & hooks** tool for ready hooks and scripts.',['Write hooks for my business']);
+K('fb ig tt gg','How do I set up pixel and conversion tracking?','pixel setup conversions api capi tracking events install tag test events purchase lead tracking','1. Install the Meta Pixel (or TikTok Pixel / Google tag) on every page.\n2. Add the server-side connection (Conversions API / Events API) for better accuracy.\n3. Verify your domain and set priority events (Facebook).\n4. Test events with the Test Events tool and confirm Purchase or Lead fires once.\n5. Use UTM links and a sheet to compare platform results with real sales.\nWithout tracking, the algorithm cannot optimise and your reports will show zero results.');
+K('fb ig tt','How do I retarget people?','retargeting remarketing custom audience warm audience engaged viewers visitors message senders','Build warm audiences and show them a different message:\n- Video viewers (50% or more), page and Instagram engagers, people who messaged, website visitors, add-to-carts.\n- Windows: 7, 14 and 30 days.\n- Use a stronger offer, a deadline, reviews or an answer to the main objection.\n- Exclude buyers.\nKeep retargeting at about 20–30% of budget.');
+K('fb ig tt','How do I scale winning ads?','scale scaling increase budget winning ad winner duplicate how to scale','Scale gradually:\n- Raise budget **20% every 2–3 days** while cost per result stays under target.\n- Or duplicate the winning ad set at a higher budget instead of editing it heavily.\n- Add new creatives constantly, since scale burns creative fast.\n- Expand audiences (Advantage+, lookalikes) and placements.\n- Watch frequency and your real cost per customer, not only platform results.');
+K('all','When should I turn off an ad?','turn off pause ad kill rule stop ad when to pause losing ad','Kill rules that work for small budgets:\n- Spent **2–3× your target cost per result with zero results**: pause.\n- Cost per result above target for 3+ days with enough data (50+ clicks): pause or replace.\n- Frequency above 3.5 with falling CTR: refresh the creative.\nDo not judge before about 3 days or 1,000 impressions, and do not pause during the learning phase unless it is clearly losing.');
+K('fb ig tt','How should I structure my campaigns?','campaign structure ad sets cbo abo naming account structure how many ad sets creatives','A clean structure:\n- One goal per campaign.\n- 1–3 ad sets (broad, interest, retargeting) with 3–5 ads each.\n- Naming: Goal_Audience_Offer_Date.\n- Use ABO (budget per ad set) for testing and CBO/Advantage+ budget once you have winners.\n- Keep budgets large enough to exit the learning phase.');
+K('fb ig','What is the difference between Facebook and Instagram ads?','instagram vs facebook ads difference reels stories ig ads placement','Both run in the same Ads Manager. Instagram skews younger and visual: **Reels and Stories** need 9:16 video, quick hooks and little text. Facebook reaches a wider age range and suits Messenger inquiries and longer copy. Use Advantage+ placements to start, then check the placement breakdown and move budget to the winners. For inquiries, remember Instagram DMs and Messenger both work as destinations.');
+K('fb ig tt sh gg','What is ROAS and break-even ROAS?','roas break even roas return on ad spend profitable profit margin breakeven','**ROAS = revenue ÷ ad spend.** **Break-even ROAS = 1 ÷ profit margin.** With a 40% margin, break-even is 2.5×: below that you lose money on every sale. Include VAT, delivery and other costs in your margin. Send me your spend, revenue and margin and I will tell you if you are profitable.',['Break-even ROAS with a 40% margin']);
+K('all','How do seasons and sale days affect ad costs?','seasonal sale days 11.11 12.12 9.9 payday ber months black friday christmas cost increase cpm','Costs climb in the “ber” months, on double-date sales (9.9, 10.10, 11.11, 12.12), Black Friday and paydays (15th/30th). Plan: warm up audiences 1–2 weeks before, prepare fresh creatives, raise budgets only on proven ads and judge results against the same period, not against a quiet week.');
+K('all','How do I add 12% VAT to the ad budget?','vat 12 percent tax add vat billing quotation budget with vat','Ad budget + 12% VAT = total. Example: ₱200 a day × 7 days = ₱1,400; VAT ₱168; total ₱1,568. Ask me, for example, “VAT for ₱500 per day for 14 days”, or use the VAT calculator in Ads Manager.');
+K('all','How long should I wait before judging an ad?','how long wait judge ad results days enough data early learning when to evaluate','Wait about **3 days** and at least **1,000 impressions and 50+ clicks**, or until the ad has spent **2–3× your target cost per result**. Short windows are noisy, especially on small budgets. Judge on cost per result, not likes.');
+K('all','Which platform is best for my business?','which platform best choose platform where to advertise facebook tiktok shopee google best platform','Match the platform to buyer intent:\n- **Facebook/Instagram**: inquiries, local services, retail, building demand.\n- **TikTok**: reach, young audiences, product discovery and TikTok Shop.\n- **Shopee ads**: shoppers already searching to buy on Shopee.\n- **Google Search**: people actively searching for what you sell (services, bookings, high-ticket).\nUnder ₱30,000 a month, start with one main platform. The Playbook tab has strategies by business type.',['Show strategies by business type']);
+K('all','How do I get more qualified leads, not just cheap ones?','qualified leads lead quality low quality leads cheap leads spam leads filter','- State the price range or minimum in the ad so only serious people respond.\n- Use lead forms with a qualifying question, or a Messenger flow with 2 questions.\n- Optimise for the deeper event (qualified lead or purchase) once you have volume.\n- Exclude low-value locations and ages after checking the breakdown.\n- Track qualified leads and closed sales, not only message counts.');
+K('all','What offers get more inquiries and sales?','offer ideas promo bundle discount free shipping freebie guarantee limited slots price anchor','Strong offers combine value and urgency:\n- **Bundle or bonus** (free delivery, free consultation, extra item).\n- **Price anchor**: regular price crossed out with today’s price.\n- **Limited slots/stock** and a real deadline.\n- **Risk reversal**: a guarantee or easy replacement.\n- **Low-friction first step**: free quote, trial slot, sample size.\nThe **Ad copy & hooks** tool builds offer stacks you can paste.');
+K('all','How do I write better ad copy?','ad copy write copywriting caption headline hook primary text better copy','Structure that converts: **Hook → Problem or desire → Solution → Proof → Offer → Single call to action.**\n- First line stops the scroll (question, number, bold claim, relatable situation).\n- Speak to one person and one problem.\n- Add a keyword call to action: “Comment PRICE”.\n- Use Taglish if that is how your customers talk.\nOpen Tools → Ad copy & hooks for 10 hook angles and 7 ready frameworks.',['Write hooks for my business']);
+K('all','How do I check weekly performance?','weekly report check performance review routine daily check what metrics report client','Weekly review: spend, results, cost per result, CTR, CPC, CPM, frequency and ROAS. Compare with the last 7 days and with target. Sort by amount spent, then look at cost per result first. Pause the worst, scale the best 20%, add 2–3 new creatives, and send the client a short report: what happened, why, what next.');
+K('all','What should I include in a client report?','client report what to send reporting clients summary insights','Keep it short: **Spend, results, cost per result, reach, impressions, CTR, top ads, what worked, what did not, next steps and budget recommendation.** Use the Reports tab to import a CSV and generate a weekly, monthly or detailed report with charts.');
+K('all','What is a UTM link and why use it?','utm tracking link naming convention source medium campaign analytics','UTM parameters (utm_source, utm_medium, utm_campaign, utm_content) tag your links so analytics shows which ad produced each visit or sale. Use consistent names, for example facebook / paid / goal_audience_offer / hook1. Build them in Tools → UTM & naming.');
+K('all','Is there anything I must avoid for ad policy and privacy?','policy compliance data privacy act ra 10173 claims health income dti sec fda legal rules','Avoid false or exaggerated claims, income or health promises, before/after images where not allowed, and personal-attribute targeting language. Handle customer data under the Data Privacy Act (RA 10173), keep DTI/SEC and FDA documents ready where your product needs them, and follow each platform’s policy.');
+K('tt','How do I make good TikTok ads?','tiktok creative ads how to make tiktok ad video hook native ugc script length','Make it feel like a native TikTok, not an ad:\n- **Hook in 1–3 seconds** (text on screen plus voice).\n- 15–30 seconds, vertical, fast cuts every 2–3 seconds, captions on.\n- Real person, real setting, trending sound at low volume.\n- Show the product doing the job, then price or offer, then one call to action.\n- Test 3–5 videos per ad group and replace fast; TikTok creative fatigues in days.',['Write a TikTok script']);
+K('tt','What are Spark Ads and should I use them?','spark ads tiktok boost organic post authorization code spark','Spark Ads promote an existing organic TikTok post (yours or a creator’s) with its likes and comments intact. They look native, keep social proof and usually perform better than uploaded ads. Get a creator’s authorization code, run the proven post as a Spark Ad and keep the comments active.');
+K('tt','Why are my TikTok views high but sales are low?','tiktok views no sales low conversion tiktok traffic not buying tiktok shop low sales','Views are not buyers. Check:\n- The hook attracts entertainment-seekers, not buyers. Show price and product clearly.\n- No clear call to action, or a slow landing page / shop.\n- Weak product page: photos, reviews, price, shipping.\n- Wrong objective: use Conversions/Shop objectives instead of video views.\n- Retarget viewers with a direct offer.');
+K('tt','What is a good TikTok CPM?','tiktok cpm high expensive cpm cost 1000 views','TikTok CPM in the Philippines typically runs about **₱150–400**. If yours is higher, go broad on targeting, use Spark Ads on proven posts, refresh creatives and avoid narrow audiences and peak days unless the offer justifies it. See the Benchmarks tab for the full ranges.');
+K('tt','How does TikTok Shop advertising work?','tiktok shop ads gmv max shop ads affiliate shop creators product ads','Shop ads promote products inside TikTok Shop and usually pair product videos, creators and live shopping. Keep product prices competitive, use strong videos and reviews, add vouchers, work with affiliate creators and watch ROAS against your break-even.');
+K('sh','How do I improve my Shopee conversion rate?','shopee conversion low sales listing optimization photos title price reviews voucher shopee not selling','Shopee shoppers compare fast, so the listing must win in seconds:\n- **Title** starts with the main keyword; add variations and specs.\n- 5–9 sharp photos plus a short video; show size, use and packaging.\n- **Price, vouchers, free shipping minimum spend** and bundles.\n- Reviews and ratings above 4.7; reply to chats quickly.\n- Clear variations and stock; fix a long ship-by time.\nAim for roughly 3–8% conversion on keyword ads.');
+K('sh','How should I run Shopee ads?','shopee ads keyword ads discovery ads search ads bid roas how to shopee advertising product ads','- **Search (keyword) ads** for shoppers searching your product: start with exact and broad keywords and review the keyword report.\n- **Discovery/targeting ads** for browsing shoppers on product pages and the feed.\n- Raise bids on keywords with ROAS above break-even; pause ones with clicks and no orders.\n- Run harder on sale days (9.9, 11.11, 12.12) and payday.\n- Only advertise listings with good photos, price and reviews.');
+K('sh','How do I prepare for Shopee sale days?','shopee sale 9.9 11.11 12.12 flash deals vouchers shopee live prepare mega sale','1. Stock up and check prices at least 2 weeks early.\n2. Join campaigns and flash deals, set vouchers and bundles.\n3. Warm up with ads and followers 7–10 days before.\n4. Increase ad budgets on hero products on sale day and the evening before.\n5. Reply to chats fast; use auto-replies.\n6. After the sale, retarget and collect reviews.');
+K('gg','Search, Performance Max, Display or YouTube?','google ads campaign types search performance max pmax display youtube demand gen which','- **Search**: people typing what you sell. Best first campaign for services and high intent.\n- **Performance Max**: automated across Google; needs conversion tracking, good assets and feeds.\n- **Display**: cheap reach and remarketing, not direct response.\n- **YouTube/Demand Gen**: awareness and discovery.\nStart with Search; add Performance Max when you have conversion data.');
+K('gg','How do I lower my Google Ads CPC?','google ads cpc high expensive cost per click lower cpc quality score keywords negative','- Improve **Quality Score**: ads that match the keyword and a relevant landing page.\n- Use phrase and exact match and add **negative keywords** weekly from the Search terms report.\n- Raise CTR with strong headlines (price, offer, location).\n- Target by location and schedule to when you can answer.\n- Pause keywords with spend and no conversions.');
+K('gg','How do I set up Google Ads conversion tracking?','google ads conversion tracking ga4 gtag call tracking form conversions setup','Create a conversion action (form submit, call, WhatsApp/message click or purchase), install the Google tag or use Google Tag Manager, test it, and mark the main action as primary. Import GA4 goals if you use them. Smart bidding such as target CPA needs roughly 30+ conversions in 30 days.');
+K('gg','How do I use Google Ads for a local business?','google ads local business near me google business profile calls location targeting service area','Claim and complete your **Google Business Profile** (photos, hours, reviews). Run Search ads with location targeting around your service area, call and message assets, and keywords such as “service + city”. Add a schedule so ads run when you can answer.');
+K('all','What do the main ad terms mean?','glossary cpm cpc ctr cpa cpl roas frequency impressions reach meaning definition what is','**CPM**: cost per 1,000 impressions. **CPC**: cost per click. **CTR**: clicks ÷ impressions. **CPA/CPL**: cost per action/lead. **ROAS**: revenue ÷ ad spend. **Frequency**: average times one person saw the ad. **Reach**: unique people. **Impressions**: total times shown.');
+K('all','Hello / what can you do?','hello hi hey help what can you do start kumusta','__intro__');
+/* FEAT features as extra knowledge */
+const FKB=[];Object.keys(FEAT).forEach(k=>FEAT[k].g.forEach(g=>g[1].forEach(f=>FKB.push({pl:k==='fb'?'fb ig':k,t:f[0],k:FEAT[k].n+' '+g[0],a:'**'+f[0]+'** ('+FEAT[k].n+', '+g[0]+')\n'+f[1],pk:k,f:[]}))));
+KB.forEach(e=>{e.wt=words(e.t);e.wk=words(e.k)});FKB.forEach(e=>{e.wt=words(e.t);e.wk=words(e.k)});
+const PK=s=>/\b(facebook|fb|meta|messenger)\b/.test(s)?'fb':/\b(instagram|ig|reels)\b/.test(s)?'ig':/\btiktok|tik tok\b/.test(s)?'tt':/\bshopee|lazada\b/.test(s)?'sh':/\bgoogle|youtube|pmax|performance max\b/.test(s)?'gg':'';
+function findKB(q,pl){const toks=words(q).filter(t=>!STOP.has(t));if(!toks.length)return[];const out=[];
+ [KB,FKB].forEach((arr,ai)=>arr.forEach(e=>{let tot=0,hit=0;for(const t of toks){const s=Math.max(ts(t,e.wt)*3,ts(t,e.wk)*1.6);if(s){tot+=s;hit++}}if(!hit)return;const cov=hit/toks.length;if(cov<.5)return;tot*=cov;if(pl&&e.pl!=='all'){if(e.pl.split(' ').includes(pl))tot+=4;else tot-=4}if(ai)tot-=3;out.push({e,s:tot})}));
+ out.sort((a,b)=>b.s-a.s);return out}
+
+/* ---------- Number parsing ---------- */
+const NV=s=>{s=String(s).toLowerCase().replace(/[₱,\s]/g,'');const m=/^(\d+(?:\.\d+)?)([km])?$/.exec(s);if(!m)return NaN;let n=parseFloat(m[1]);if(m[2]==='k')n*=1e3;if(m[2]==='m')n*=1e6;return n};
+const NUM='(?:₱|php\\s?)?(\\d[\\d,]*(?:\\.\\d+)?[km]?)(?![a-z\\d])';
+const DEF=[
+ ['cpr','cost per (?:result|message|msg|lead|purchase|order|inquiry|inquiries|conversion|conversation|chat|sale)|cpl|cpa|cpr'],
+ ['cpc','cpc|cost per click'],
+ ['cpm','cpm|cost per (?:1000|1,000|thousand)(?: impressions| views)?'],
+ ['ctr','ctr|click[- ]?through[- ]?rate'],
+ ['freq','frequency|freq'],
+ ['roas','roas|return on ad spend'],
+ ['aov','aov|average order value|avg order value|order value'],
+ ['margin','profit margin|margin'],
+ ['daily','daily budget|budget per day|per day|a day|/day|daily'],
+ ['rev','revenue|conversion value|gmv|total sales|sales value|sales amount|income|sales'],
+ ['spend','amount spent|ad spend|spent|spend|budget used|gastos|nagastos'],
+ ['impr','impressions|impression|views'],
+ ['reach','reach'],
+ ['clk','link clicks|clicks|click'],
+ ['msg','messaging conversations(?: started)?|messages|message|msgs|msg|inquiries|inquiry|chats|dms|conversations|convos'],
+ ['lead','leads|lead'],
+ ['ord','purchases|purchase|orders|order|conversions|conversion'],
+ ['atc','add to carts?|atc'],
+ ['days','days|day']
+];
+function parseNums(text){let t=' '+text.toLowerCase()+' ',M={},W={};
+ DEF.forEach(([k,w])=>{let m;
+  const r1=new RegExp('(?:^|[^a-z])('+w+')\\s*(?:of|is|was|were|at|are|=|:|-|→|around|about|only)?\\s*'+NUM);
+  const r2=new RegExp(NUM+'\\s*[%x]?\\s*(?:in |of |total )?('+w+')(?![a-z])');
+  let a=r2.exec(t),b=r1.exec(t),use=null;
+  if(a&&b)use=a.index<=b.index?'a':'b';else if(a)use='a';else if(b)use='b';
+  if(!use)return;
+  const mm=use==='a'?a:b,num=use==='a'?mm[1]:mm[2],wd=use==='a'?mm[2]:mm[1],v=NV(num);if(!isFinite(v))return;
+  M[k]=v;W[k]=wd;t=t.replace(mm[0],' ')});
+ /* per-day wording like "200 per day" */
+ return{M,W}}
+const peso=(x)=>isFinite(x)?'₱'+(+x).toLocaleString('en-PH',{maximumFractionDigits:2}):'—';
+const nfmt=x=>isFinite(x)?Math.round(x).toLocaleString('en-PH'):'—';
+const pct=x=>isFinite(x)?(+x.toFixed(2))+'%':'—';
+
+/* ---------- Benchmarks ---------- */
+const BM={cpm:/^CPM/i,ctr:/^CTR/i,cpc:/CPC/i,cprmsg:/cost per message/i,cprlead:/cost per lead/i,cprord:/cost per purchase/i,roas:/^ROAS/i,cvr:/conversion rate/i};
+const bmF=(pl,k)=>{const p=P[pl]||P.fb;return p.m.find(m=>BM[k].test(m[1]))};
+const rate=(pl,k,v)=>{let m=bmF(pl,k);if(!m&&pl==='gg'&&k==='ctr')m=['Traffic','Search CTR','%','h',[5,3,2]];if(!m||!isFinite(v))return null;const i=rt(m,v);return{i,lab:T[i],good:rg(m)[1],exc:rg(m)[0],m}};
+const CL=['r0','r1','r2','r3'];
+const chip=r=>r?`<span class="rtg ${CL[r.i]}">${r.lab}</span>`:'<span class="rtg rn">n/a</span>';
+
+/* ---------- Diagnosis ---------- */
+function analyze(M0,W,pl,notes){const M={...M0};
+ if(M.cpm!=null&&M.cpm<45&&(pl==='fb'||pl==='ig')&&M.cpr==null&&!M.impr){M.cpr=M.cpm;W.cpr='cost per message';delete M.cpm;notes.push('I read “CPM” as **cost per message** because it is below ₱45. If you meant cost per 1,000 views, tell me.')}
+ let kind=null,n=null;
+ if(M.msg!=null){kind='msg';n=M.msg}else if(M.lead!=null){kind='lead';n=M.lead}else if(M.ord!=null){kind='ord';n=M.ord}
+ if(!kind&&M.cpr!=null){const w=(W.cpr||'');kind=/message|msg|inquir|chat|conversation/.test(w)?'msg':/lead|cpl/.test(w)?'lead':/purchase|order|cpa|sale|conversion/.test(w)?'ord':(pl==='fb'||pl==='ig'?'msg':'ord')}
+ if(M.rev!=null&&M.rev<200&&M.ord==null&&/sales/.test(W.rev||'')&&M.spend!=null&&M.rev<M.spend/5){M.ord=M.rev;M.rev=null;n=M.ord;kind='ord'}
+ const D={};const sp=M.spend;
+ if(M.aov!=null&&M.ord!=null&&M.rev==null)M.rev=M.aov*M.ord;
+ D.cpm=M.cpm!=null?M.cpm:(sp!=null&&M.impr?sp/M.impr*1000:NaN);
+ D.ctr=M.ctr!=null?M.ctr:(M.clk&&M.impr?M.clk/M.impr*100:NaN);
+ D.cpc=M.cpc!=null?M.cpc:(sp!=null&&M.clk?sp/M.clk:NaN);
+ D.cpr=M.cpr!=null?M.cpr:(sp!=null&&n?sp/n:NaN);
+ D.freq=M.freq!=null?M.freq:(M.impr&&M.reach?M.impr/M.reach:NaN);
+ D.cvr=(n!=null&&M.clk)?n/M.clk*100:NaN;
+ D.roas=M.roas!=null?M.roas:(M.rev!=null&&sp?M.rev/sp:NaN);
+ const mg=M.margin!=null?M.margin:null;D.be=mg?100/mg:NaN;D.cpaMax=(mg&&M.aov)?M.aov*mg/100:NaN;
+ D.profit=(M.rev!=null&&mg!=null&&sp!=null)?M.rev*mg/100-sp:NaN;
+ const cprKey=kind==='msg'?'cprmsg':kind==='lead'?'cprlead':kind==='ord'?'cprord':null;
+ const R={cpm:rate(pl,'cpm',D.cpm),ctr:rate(pl,'ctr',D.ctr),cpc:rate(pl,'cpc',D.cpc),cpr:cprKey?rate(pl,cprKey,D.cpr):null,roas:rate(pl,'roas',D.roas),cvr:(pl==='fb'||pl==='ig')?null:rate(pl,'cvr',D.cvr)};
+ const rn=kind==='msg'?'message':kind==='lead'?'lead':'order';
+ const rows=[];
+ const add=(l,v,f,r,tg)=>{if(isFinite(v))rows.push({l,v:f(v),r,tg})};
+ add('Ad spend',sp,peso,null);add('Impressions',M.impr,nfmt,null);add('Reach',M.reach,nfmt,null);add('Link clicks',M.clk,nfmt,null);
+ if(n!=null)add(kind==='msg'?'Messages':kind==='lead'?'Leads':'Orders',n,nfmt,null);
+ add('CPM (per 1,000 views)',D.cpm,peso,R.cpm,R.cpm&&R.cpm.good);add('CTR',D.ctr,pct,R.ctr,R.ctr&&R.ctr.good);add('CPC',D.cpc,peso,R.cpc,R.cpc&&R.cpc.good);
+ add('Click → '+rn+' rate',D.cvr,pct,R.cvr,R.cvr&&R.cvr.good);
+ add('Cost per '+rn,D.cpr,peso,R.cpr,R.cpr&&R.cpr.good);
+ add('Frequency',D.freq,x=>(+x.toFixed(2))+'',D.freq>=3.5?{i:3,lab:'High'}:D.freq>=2.5?{i:2,lab:'Watch'}:{i:0,lab:'OK'},'Under 2.5 on a cold audience');
+ add('ROAS',D.roas,x=>(+x.toFixed(2))+'x',R.roas,R.roas&&R.roas.good);
+ add('Break-even ROAS',D.be,x=>(+x.toFixed(2))+'x',null);add('Profit after ad spend',D.profit,peso,isFinite(D.profit)?(D.profit<0?{i:3,lab:'Loss'}:{i:0,lab:'Profit'}):null);
+ /* issues */
+ const I=[];const push=(sev,title,why,fix)=>I.push({sev,title,why,fix});
+ const lowData=(M.impr!=null&&M.impr<1000)||(M.clk!=null&&M.clk<50&&(n==null||n<10));
+ if(sp>0&&(n===0||(n==null&&M.clk>=30&&M.cpr==null&&M.msg==null&&M.lead==null&&M.ord==null&&false))){push(3,'Spend with zero results',`₱${nfmt(sp)} has been spent without a single ${rn}.`,['Check tracking first: pixel/events firing, message objective connected, correct page.','If tracking is fine and spend is over 2–3× your target cost per result, pause this ad and test a new hook and offer.','Make sure the click destination works and shows the price.'])}
+ if(lowData)push(1,'Too early to judge','There is not enough data yet (under about 1,000 impressions or 50 clicks), so the numbers are noisy.',['Wait until about 3 days or 2–3× your target cost per result has been spent.','Avoid edits to budget, audience or creative during this time.']);
+ if(isFinite(D.freq)&&D.freq>=3.5&&pl!=='sh'&&pl!=='gg')push(2,'Ad fatigue: frequency is high',`Each person saw the ad about ${(+D.freq.toFixed(1))} times.`,['Upload 3–5 new creatives or new hooks and pause the tired ones.','Widen the audience and exclude people who already messaged or bought.','Do not raise budget on this ad set until frequency drops.']);
+ else if(isFinite(D.freq)&&D.freq>=2.5&&pl!=='sh'&&pl!=='gg')push(1,'Frequency is rising',`At about ${(+D.freq.toFixed(1))}, fatigue is near.`,['Prepare fresh creatives now.','Watch CTR: if it keeps falling, rotate ads.']);
+ if(R.cpm&&R.cpm.i>=2)push(R.cpm.i,'Expensive delivery (high CPM)',`CPM of ${peso(D.cpm)} is ${R.cpm.lab.toLowerCase()} for ${PLN[pl]} (good is ${R.cpm.good}).`,['Broaden the audience or switch to Advantage+ audience; very narrow targeting raises CPM.','Check the season: ber months, sale days and paydays push costs up, so compare with the same period.','Improve ad engagement; better CTR and engagement lowers CPM over time.','Review placements and exclude low performers.'].concat(pl==='tt'?['Use Spark Ads on proven organic posts to lower costs.']:[]));
+ if(R.ctr&&R.ctr.i>=2)push(R.ctr.i,'Weak creative: low CTR',`CTR of ${pct(D.ctr)} is ${R.ctr.lab.toLowerCase()} (good is ${R.ctr.good}). People see the ad but are not interested enough to click.`,['Rewrite the hook (first 3 seconds / first line). Test question, myth-buster, price reveal and story angles.','Show the product in use and put a concrete offer or price up front.','Use the right format: 9:16 video for Reels, Stories and TikTok.','Make the call to action explicit: “Message us”, “Comment PRICE”.','Open Tools → Ad copy & hooks for ready angles.']);
+ if(R.cpc&&R.cpc.i>=2&&!(R.ctr&&R.ctr.i>=2)&&!(R.cpm&&R.cpm.i>=2))push(R.cpc.i,'Clicks cost too much',`CPC of ${peso(D.cpc)} is ${R.cpc.lab.toLowerCase()} (good is ${R.cpc.good}).`,pl==='gg'?['Raise Quality Score: tighter ad-to-keyword match and a relevant landing page.','Add negative keywords from the Search terms report.','Use phrase and exact match; pause keywords with spend and no conversions.']:['Test new creatives to lift CTR; higher CTR lowers CPC.','Broaden the audience and try different placements.']);
+ /* click -> result */
+ let cvrLow=false;
+ if(isFinite(D.cvr)&&n!=null){const th=kind==='msg'?[10,20]:kind==='lead'?[4,8]:[1,2.5];const rr=R.cvr;if(rr?rr.i>=2:D.cvr<th[0]){cvrLow=true;push(3-(rr&&rr.i===2?1:0),'Clicks are not turning into '+rn+'s',`Only ${pct(D.cvr)} of clicks became a ${rn}.`,kind==='msg'?['Match the ad promise with the Messenger greeting and add ice-breaker questions.','Reply within minutes and offer price and next step in the first message.','Use the Messages objective (not Traffic) so Meta finds people who message.','Check that the link/button really opens the chat on mobile.']:['Speed up the page (under 3 seconds on mobile) and show price and the button above the fold.','Match headline, photo and price to the ad; cut steps and form fields.','Add trust: reviews, real photos, delivery and return terms, payment options.','Confirm the pixel and events are firing correctly.'])}}
+ if(R.cpr&&R.cpr.i>=2){const w=[];if(R.cpm&&R.cpm.i>=2)w.push('delivery cost (CPM)');if(R.ctr&&R.ctr.i>=2)w.push('creative (CTR)');if(cvrLow)w.push('the click-to-'+rn+' step');push(R.cpr.i,'Cost per '+rn+' is '+R.cpr.lab.toLowerCase(),`${peso(D.cpr)} per ${rn} versus a good level of ${R.cpr.good}.`+(w.length?` The weak link${w.length>1?'s are':' is'}: ${w.join(', ')}. Fix those first.`:' Upstream metrics look fine, so improve the offer, audience quality and follow-up.'),['Fix the weakest funnel step above first, one change at a time.','Move budget from the highest-cost ad sets to the cheapest ones.','Test a stronger offer (bonus, bundle, deadline).'])}
+ if(isFinite(D.roas)&&isFinite(D.be)&&D.roas<D.be)push(3,'You are losing money at this ROAS',`ROAS ${(+D.roas.toFixed(2))}x is below break-even ${(+D.be.toFixed(2))}x.`+(isFinite(D.profit)?` Estimated result after ad spend: ${peso(D.profit)}.`:''),['Raise average order value with bundles, add-ons or minimum-spend free shipping.','Improve conversion rate (page, offer, trust) before raising budget.','Cut spend on losing ads and ad sets; keep only those above break-even.','Review price and costs: margin may need to rise.']);
+ else if(isFinite(D.roas)&&!isFinite(D.be)&&R.roas&&R.roas.i>=2)push(R.roas.i,'ROAS is low',`${(+D.roas.toFixed(2))}x is ${R.roas.lab.toLowerCase()} (good is ${R.roas.good}). Tell me your profit margin to check break-even.`,['Improve conversion rate and average order value.','Cut the worst ad sets; retarget warm audiences.']);
+ if(isFinite(D.cpaMax)&&isFinite(D.cpr)&&kind==='ord'&&D.cpr>D.cpaMax)push(3,'Cost per order is above your profit per order',`Each order earns about ${peso(D.cpaMax)} profit but costs ${peso(D.cpr)} in ads.`,['Lower acquisition cost or raise the price/AOV before scaling.']);
+ if(M.msg!=null&&M.ord!=null&&M.msg>0){const cr=M.ord/M.msg*100;if(cr<15)push(cr<8?2:1,'Message-to-sale close rate is low',`${pct(cr)} of messages became orders.`,['Reply in under 5 minutes and send price, inclusions and next step in the first reply.','Ask qualifying questions and follow up after 1 hour, 24 hours and 3 days.','Add the price range to the ad so only serious people message.'])}
+ if(n!=null&&n<50&&M.days>=7&&(pl==='fb'||pl==='ig'))push(1,'Probably “Learning limited”',`Only ${nfmt(n)} results in ${M.days} days; an ad set needs about 50 events in 7 days.`,['Consolidate similar ad sets and raise budget so each ad set can reach 50 events.','Optimise for messages instead of purchases if volume is low.']);
+ if(pl==='sh'&&(R.ctr&&R.ctr.i>=2||cvrLow))push(2,'Improve the Shopee listing before spending more','Ad traffic only converts if the listing wins the comparison.',['Rework the title (main keyword first), photos, price and vouchers.','Reply to chats fast and keep ratings above 4.7.']);
+ if(pl==='gg'&&sp>0)push(1,'Clean up search terms','Wasted clicks are the quickest Google win.',['Review the Search terms report weekly and add negatives.','Pause keywords with spend and no conversions.']);
+ if(!rows.length)return null;
+ if(!I.length&&rows.every(r=>!r.r||r.r.lab==='OK'))I.push({sev:1,title:'Not enough benchmarks to rate this',why:'I could not compare these numbers with a '+PLN[pl]+' benchmark yet.',fix:['Add spend, impressions, clicks and results so I can calculate CTR, CPC, CPM and cost per result.','Tell me your target cost per result and profit margin so I can judge profitability.']});
+ if(!I.length)I.push({sev:0,title:'Nothing is flagged',why:'Your numbers sit in a healthy range for '+PLN[pl]+'.',fix:['Scale gradually: +20% budget every 2–3 days while cost per result stays under target.','Duplicate the winning ad set instead of editing it heavily.','Keep adding 2–3 new creatives each week to avoid fatigue.','Track real cost per customer, not just platform results.']});
+
+ I.sort((a,b)=>b.sev-a.sev);
+ const maxS=I.reduce((m,x)=>Math.max(m,x.sev),0);
+ let verdict=maxS>=3?['r3','Needs urgent attention']:maxS===2?['r2','Needs optimisation']:maxS===1?['r1','Okay, with watch-outs']:['r0','Healthy'];
+ return{rows,I,verdict,pl,kind,n,D,R}}
+
+function renderAnalysis(a,notes,title){const top=a.I[0];
+ let h=`<div class="aiv ${a.verdict[0]}"><b>${esc3(title||'Diagnosis')}: ${a.verdict[1]}</b><span>${PLN[a.pl]}${a.kind?' · '+(a.kind==='msg'?'messages':a.kind==='lead'?'leads':'orders'):''}</span></div>`;
+ if(notes&&notes.length)h+='<div class="note">'+notes.map(n=>md(n)).join('')+'</div>';
+ h+='<div class="sc"><table class="ait"><tr><th>Metric</th><th>Your number</th><th>Rating</th><th>Good level</th></tr>'+a.rows.map(r=>`<tr><td>${r.l}</td><td><b>${r.v}</b></td><td>${r.r?`<span class="rtg ${CL[r.r.i]||'r0'}">${r.r.lab}</span>`:''}</td><td>${r.tg||''}</td></tr>`).join('')+'</table></div>';
+ h+=`<p><b>Biggest issue:</b> ${esc3(top.title)}. ${esc3(top.why)}</p>`;
+ h+='<p><b>Fix first, in this order:</b></p><ol>'+a.I.slice(0,4).map(x=>`<li><b>${esc3(x.title)}</b>: ${esc3(x.why)}<ul>${x.fix.slice(0,3).map(f=>'<li>'+esc3(f)+'</li>').join('')}</ul></li>`).join('')+'</ol>';
+ return h}
+
+/* ---------- CSV ---------- */
+function parseCSV(text){const delim=(text.split('\n')[0].match(/\t/g)||[]).length>=2?'\t':(text.split('\n')[0].match(/;/g)||[]).length>=2&&!(text.split('\n')[0].match(/,/g)||[]).length?';':',';
+ const rows=[];let row=[],cur='',q=false;for(let i=0;i<text.length;i++){const c=text[i];if(q){if(c==='"'&&text[i+1]==='"'){cur+='"';i++}else if(c==='"')q=false;else cur+=c}else if(c==='"')q=true;else if(c===delim){row.push(cur);cur=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(cur);cur='';if(row.some(x=>x.trim()))rows.push(row);row=[]}else cur+=c}
+ row.push(cur);if(row.some(x=>x.trim()))rows.push(row);return rows}
+const cn=s=>{s=String(s==null?'':s).replace(/[₱,%\s]/g,'').replace(/^php/i,'');if(s===''||s==='-'||s==='—')return NaN;const n=parseFloat(s);return isFinite(n)?n:NaN};
+function csvAnalyze(text,pl){const rows=parseCSV(text);if(rows.length<2)return null;const hdr=rows[0].map(h=>h.toLowerCase().trim());
+ const idx=re=>hdr.findIndex(h=>re.test(h));
+ const c={name:idx(/campaign name|ad set name|ad name|^campaign$|^ad set$|^ad$|^name$|keyword|search term|product name|^product$/),spend:idx(/amount spent|^spend|^cost( \(.*\))?$|total cost|ad spend/),impr:idx(/^impressions|impressions$/),reach:idx(/^reach/),clk:(()=>{let i=idx(/link clicks/);return i>=0?i:idx(/^clicks( \(all\))?$|^clicks/)})(),freq:idx(/^frequency/),rev:idx(/conversion value|^revenue|^gmv|^sales$/)};
+ let ri=-1,kind=null;[['msg',/messaging conversations started|messages|conversations/],['ord',/^purchases|^orders|^results$/],['lead',/^leads/],['ord',/^conversions/]].some(([k,re])=>{const i=idx(re);if(i>=0){ri=i;kind=k;return true}return false});
+ if(ri<0)ri=idx(/^results$|^result$/);if(ri>=0&&!kind)kind=(pl==='fb'||pl==='ig')?'msg':'ord';
+ if(c.spend<0&&ri<0&&c.impr<0)return null;
+ const data=rows.slice(1).map(r=>({name:c.name>=0?(r[c.name]||'').trim():'',spend:c.spend>=0?cn(r[c.spend]):NaN,impr:c.impr>=0?cn(r[c.impr]):NaN,reach:c.reach>=0?cn(r[c.reach]):NaN,clk:c.clk>=0?cn(r[c.clk]):NaN,res:ri>=0?cn(r[ri]):NaN,freq:c.freq>=0?cn(r[c.freq]):NaN,rev:c.rev>=0?cn(r[c.rev]):NaN})).filter(r=>(isFinite(r.spend)&&r.spend>=0)||isFinite(r.impr));
+ if(!data.length)return null;
+ const sum=k=>data.reduce((s,r)=>s+(isFinite(r[k])?r[k]:0),0),has=k=>data.some(r=>isFinite(r[k]));
+ const M={};if(has('spend'))M.spend=sum('spend');if(has('impr'))M.impr=sum('impr');if(has('reach'))M.reach=sum('reach');if(has('clk'))M.clk=sum('clk');if(has('rev'))M.rev=sum('rev');if(has('res'))M[kind||'msg']=sum('res');
+ if(has('freq')&&!M.reach){const f=data.filter(r=>isFinite(r.freq));M.freq=f.reduce((s,r)=>s+r.freq,0)/f.length}
+ return{M,data,kind,cols:c,hasRes:ri>=0}}
+function csvInsights(r,pl){let h='';const cprKey=r.kind==='msg'?'cprmsg':r.kind==='lead'?'cprlead':'cprord';
+ const rowsN=r.data.filter(x=>x.name||isFinite(x.spend));if(rowsN.length<2)return h;
+ const wasted=rowsN.filter(x=>x.spend>0&&r.hasRes&&(!x.res||x.res===0));const wsum=wasted.reduce((s,x)=>s+x.spend,0);
+ const withRes=rowsN.filter(x=>x.res>0&&x.spend>0).map(x=>({...x,cpr:x.spend/x.res})).sort((a,b)=>a.cpr-b.cpr);
+ const tb=rowsN.slice().sort((a,b)=>(b.spend||0)-(a.spend||0)).slice(0,8);
+ h+='<p><b>By campaign / ad</b> (top by spend):</p><div class="sc"><table class="ait"><tr><th>Name</th><th>Spend</th><th>Results</th><th>Cost per result</th><th>Rating</th></tr>'+tb.map(x=>{const c=x.res>0?x.spend/x.res:NaN,rr=rate(pl,cprKey,c);return`<tr><td>${esc3(x.name||'—').slice(0,48)}</td><td>${peso(x.spend)}</td><td>${nfmt(x.res)}</td><td>${peso(c)}</td><td>${x.res>0?chip(rr):'<span class="rtg r3">No results</span>'}</td></tr>`}).join('')+'</table></div>';
+ if(withRes.length>=2)h+=`<p><b>Best:</b> ${esc3(withRes[0].name||'row 1').slice(0,50)} at ${peso(withRes[0].cpr)} per result. <b>Worst:</b> ${esc3(withRes[withRes.length-1].name||'last row').slice(0,50)} at ${peso(withRes[withRes.length-1].cpr)}. Shift budget from the worst toward the best.</p>`;
+ if(wasted.length)h+=`<p><b>Wasted spend:</b> ${wasted.length} row${wasted.length>1?'s':''} spent ${peso(wsum)} with zero results (${pct(wsum/(rowsN.reduce((s,x)=>s+(x.spend||0),0)||1)*100)} of spend). Pause or rework: ${wasted.slice(0,3).map(x=>esc3((x.name||'row').slice(0,30))).join(', ')}.</p>`;
+ const hf=rowsN.filter(x=>x.freq>=3.5);if(hf.length)h+=`<p><b>Fatigue:</b> ${hf.length} row${hf.length>1?'s have':' has'} frequency above 3.5. Refresh the creative.</p>`;
+ return h}
+
+/* ---------- Calculators and benchmark lookups ---------- */
+function calc(text,pl,M){const t=text.toLowerCase();
+ if(/\bvat\b|12\s?%|\btax\b/.test(t)&&(M.daily||M.spend||/\d/.test(t))){const days=M.days||1,daily=M.daily,base=daily?daily*days:(M.spend!=null?M.spend:(()=>{const m=/(\d[\d,]*(?:\.\d+)?k?)/.exec(t);return m?NV(m[1]):NaN})());if(!isFinite(base))return null;const incl=/(inclusive|includes? vat|already)/.test(t);const rate=0.12;let net=incl?base/(1+rate):base,vat=net*rate,tot=net+vat;
+  return{a:`**VAT computation (12%)**\n${daily?`- Daily budget ${peso(daily)} × ${days} day${days>1?'s':''} = ${peso(base)}`:`- Ad budget (${incl?'VAT included':'before VAT'}): ${peso(base)}`}\n- ${incl?'Budget before VAT':'Budget'}: ${peso(net)}\n- VAT (12%): ${peso(vat)}\n- **Total to pay: ${peso(tot)}**\nUse the VAT calculator in Ads Manager to copy this for a quotation.`,act:[{l:'Open VAT calculator',go:'am_vat'}]}}
+ if(/break[- ]?even/.test(t)&&M.margin){return{a:`**Break-even ROAS = 100 ÷ ${M.margin}% = ${(+(100/M.margin).toFixed(2))}×**\nBelow that ROAS you lose money on each sale. Anything above ${(+(100/M.margin*1.3).toFixed(2))}× (about 30% headroom) is a comfortable target.`}}
+ const m1=/how many (messages|inquiries|leads|orders|sales|results|customers).*?(?:with|for|if)\s*(?:a\s*)?(?:budget of\s*)?(?:₱|php\s?)?(\d[\d,]*(?:\.\d+)?k?)/.exec(t);
+ if(m1){const bud=NV(m1[2]);const k=/lead/.test(m1[1])?'cprlead':/order|sale|customer/.test(m1[1])?'cprord':'cprmsg';const pp=pl||'fb';const m=bmF(pp,k)||bmF('fb',k);if(m&&isFinite(bud)){const th=m[4];return{a:`With ${peso(bud)} on ${PLN[bmF(pp,k)?pp:'fb']}, at typical ${m1[1]} costs:\n- Excellent (${rg(m)[0]}): about ${nfmt(bud/th[0])}\n- Good (${rg(m)[1]}): about **${nfmt(bud/th[1])}**\n- Average (${rg(m)[2]}): about ${nfmt(bud/th[2])}\nThis is a projection from benchmarks. Use the Budget simulator for a full forecast with profit and VAT.`,act:[{l:'Open Budget simulator',tab:'sim'}]}}}
+ const m2=/budget (?:needed|do i need|for)\D{0,25}(\d[\d,]*k?)\s*(messages|inquiries|leads|orders|sales|customers)/.exec(t)||/(\d[\d,]*k?)\s*(messages|inquiries|leads|orders|sales|customers).*budget/.exec(t);
+ if(m2){const nn=NV(m2[1]),k=/lead/.test(m2[2])?'cprlead':/order|sale|customer/.test(m2[2])?'cprord':'cprmsg',pp=pl||'fb',m=bmF(pp,k)||bmF('fb',k);if(m&&isFinite(nn)){const th=m[4];return{a:`To get ${nfmt(nn)} ${m2[2]}:\n- At a good cost (${rg(m)[1]}): about **${peso(nn*th[1])}**\n- At an average cost (${rg(m)[2]}): about ${peso(nn*th[2])}\n- Plan for a range of ${peso(nn*th[0])} to ${peso(nn*th[2])}, then add 12% VAT when you quote.`,act:[{l:'Open Goal planner',tab:'sim'}]}}}
+ return null}
+function benchLookup(text,pl){const t=text.toLowerCase();if(!/(good|average|benchmark|normal|typical|expected|standard|ideal|target|range|healthy|magkano ang|how much is a)/.test(t))return null;
+ const k=/cost per message|per message|cpm.*message/.test(t)?'cprmsg':/cost per lead|\bcpl\b/.test(t)?'cprlead':/cost per purchase|\bcpa\b|cost per order/.test(t)?'cprord':/\bctr\b|click[- ]?through/.test(t)?'ctr':/\bcpc\b|cost per click/.test(t)?'cpc':/\bcpm\b|per 1000|per 1,000/.test(t)?'cpm':/\broas\b/.test(t)?'roas':/conversion rate|\bcvr\b/.test(t)?'cvr':null;if(!k)return null;
+ const list=pl?[pl]:['fb','ig','tt','sh','gg'];const out=[];list.forEach(p=>{const m=bmF(p,k);if(m){const g=rg(m);out.push(`- **${PLN[p]} · ${m[1]}**: Excellent ${g[0]}, Good ${g[1]}, Average ${g[2]}, Needs work ${g[3]}`)}});
+ if(!out.length)return null;return{a:'Here are the Philippine 2026 benchmark ranges in this guide:\n'+out.join('\n')+'\nBenchmarks are directional, not guarantees. Compare against the same season.',act:[{l:'Open Benchmarks',tab:'bench'}]}}
+
+/* ---------- Responder ---------- */
+const INTRO='Hi! I am your **Ads Assistant** for Facebook, Instagram, TikTok, Shopee and Google ads. I can:\n- **Answer questions** (costs, creatives, budgets, tracking, scaling, policy).\n- **Analyze your numbers**: paste something like “Facebook, spent 5000, 180000 impressions, 1900 clicks, 38 messages”.\n- **Diagnose a campaign export**: upload or paste an Ads Manager CSV with the 📎 button.\n- **Calculate**: VAT, break-even ROAS, how many results a budget can bring.\nPick a platform above to focus my answers, or just ask.';
+const SUG=['Why is my cost per message high?','What is a good CTR on TikTok?','My ads get clicks but no sales','How do I improve my Shopee conversion?','How many messages can I get with ₱5,000?','Calculate VAT for ₱200 per day for 7 days'];
+function respond(text){const raw=text.trim();const low=raw.toLowerCase();let pl=PK(low)||AIP;if(PK(low)&&PK(low)!==AIP){AIP=PK(low)}
+ /* CSV */
+ const lines=raw.split('\n').filter(l=>l.trim());
+ if(lines.length>=2&&/spent|spend|impressions|reach|clicks|cost|results/i.test(lines[0])&&/[,\t;]/.test(lines[0])){const r=csvAnalyze(raw,pl||'fb');if(r){const p=pl||'fb',notes=[];const a=analyze(r.M,{},p,notes);if(a){AIL={a,p};return{h:renderAnalysis(a,notes,'Export diagnosis')+csvInsights(r,p),act:nextActs()}}}}
+ /* numbers */
+ const {M,W}=parseNums(raw);const keys=Object.keys(M).filter(k=>k!=='days'&&k!=='daily');
+ const c=calc(raw,pl,M);if(c)return{h:md(c.a),act:c.act||[]};
+ const strong=['spend','impr','clk','cpr','ctr','cpm','cpc','msg','lead','ord','roas','rev','reach'].filter(k=>M[k]!=null);
+ if(strong.length>=2||(strong.length===1&&(/(analy|diagnos|check|review|evaluate|rate|is this good|ok ba)/.test(low)||['ctr','cpc','cpm','cpr','roas'].includes(strong[0])))){const p=pl||'fb',notes=[];if(!PK(low)&&!AIP)notes.push('No platform mentioned, so I used **Facebook** benchmarks. Say “TikTok”, “Shopee” or “Google” to switch.');const a=analyze(M,W,p,notes);if(a){AIL={a,p};return{h:renderAnalysis(a,notes),act:nextActs()}}}
+ const bl=benchLookup(raw,PK(low));if(bl)return{h:md(bl.a),act:bl.act};
+ if(/^(hi|hello|hey|kumusta|good (morning|afternoon|evening))\b/.test(low)&&low.length<30)return{h:md(INTRO),act:[]};
+ if(AIL&&/(what (should|do) i do|next step|what now|fix|improve|recommend|action plan|plan)/.test(low)&&!findKB(raw,pl).length){const a=AIL.a;return{h:md('Here is a 7-day plan for your '+PLN[AIL.p]+' campaign:\n1. **Day 1**: '+(a.I[0].fix[0])+'\n2. **Day 2–3**: '+(a.I[1]?a.I[1].fix[0]:'Let the data build; do not edit.')+'\n3. **Day 3**: pause the worst ad set or ad (2–3× target cost with no results).\n4. **Day 4–5**: launch 2–3 new creatives with different hooks, same offer.\n5. **Day 6**: compare cost per result; keep the winner.\n6. **Day 7**: scale the winner by 20% and send a short report.\nPaste new numbers after a few days and I will re-check them.'),act:[{l:'Write new hooks',tab:'tools',tool:'copy'}]}}
+ const hits=findKB(raw,pl);
+ if(hits.length&&hits[0].s>=10){const e=hits[0].e;if(e.a==='__intro__')return{h:md(INTRO),act:[]};const act=[];if(e.pk)act.push({l:'Open full explanation',feat:[e.pk,e.t]});(e.f||[]).forEach(q=>act.push({l:q,q}));
+  const more=hits.slice(1,3).filter(x=>x.s>=7&&x.e.a!=='__intro__').map(x=>({l:x.e.t,q:x.e.t}));return{h:md(e.a),act:act.concat(more)}}
+ const near=hits.filter(x=>x.s>=3&&x.e.a!=='__intro__').slice(0,3);
+ return{h:md('I am not fully sure what you are asking. Try rephrasing, name the platform, or send your numbers (for example: “TikTok, spent 3000, 90000 impressions, 800 clicks, 12 orders”).'+(near.length?'\nClosest topics:':'')),act:near.map(x=>({l:x.e.t,q:x.e.t}))}}
+function nextActs(){return[{l:'What should I do next?',q:'What should I do next?'},{l:'Write new hooks',tab:'tools',tool:'copy'},{l:'Open Diagnose tool',tab:'dx'},{l:'Check my pixel setup',q:'How do I set up pixel and conversion tracking?'}]}
+
+/* ---------- UI ---------- */
+const EXAMPLE='Facebook messages campaign: spent 5000, 180000 impressions, 1900 clicks, 38 messages, frequency 2.1, 3 orders, aov 1500, margin 40%';
+const UI=p=>`<div class="chips aipl" id="${p}_pl">${[['','All platforms'],...Object.keys(PLN).map(k=>[k,PLN[k]])].map(x=>`<button type="button" data-p="${x[0]}"${x[0]===AIP?' class="on"':''}>${x[1]}</button>`).join('')}</div>
+<div class="ailog" id="${p}_log" aria-live="polite"></div>
+<div class="chips aisg" id="${p}_sug"></div>
+<div class="aiin"><textarea id="${p}_in" rows="2" placeholder="Ask a question, or paste numbers: Facebook, spent 5000, 180000 impressions, 1900 clicks, 38 messages" aria-label="Message the assistant"></textarea><div class="aibt"><button class="btn" type="button" id="${p}_send">Send</button><button class="btn alt" id="${p}_file" type="button">📎 CSV</button><button class="btn alt" id="${p}_ex" type="button">Example</button><button class="btn alt" id="${p}_clr" type="button">Clear</button></div><input type="file" id="${p}_fi" accept=".csv,.tsv,.txt,text/csv" hidden></div>`;
+V.ai=()=>`<div class="banner">${art.ai||''}<h2>AI Ads Assistant</h2></div><p class="sub">Ask about Facebook, Instagram, TikTok, Shopee or Google ads, or paste your numbers or an Ads Manager CSV for an instant analysis and diagnosis. It runs entirely in your browser and nothing is uploaded.</p>
+<div class="card aicard">${UI('ai')}<p class="note" style="margin-top:8px">This is a built-in expert assistant that answers from this guide’s Philippine benchmarks and playbooks. It is not a live AI model, so for big spending decisions confirm with your own data and test small first.</p></div>`;
+const LOGS=()=>['ai','fa'].map(p=>$(p+'_log')).filter(Boolean);
+const mkMsg=(r,h)=>{const d=document.createElement('div');d.className='aim '+(r==='u'?'me':'bot');d.innerHTML=h;return d};
+function drawMsg(r,h){LOGS().forEach(l=>{l.appendChild(mkMsg(r,h));l.scrollTop=l.scrollHeight})}
+function addMsg(r,h){AIH.push({r,h});drawMsg(r,h)}
+function typing(){const els=LOGS().map(l=>{const tp=document.createElement('div');tp.className='aim bot typ';tp.innerHTML='<span></span><span></span><span></span>';l.appendChild(tp);l.scrollTop=l.scrollHeight;return tp});return()=>els.forEach(e=>e.remove())}
+function actsHTML(a){if(!a||!a.length)return'';return'<div class="chips aiac">'+a.map(x=>`<button type="button" data-act='${esc3(JSON.stringify(x)).replace(/'/g,'&#39;')}'>${esc3(x.l)}</button>`).join('')+'</div>'}
+function send(text){text=(text||'').trim();if(!text)return;addMsg('u','<p>'+esc3(text).replace(/\n/g,'<br>')+'</p>');
+ const done=typing();
+ setTimeout(()=>{done();let r;try{r=respond(text)}catch(e){r={h:md('Sorry, I could not read that. Please try again with simple numbers like “spent 5000, 120000 impressions, 1500 clicks, 40 messages”.'),act:[]}}
+  addMsg('a',r.h+actsHTML(r.act));syncPl()},260)}
+function syncPl(){['ai','fa'].forEach(p=>{const c=$(p+'_pl');if(c)c.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.p===AIP))})}
+function closeFloat(){if(window.innerWidth<=760&&pan)setFloat(false)}
+function doAct(x){if(x.q){send(x.q)}else if(x.go){closeFloat();const on=nav.querySelector('button.on');if(!on||on.dataset.k!=='am')show('am');setTimeout(()=>{const t=$(x.go);if(t)t.scrollIntoView({behavior:'smooth',block:'start'})},40)}else if(x.tab){closeFloat();show(x.tab);if(x.tool)tlGo(x.tool)}else if(x.feat){closeFloat();show('am');FP=x.feat[0];const q=$('fq2');if(q)q.value=x.feat[1];featRender();const bd=$('fbd');if(bd)bd.querySelectorAll('details').forEach(d=>d.open=true);setTimeout(()=>{const t=$('am_feat');if(t)t.scrollIntoView({behavior:'smooth',block:'start'})},40)}}
+function clearChat(){AIH=[];AIL=null;LOGS().forEach(l=>l.innerHTML='');AIH.push({r:'a',h:md(INTRO)});drawMsg('a',md(INTRO))}
+function mount(p){const log=$(p+'_log');if(!log)return;if(!AIH.length)AIH.push({r:'a',h:md(INTRO)});
+ log.innerHTML='';AIH.forEach(m=>log.appendChild(mkMsg(m.r,m.h)));log.scrollTop=log.scrollHeight;
+ const sg=$(p+'_sug'),inp=$(p+'_in');sg.innerHTML=SUG.map(s=>`<button type="button" data-q="${esc3(s)}">${esc3(s)}</button>`).join('');
+ const go=()=>{const v=inp.value;inp.value='';send(v)};
+ $(p+'_send').onclick=go;inp.onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();go()}};
+ sg.onclick=e=>{const b=e.target.closest('button');if(b)send(b.dataset.q)};
+ log.onclick=e=>{const b=e.target.closest('[data-act]');if(b){try{doAct(JSON.parse(b.dataset.act))}catch(x){}}};
+ $(p+'_pl').onclick=e=>{const b=e.target.closest('button');if(!b)return;AIP=b.dataset.p;syncPl()};
+ $(p+'_clr').onclick=clearChat;$(p+'_ex').onclick=()=>send(EXAMPLE);$(p+'_file').onclick=()=>$(p+'_fi').click();
+ $(p+'_fi').onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{addMsg('u','<p>📎 '+esc3(f.name)+'</p>');const done=typing();setTimeout(()=>{done();let r;try{r=respond(String(rd.result))}catch(x){r=null}
+   if(!r||/not fully sure/.test(r.h))r={h:md('I could not find the usual columns in that file. Export from Ads Manager with columns such as Campaign name, Amount spent, Impressions, Reach, Link clicks and Results, then upload the CSV again.'),act:[]};
+   addMsg('a',r.h+actsHTML(r.act));syncPl()},260)};rd.readAsText(f);e.target.value=''}}
+window.aiInit=()=>mount('ai');
+
+/* ---------- Floating widget ---------- */
+const fab=document.createElement('button');fab.id='aifab';fab.className='aifab';fab.type='button';fab.setAttribute('aria-label','Open the AI Ads Assistant');fab.setAttribute('aria-expanded','false');fab.innerHTML='<span class="aifi" aria-hidden="true">🤖</span><span class="aift">Ask AI</span>';
+const tip=document.createElement('div');tip.className='aitip';tip.hidden=true;tip.innerHTML='<button type="button" aria-label="Dismiss">✕</button><b>Need help with your ads?</b><span>Ask a question or paste your numbers for a quick diagnosis.</span>';
+const pan=document.createElement('aside');pan.id='aipan';pan.className='aipan';pan.setAttribute('role','dialog');pan.setAttribute('aria-label','AI Ads Assistant');
+pan.innerHTML='<div class="aihd"><div><b>🤖 AI Ads Assistant</b><small>Facebook · Instagram · TikTok · Shopee · Google</small></div><div class="aihx"><button type="button" id="fa_full" title="Open full page" aria-label="Open full page">⤢</button><button type="button" id="fa_x" title="Close" aria-label="Close assistant">✕</button></div></div><div class="aibd">'+UI('fa')+'</div>';
+document.body.append(fab,tip,pan);mount('fa');
+function setFloat(o){pan.classList.toggle('open',o);fab.classList.toggle('hide',o);fab.setAttribute('aria-expanded',o?'true':'false');tip.hidden=true;if(o){setTimeout(()=>{const i=$('fa_in');if(i)i.focus();const l=$('fa_log');if(l)l.scrollTop=l.scrollHeight},120)}else{try{fab.focus({preventScroll:true})}catch(e){}}}
+fab.onclick=()=>{try{sessionStorage.setItem('aitip','1')}catch(e){}setFloat(true)};
+$('fa_x').onclick=()=>setFloat(false);
+$('fa_full').onclick=()=>{setFloat(false);show('ai')};
+tip.querySelector('button').onclick=()=>{tip.hidden=true;try{sessionStorage.setItem('aitip','1')}catch(e){}};
+tip.onclick=e=>{if(!e.target.closest('button'))fab.click()};
+pan.addEventListener('keydown',e=>{if(e.key==='Escape')setFloat(false)});
+window.aiFloat=setFloat;
+setTimeout(()=>{let seen=false;try{seen=sessionStorage.getItem('aitip')==='1'}catch(e){}const k=(nav.querySelector('button.on')||{dataset:{}}).dataset.k;if(!seen&&k==='dash'&&!pan.classList.contains('open'))tip.hidden=false},1800);
+window.siteAssistant={ask:respond,parse:parseNums};
+})();
+
 /* ===== Smart search: type part of a word (e.g. "calcu") and jump straight to the right section ===== */
 (function(){
 const norm=s=>String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
@@ -1433,7 +1947,7 @@ const add=o=>{o.q=o.q||0;E.push(o)};
 const TN={};tabs.forEach(t=>TN[t[0]]=t);
 
 /* ---- Main sections ---- */
-tabs.forEach(t=>add({t:t[1],ic:t[2],tab:t[0],d:MDESC[t[0]]||'',k:{dash:'home overview start welcome main page',bench:'benchmark standards average cpm cpc ctr',sim:'simulator forecast budget projection',dx:'diagnosis diagnose health check fix',rep:'report reports weekly monthly client pdf',am:'ads manager tasks features vat budget',ads:'packages pricing price sales scripts service offer rates',pb:'playbook strategy strategies business type glossary',tools:'tools copywriting hooks calendar test utm'}[t[0]]||'',b:6,top:1}));
+tabs.forEach(t=>add({t:t[1],ic:t[2],tab:t[0],d:MDESC[t[0]]||'',k:{dash:'home overview start welcome main page',bench:'benchmark standards average cpm cpc ctr',sim:'simulator forecast budget projection',dx:'diagnosis diagnose health check fix',rep:'report reports weekly monthly client pdf',am:'ads manager tasks features vat budget',ads:'packages pricing price sales scripts service offer rates',pb:'playbook strategy strategies business type glossary',tools:'tools copywriting hooks calendar test utm',ai:'assistant chatbot chat ai ask question help analyze analyse diagnose data numbers csv'}[t[0]]||'',b:6,top:1}));
 
 /* ---- Dashboard ---- */
 add({t:'Upcoming sale dates to plan for',ic:'📅',tab:'dash',h:'Upcoming dates',d:'9.9, 10.10, 11.11, 12.12, Black Friday, paydays and holidays',k:'sale dates calendar events holiday payday black friday mega sale promo season ber months schedule'});
@@ -1486,8 +2000,12 @@ BIZ.forEach((b,i)=>add({t:b.n+' ads strategy',ic:b.i||'🏪',tab:'pb',path:'Play
  go:()=>{const s=$('bzs');if(s&&s.value){s.value='';s.dispatchEvent(new Event('input'))}const c=$('bzc').querySelector('[data-i="'+i+'"]');if(c)c.click()},sc:()=>$('bzd')}));
 add({t:'Quick glossary (CPM, CPC, CTR, ROAS)',ic:'📖',tab:'pb',path:'Playbook',d:'What the common ad terms mean',k:'glossary terms meaning definition dictionary cpm cpc ctr roas cpa cpl frequency impressions what is',h:'Quick glossary',b:1});
 
+/* ---- AI assistant ---- */
+add({t:'Ask the AI Ads Assistant',ic:'🤖',tab:'ai',d:'Ask about Facebook, Instagram, TikTok, Shopee or Google ads and get instant answers',k:'ask question chat help assistant ai chatbot advice how to why',q:1,b:3});
+add({t:'Analyze and diagnose my ad numbers',ic:'🔬',tab:'ai',path:'AI Assistant',d:'Paste spend, impressions, clicks and results to find the weak link',k:'analyze analyse diagnose numbers data results problem fix paste metrics performance',sc:()=>$('ai_in'),b:2});
+add({t:'Upload an Ads Manager CSV for analysis',ic:'📎',tab:'ai',path:'AI Assistant',d:'Find best, worst and wasted campaigns from an export',k:'upload csv export file analyze campaigns wasted spend best worst',sc:()=>$('ai_in')});
 /* ---- Tools ---- */
-const TLK={copy:['write ad copy headlines captions hooks text generator caption primary text taglish','Generate ad copy and hooks'],cal:['content calendar plan schedule posts weekly sale dates 11.11 12.12 payday planner','Plan content and ads around Philippine sale dates'],ab:['a/b test ab split test significance sample size winner conversion statistics calculator','Check if an A/B test result is reliable'],lp:['learning phase pacing budget spend plan calculator daily budget events target on track','Protect the learning phase and check spend pacing'],utm:['utm tracking links naming convention url builder parameters campaign source medium analytics','Build tracking links and consistent campaign names']};
+const TLK={copy:['write ad copy headlines captions hooks text generator caption primary text taglish creative ideas sales inquiries comment keyword messenger greeting objection replies follow up retargeting scripts offer stack','Generate ad copy and hooks'],cal:['content calendar plan schedule posts weekly sale dates 11.11 12.12 payday planner','Plan content and ads around Philippine sale dates'],ab:['a/b test ab split test significance sample size winner conversion statistics calculator','Check if an A/B test result is reliable'],lp:['learning phase pacing budget spend plan calculator daily budget events target on track','Protect the learning phase and check spend pacing'],utm:['utm tracking links naming convention url builder parameters campaign source medium analytics','Build tracking links and consistent campaign names']};
 TLT.forEach(t=>add({t:t[2],ic:t[1],tab:'tools',path:'Marketing tools',d:TLK[t[0]]?TLK[t[0]][1]:'',k:(TLK[t[0]]?TLK[t[0]][0]:'')+' tool',b:1,go:()=>tlGo(t[0]),sc:()=>$('tside')}));
 
 /* ---- Matching ---- */
@@ -1539,6 +2057,14 @@ document.addEventListener('keydown',ev=>{const tg=ev.target,typing=tg&&(/^(INPUT
 window.siteSearch={open,close,search:q=>search(q).map(e=>e.t)};
 })();
 
+
+tabs.forEach(([k,n,ic])=>{const b=document.createElement('button');b.innerHTML=`<span aria-hidden="true">${ic}</span>${n}`;b.dataset.k=k;b.onclick=()=>show(k);nav.appendChild(b)});mnInit();
+const root=document.documentElement,tb=$('th');
+function setTheme(t){root.dataset.theme=t;tb.textContent=t==='dark'?'☀ Light':'☾ Dark';try{localStorage.setItem('theme',t)}catch(e){}}
+let st=null;try{st=localStorage.getItem('theme')}catch(e){}
+setTheme(st||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+tb.onclick=()=>setTheme(root.dataset.theme==='dark'?'light':'dark');
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1),c=nav.querySelector('button.on');if(tabs.some(t=>t[0]===h)&&(!c||c.dataset.k!==h))show(h)});$('hl').src=LOGO;const h0=location.hash.slice(1);show(tabs.some(t=>t[0]===h0)?h0:'dash');
 </script>
 </body>
 </html>
