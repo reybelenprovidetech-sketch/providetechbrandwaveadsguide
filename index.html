@@ -233,6 +233,25 @@ header{background:linear-gradient(135deg,rgba(11,79,194,.9) 0%,rgba(24,119,242,.
 @media(max-width:560px){.mstep{display:none}}
 @media(prefers-reduced-motion:reduce){.lgm,.lgk{transition:none}}
 @media print{.lgm,.lgk,.lgb{display:none!important}}
+.dxad{border:1px solid var(--bd);border-radius:12px;padding:12px;margin:0 0 12px;background:color-mix(in srgb,var(--card) 70%,transparent)}
+.dxh{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}.dxh select,.dxh input{flex:1 1 140px;min-width:0}
+.dxrm{border:1px solid var(--bd);background:transparent;color:var(--mu);border-radius:8px;padding:6px 10px;cursor:pointer}.dxrm:disabled{opacity:.35;cursor:default}
+.dxbt{display:flex;gap:6px;flex-wrap:wrap}
+.dxt{display:inline-block;padding:2px 9px;border-radius:99px;font-size:.75rem;font-weight:700;border:1px solid currentColor;margin-left:6px}
+.dxt.e{color:var(--ex)}.dxt.g{color:var(--go)}.dxt.a{color:var(--av)}.dxt.p{color:var(--po)}
+.dxv{display:flex;flex-direction:column;gap:2px;border-left:4px solid var(--av);padding:8px 12px;border-radius:8px;margin-bottom:10px;background:color-mix(in srgb,var(--card) 60%,transparent)}
+.dxv.e{border-color:var(--ex)}.dxv.g{border-color:var(--go)}.dxv.p{border-color:var(--po)}.dxv b{font-size:1.1rem}
+.kpi b.e{color:var(--ex)}.kpi b.g{color:var(--go)}.kpi b.a{color:var(--av)}.kpi b.p{color:var(--po)}
+td .e{color:var(--ex);font-weight:700}td .p{color:var(--po);font-weight:700}
+.dxbr{display:grid;grid-template-columns:130px 1fr 1fr;gap:8px;align-items:center;margin:6px 0;font-size:.85rem}
+.dxbr div{position:relative;background:color-mix(in srgb,var(--bd) 40%,transparent);border-radius:6px;height:22px;overflow:hidden}
+.dxbr i{position:absolute;left:0;top:0;bottom:0;display:block}.dxbr i.s{background:var(--av);opacity:.55}.dxbr i.r{background:var(--ex);opacity:.6}
+.dxbr em{position:relative;font-style:normal;padding-left:6px;font-size:.75rem;line-height:22px}
+.dxmix{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}.dxmix div{border:1px solid var(--bd);border-radius:10px;padding:10px;display:flex;flex-direction:column}.dxmix span{font-size:1.5rem;font-weight:800;color:var(--ac)}
+.dxdet{border:1px solid var(--bd);border-radius:12px;margin:8px 0;padding:0 12px}.dxdet summary{cursor:pointer;padding:10px 0;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between}
+.dxchips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.dxc{border:1px solid var(--bd);border-radius:8px;padding:4px 8px;display:flex;flex-direction:column;font-size:.8rem}.dxc small{color:var(--mu)}.dxc em{font-style:normal;font-size:.7rem}
+.dxc.e em{color:var(--ex)}.dxc.g em{color:var(--go)}.dxc.a em{color:var(--av)}.dxc.p em{color:var(--po)}
+@media(max-width:600px){.dxbr{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -2156,6 +2175,216 @@ function logout(){SES=null;save(null);if(window.aiFloat)aiFloat(false);afterAuth
 if(btn)btn.onclick=()=>{if(SES)logout();else openM(null)};
 syncBtn();
 window.ProvideTechAuth={hash:(u,p)=>hashPw(u,p),logout,user:()=>SES&&SES.u};
+})();
+
+/* ===== Diagnose 2.0: real data by creative format (image / video / carousel) with quality-aware verdicts ===== */
+(function(){
+const FM={image:['Static image','🖼️'],video:['Video','🎬'],carousel:['Carousel','🎠']};
+const REF={
+ ctr:{fb:[2,1,.7],ig:[1.5,.9,.6],tt:[1.5,1,.5],sh:[5,3,2],gg:[5,3,2]},
+ cpc:{fb:[5,9,15],ig:[6,12,20],tt:[8,20,40],sh:[3,8,15],gg:[10,25,40]},
+ cpk:{fb:[60,80,120],ig:[90,140,220],tt:[150,250,400]},
+ msg:{fb:[10,20,40],ig:[12,25,50],tt:[15,30,60],sh:[30,60,120],gg:[250,500,900]}};
+const PLN2={fb:'Facebook',ig:'Instagram',tt:'TikTok',sh:'Shopee',gg:'Google Ads'};
+const LAB=['Excellent','Good','Fair','Needs work'],CC=['e','g','a','p'];
+const rate=(dir,t,v)=>{if(!t||!isFinite(v))return null;return dir==='h'?(v>=t[0]?0:v>=t[1]?1:v>=t[2]?2:3):(v<=t[0]?0:v<=t[1]?1:v<=t[2]?2:3)};
+const F=isFinite,num=s=>{const n=parseFloat(String(s==null?'':s).replace(/[₱,\s%]/g,''));return isFinite(n)?n:NaN};
+const P0=x=>F(x)?'₱'+(+x).toLocaleString('en-PH',{maximumFractionDigits:x>=100?0:2}):'—';
+const N0=x=>F(x)?Math.round(x).toLocaleString('en-PH'):'—';
+const PC=x=>F(x)?(+x.toFixed(1))+'%':'—';
+const X1=x=>F(x)?(+x.toFixed(2))+'x':'—';
+const E=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const KEY='ptb_dx_v2';
+const EX={pl:'fb',val:'1800',mar:'40',cr:'',ads:[
+ {f:'image',nm:'Promo photo',cpm:'18',msg:'42',ctr:'1.1',fq:'2.4',cpc:'8',ql:'20',od:'5'},
+ {f:'video',nm:'15s UGC video',cpm:'11',msg:'96',ctr:'2.3',fq:'2.0',cpc:'4.5',ql:'18',od:'3'},
+ {f:'carousel',nm:'Package carousel',cpm:'42',msg:'28',ctr:'0.9',fq:'3.2',cpc:'12',ql:'20',od:'7'}],ex:true};
+const blank=()=>({f:'image',nm:'',cpm:'',msg:'',ctr:'',fq:'',cpc:'',ql:'',od:''});
+let S=null;
+try{S=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+if(!S||!Array.isArray(S.ads)||!S.ads.length)S=JSON.parse(JSON.stringify(EX));
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+
+/* ---------- metrics ---------- */
+function mkAd(a){const cpmsg=num(a.cpm),msg=num(a.msg),ctr=num(a.ctr),fq=num(a.fq),cpc=num(a.cpc),od=num(a.od),ql=num(a.ql);
+ const spend=(F(cpmsg)&&F(msg))?cpmsg*msg:NaN,clicks=(F(spend)&&cpc>0)?spend/cpc:NaN,impr=(F(clicks)&&ctr>0)?clicks/(ctr/100):NaN,reach=(F(impr)&&fq>0)?impr/fq:NaN;
+ return{spend,msg,cpmsg,ctr,fq,cpc,od,ql,clicks,impr,reach}}
+function agg(list){const s=k=>{const v=list.map(x=>x[k]).filter(F);return v.length?v.reduce((a,b)=>a+b,0):NaN};
+ const spend=s('spend'),msg=s('msg'),clicks=s('clicks'),impr=s('impr'),reach=s('reach');
+ return{spend,msg,od:s('od'),ql:s('ql'),clicks,impr,reach,cpmsg:msg>0?spend/msg:NaN,ctr:impr>0?clicks/impr*100:NaN,cpc:clicks>0?spend/clicks:NaN,fq:reach>0?impr/reach:NaN,n:list.length}}
+function fin(m,c){m.cpk=(F(m.spend)&&m.impr>0)?m.spend/m.impr*1000:NaN;m.cm=(m.clicks>0&&F(m.msg))?m.msg/m.clicks*100:NaN;
+ m.close=(F(m.od)&&m.msg>0)?m.od/m.msg*100:NaN;m.qr=(F(m.ql)&&m.msg>0)?m.ql/m.msg*100:NaN;
+ m.cps=m.od>0?m.spend/m.od:NaN;m.cpq=m.ql>0?m.spend/m.ql:NaN;m.rev=(F(m.od)&&F(c.val))?m.od*m.val_:NaN;
+ m.rev=(F(m.od)&&F(c.val))?m.od*c.val:NaN;m.roas=(F(m.rev)&&m.spend>0)?m.rev/m.spend:NaN;
+ m.profit=(F(m.od)&&F(c.pps)&&F(m.spend))?m.od*c.pps-m.spend:NaN;
+ const cl=F(m.close)?m.close:c.cr;m.bem=(F(c.pps)&&F(cl))?c.pps*cl/100:NaN;return m}
+
+/* ---------- classification: cost level x quality level ---------- */
+function level(m,c,ref){
+ /* cost level */
+ let cost='mid',basis='';
+ if(F(m.bem)&&m.bem>0&&F(m.cpmsg)){const r=m.cpmsg/m.bem;m.ratio=r;cost=r<=.8?'low':r>=1?'high':'mid';basis='your break-even of '+P0(m.bem)+' per message'}
+ else if(ref.n>=2&&F(ref.avgCost)&&F(m.cpmsg)){const r=m.cpmsg/ref.avgCost;cost=r<=.85?'low':r>=1.15?'high':'mid';basis='the campaign average of '+P0(ref.avgCost)}
+ else if(F(m.cpmsg)){const t=REF.msg[c.pl]||REF.msg.fb;cost=m.cpmsg<=t[1]?'low':m.cpmsg>t[2]?'high':'mid';basis='market reference only'}
+ /* quality level */
+ let q='unknown',qb='';
+ if(F(m.close)){
+  if(m.od===0&&m.msg<15)q='unknown';
+  else{const rf=F(c.cr)?c.cr:(F(ref.avgClose)&&ref.nc>=2?ref.avgClose:NaN);
+   if(F(rf)&&rf>0){const r=m.close/rf;q=r>=1.15?'high':r<=.7?'low':'mid';qb=F(c.cr)?'your usual '+PC(c.cr)+' close rate':'the campaign average of '+PC(rf)}
+   else{q=m.close>=20?'high':m.close<8?'low':'mid';qb='typical Messenger close rates (8–20%)'}}}
+ else if(F(m.qr)){q=m.qr>=40?'high':m.qr<20?'low':'mid';qb='qualified-lead share'}
+ const low=F(m.msg)&&m.msg<15?'Low data':null;
+ let key,label,tone;
+ if(q==='unknown'){key='nodata';label='Add sales data';tone='a'}
+ else if(q==='high'&&cost==='high'){key='premium';label='Premium leads';tone='g'}
+ else if(q==='high'){key='scale';label='Scale';tone='e'}
+ else if(q==='mid'&&cost==='high'){key='watch';label='Watch cost';tone='a'}
+ else if(q==='mid'){key='healthy';label='Healthy';tone='g'}
+ else if(q==='low'&&cost==='low'){key='cheaplow';label='Cheap, low intent';tone='a'}
+ else{key='rebuild';label='Rebuild';tone='p'}
+ if(F(m.profit)){if(m.profit>0&&key==='rebuild'){key='watch';label='Profitable, weak';tone='a'}if(m.profit<0&&(key==='scale'||key==='healthy'||key==='premium')){key='watch';label='Not yet profitable';tone='a'}}
+ return{cost,q,key,label,tone,basis,qb,low}}
+
+/* ---------- format tips ---------- */
+const FT={
+ video:{ctr:'Rework the first 3 seconds: open on the problem or the result, add captions, show the price or offer by second 5.',fq:'Cut a fresh version of the same idea (new first 3 seconds, new voice-over) instead of re-uploading the same video.',cm:'Add the price range and a clear “Message us” end card so viewers know what to ask.',gen:'Videos pull cheap attention; protect quality by stating who it is for and the price range.'},
+ image:{ctr:'Use one benefit headline on the image, a price or offer badge and a real photo. Test 3 variations of the headline.',fq:'Rotate 3–4 image variations; static images tire fastest.',cm:'Put the offer and next step in the first line of the copy and add a Send Message button.',gen:'Static images are the cheapest to test: try several headlines and offers.'},
+ carousel:{ctr:'Make card 1 the strongest hook and order cards by interest (benefit, proof, price, offer). Use 3–5 cards.',fq:'Re-order the cards and swap the first card to refresh the same ad.',cm:'End the last card with a clear call to action and put price on a card so only serious people message.',gen:'Carousels tend to filter for serious buyers because people swipe through price and details before messaging.'}};
+
+/* ---------- per-ad diagnosis ---------- */
+function diagAd(a,m,lv,c){const pl=c.pl,I=[],R={};
+ R.ctr=rate('h',REF.ctr[pl],m.ctr);R.fq=rate('l',[2,3,4],m.fq);R.cpc=rate('l',REF.cpc[pl],m.cpc);R.cpk=rate('l',REF.cpk[pl],m.cpk);
+ const ft=FT[a.f];
+ if(R.ctr!=null&&R.ctr>=2)I.push(['Weak hook: '+PC(m.ctr)+' CTR','People see it but few care. '+ft.ctr]);
+ if(F(m.fq)&&m.fq>=3.5)I.push(['Ad fatigue: frequency '+(+m.fq.toFixed(1)),'The same people see it too often. '+ft.fq+' Exclude people who already messaged.']);
+ else if(F(m.fq)&&m.fq>=2.8)I.push(['Frequency is climbing ('+(+m.fq.toFixed(1))+')','Plan a refresh now. '+ft.fq]);
+ if(R.cpc!=null&&R.cpc>=2&&!(R.ctr!=null&&R.ctr>=2))I.push(['Clicks are expensive ('+P0(m.cpc)+')','CTR is fine, so the cost is coming from delivery (CPM). Broaden the audience, use automatic placements and avoid peak sale days.']);
+ if(R.cpk!=null&&R.cpk>=2)I.push(['Delivery is expensive (about '+P0(m.cpk)+' per 1,000 views)','Narrow audience or peak season. Broaden targeting and let placements run automatically.']);
+ if(F(m.cm)){if(m.cm<8)I.push(['Few clicks become messages ('+PC(m.cm)+')','Something between the click and the chat is losing people. '+ft.cm]);
+  else if(m.cm>100)I.push(['Messages are higher than clicks','Your CPC may count link clicks only while messages also come from other paths. Check how each number is defined in Ads Manager before trusting this ratio.'])}
+ if(R.ctr!=null&&R.ctr<=1&&F(m.cm)&&m.cm<10&&F(m.ctr)&&m.ctr>=1.5)I.push(['Curiosity clicks','Strong CTR but few messages: the ad attracts attention without a clear reason to chat. Show the price range and who it is for.']);
+ const w=[];
+ if(lv.key==='premium')w.push('Do not cut this ad because the cost per message looks high. Judge it by cost per sale'+(F(m.cps)?' ('+P0(m.cps)+')':'')+'. Keep it running, protect the audience, and lower the cost with fresher creatives, not tighter targeting.');
+ if(lv.key==='scale')w.push('Raise the budget about 20% every 2–3 days while the cost per sale stays under '+(F(c.pps)?P0(c.pps):'your profit per sale')+'. Duplicate it into a new ad set to scale without resetting learning.');
+ if(lv.key==='cheaplow')w.push('Cheap messages are not the goal. Add the price range, minimum order or who it is for to the ad so fewer window-shoppers message. Expect the cost per message to rise while the close rate improves.','Use a Messenger welcome flow that asks one qualifying question (budget, date or quantity).');
+ if(lv.key==='rebuild')w.push('Pause or rebuild this ad: it is costing money without bringing buyers. Keep the idea, change the hook and the offer, and test a replacement for 3 days.');
+ if(lv.key==='watch')w.push('Hold the budget. Reply faster and follow up within 1 hour and 24 hours before judging the ad.');
+ if(lv.key==='healthy')w.push('Keep it running and test one new variation next to it.');
+ if(lv.key==='nodata')w.push('Add the number of orders (and qualified leads if you track them) so this ad can be judged by what it brings, not only by what a message costs.');
+ w.push(ft.gen);
+ return{I,R,w}}
+
+/* ---------- UI ---------- */
+const fld=(i,k,l,ph,u)=>`<div><label for="dxf${i}${k}">${l}</label><input id="dxf${i}${k}" data-i="${i}" data-k="${k}" inputmode="decimal" autocomplete="off" placeholder="${ph}" value="${E(S.ads[i][k])}"></div>`;
+function adHTML(i){const a=S.ads[i];return`<div class="dxad" data-i="${i}"><div class="dxh"><b>Ad ${i+1}</b><select data-i="${i}" data-k="f" aria-label="Creative format of ad ${i+1}">${Object.keys(FM).map(k=>`<option value="${k}"${a.f===k?' selected':''}>${FM[k][1]} ${FM[k][0]}</option>`).join('')}</select><input data-i="${i}" data-k="nm" placeholder="Ad name (optional)" value="${E(a.nm)}" aria-label="Name of ad ${i+1}"><button type="button" class="dxrm" data-rm="${i}" aria-label="Remove ad ${i+1}"${S.ads.length<2?' disabled':''}>✕</button></div>
+<div class="ff">${fld(i,'cpm','Cost per message (₱)','e.g. 18')}${fld(i,'msg','Number of messages','e.g. 42')}${fld(i,'ctr','Click-through rate (%)','e.g. 1.2')}${fld(i,'fq','Frequency','e.g. 2.4')}${fld(i,'cpc','Cost per click (₱)','e.g. 8')}${fld(i,'ql','Qualified leads (optional)','e.g. 20')}${fld(i,'od','Orders / sales (optional)','e.g. 5')}</div></div>`}
+function ctxHTML(){return`<div class="ff"><div><label for="dxpl">Platform</label><select id="dxpl">${Object.keys(PLN2).map(k=>`<option value="${k}"${S.pl===k?' selected':''}>${PLN2[k]}</option>`).join('')}</select></div>
+<div><label for="dxval">Average sale value (₱, optional)</label><input id="dxval" inputmode="decimal" placeholder="e.g. 1800" value="${E(S.val)}"></div>
+<div><label for="dxmar">Profit margin (%, optional)</label><input id="dxmar" inputmode="decimal" placeholder="e.g. 40" value="${E(S.mar)}"></div>
+<div><label for="dxcr">Usual close rate (%, optional)</label><input id="dxcr" inputmode="decimal" placeholder="messages that buy, e.g. 15" value="${E(S.cr)}"></div></div><p class="note" id="dxec" style="margin-top:8px"></p>`}
+V.dx=()=>`<div class="banner">${art.dx}<h2>Diagnose your ads</h2></div><p class="sub">Enter the real numbers for each ad and pick its format (static image, video or carousel). The tool rates every ad, compares your format mix and tells you what to scale, fix or pause. It judges cost per message by what a message is worth to <b>your</b> business, not by a fixed peso target.</p>
+<div class="card"><h3>1. Your campaign</h3>${ctxHTML()}</div>
+<div class="card"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center"><h3 style="margin:0">2. Your ads</h3><div class="dxbt"><button class="btn alt" type="button" id="dxadd">+ Add ad</button><button class="btn alt" type="button" id="dxex">Load example</button><button class="btn alt" type="button" id="dxclr">Clear all</button></div></div><p class="note" id="dxexn" style="margin:6px 0 10px"></p><div id="dxads">${S.ads.map((a,i)=>adHTML(i)).join('')}</div></div>
+<div id="dxr" aria-live="polite"></div>
+<p class="note">Cost per click and CTR are used to estimate clicks and views, so enter them from the same ad and date range. The more ads and orders you enter, the more reliable the comparison. Fewer than 15 messages or 3 orders per ad is directional only.</p>`;
+
+function ctxOf(){const val=num(S.val),mar=num(S.mar),cr=num(S.cr);return{pl:S.pl,val,mar,cr,pps:(F(val)&&F(mar))?val*mar/100:NaN}}
+function run(){const c=ctxOf(),out=$('dxr');if(!out)return;
+ const ec=$('dxec');if(ec){let t='';if(F(c.pps)){t='Profit per sale: <b>'+P0(c.pps)+'</b>.';if(F(c.cr)&&c.cr>0)t+=' At a '+PC(c.cr)+' close rate you can spend up to <b>'+P0(c.pps*c.cr/100)+' per message</b> and still break even.';else t+=' Add your usual close rate to see the most you can afford to pay per message.'}else t='Add your average sale value and profit margin so a message is judged by what it is worth to you. You can also leave them blank.';ec.innerHTML=t}
+ const exn=$('dxexn');if(exn)exn.textContent=S.ex?'Example numbers are loaded so you can see how it works. Replace them with your real data or press Clear all.':'';
+ const ads=S.ads.map(a=>({a,m:mkAd(a)})).filter(x=>F(x.m.spend)&&x.m.msg>0);
+ if(!ads.length){out.innerHTML='<div class="card"><h3>Your diagnosis</h3><p>Enter at least <b>cost per message</b> and <b>number of messages</b> for one ad to start.</p></div>';return}
+ /* campaign refs */
+ const tot=agg(ads.map(x=>x.m));fin(tot,c);
+ const withOd=ads.filter(x=>F(x.m.od)&&x.m.msg>=1);
+ const ref={n:ads.length,avgCost:tot.cpmsg,nc:withOd.length,avgClose:withOd.length?withOd.reduce((s,x)=>s+x.m.od,0)/withOd.reduce((s,x)=>s+x.m.msg,0)*100:NaN};
+ ads.forEach(x=>{fin(x.m,c);x.lv=level(x.m,c,ref);x.d=diagAd(x.a,x.m,x.lv,c)});
+ /* formats */
+ const fmts=Object.keys(FM).map(k=>{const g=ads.filter(x=>x.a.f===k);if(!g.length)return null;const m=fin(agg(g.map(x=>x.m)),c);const lv=level(m,c,ref);return{k,g,m,lv}}).filter(Boolean);
+ const tlv=level(tot,c,ref);
+ const hasOd=F(tot.od),hasP=F(tot.profit);
+ /* efficiency per format */
+ const eff=f=>hasOd&&f.m.od>0?f.m.od/f.m.spend:(hasOd?0:(F(f.m.ql)&&f.m.ql>0?f.m.ql/f.m.spend:f.m.msg/f.m.spend));
+ const effMax=Math.max(...fmts.map(eff),1e-9);
+ fmts.forEach(f=>{f.eff=eff(f)/effMax;f.sp=f.m.spend/tot.spend});
+ const best=fmts.slice().sort((a,b)=>hasP?(b.m.profit||-1e9)-(a.m.profit||-1e9):b.eff-a.eff)[0],worst=fmts.slice().sort((a,b)=>a.eff-b.eff)[0];
+ /* verdict */
+ let vt,vtone,vtxt;
+ if(hasP){if(tot.profit>0){vt='Profitable';vtone='e';vtxt='After ad spend you are about '+P0(tot.profit)+' ahead on these ads.'}else{vt='Losing money';vtone='p';vtxt='After ad spend you are about '+P0(-tot.profit)+' behind on these ads.'}}
+ else if(hasOd){vt=tot.od>0?'Bringing sales':'No sales yet';vtone=tot.od>0?'g':'p';vtxt=tot.od>0?'Orders are coming in. Add sale value and margin to confirm profit.':'Messages are not turning into orders yet.'}
+ else{vt='Not enough data to judge';vtone='a';vtxt='Cost per message alone cannot show whether the campaign works. Add orders and sale value.'}
+ /* conclusion */
+ const sc=[];
+ sc.push(`You spent about <b>${P0(tot.spend)}</b> and got <b>${N0(tot.msg)} messages</b> at <b>${P0(tot.cpmsg)}</b> each${hasOd?`, which became <b>${N0(tot.od)} order${tot.od===1?'':'s'}</b> (${PC(tot.close)} close rate, ${F(tot.cps)?P0(tot.cps)+' per sale':'no cost per sale yet'})`:''}.`);
+ if(fmts.length>1&&hasOd&&tot.od>0){const cheap=fmts.slice().sort((a,b)=>a.m.cpmsg-b.m.cpmsg)[0];
+  if(cheap.k!==best.k)sc.push(`<b>${FM[cheap.k][0]}</b> gives the cheapest messages (${P0(cheap.m.cpmsg)}) but <b>${FM[best.k][0]}</b> ${hasP?'earns the most profit ('+P0(best.m.profit)+')':'brings the most sales per peso'}${F(best.m.cps)?' at '+P0(best.m.cps)+' per sale':''}. Cheap messages are not the same as good customers.`);
+  else sc.push(`<b>${FM[best.k][0]}</b> leads on both cost and results.`)}
+ else if(fmts.length>1)sc.push(`${hasOd?'No format has produced a sale yet, so':'With cost per message only,'} <b>${FM[fmts.slice().sort((a,b)=>a.m.cpmsg-b.m.cpmsg)[0].k][0]}</b> looks cheapest, but that does not prove it brings buyers. Add orders to confirm.`);
+ if(F(c.pps)&&F(tot.bem)&&tot.cpmsg>tot.bem)sc.push(`Your average cost per message (${P0(tot.cpmsg)}) is above the ${P0(tot.bem)} you can afford at the current close rate, so improve closing or lower the cost.`);
+ else if(F(c.pps)&&F(tot.bem))sc.push(`You can afford up to <b>${P0(tot.bem)}</b> per message at the current close rate, so a higher cost per message is acceptable as long as buyers keep coming.`);
+ /* suggested mix */
+ let mix=null,mixNote='';
+ if(fmts.length>1){const raw=fmts.map(f=>.7*(f.eff/fmts.reduce((s,x)=>s+x.eff,0)||0)+.3*f.sp);let r=raw.map(v=>Math.min(.7,Math.max(.1,v)));const sm=r.reduce((a,b)=>a+b,0);r=r.map(v=>v/sm);
+  let p=r.map(v=>Math.round(v*20)*5);const d=100-p.reduce((a,b)=>a+b,0);p[p.indexOf(Math.max(...p))]+=d;mix=fmts.map((f,i)=>({f,p:p[i]}));
+  const lowc=ads.some(x=>x.m.msg<15)||(hasOd&&tot.od<5);mixNote=lowc?'Directional only: some ads have very little data, so test for 3–5 more days before moving large budgets.':''}
+ /* recommendations */
+ const rec={fix:[],scale:[],test:[],data:[]};
+ ads.forEach(x=>{const nm=(x.a.nm||'Ad '+(S.ads.indexOf(x.a)+1))+' ('+FM[x.a.f][0]+')',share=x.m.spend/tot.spend;
+  if(x.lv.key==='rebuild')rec.fix.push([share,`<b>${E(nm)}</b> takes ${PC(share*100)} of spend but is not bringing buyers. Pause or rebuild it with a new hook and a clearer offer.`]);
+  if(x.lv.key==='cheaplow')rec.fix.push([share*.8,`<b>${E(nm)}</b> gets cheap messages (${P0(x.m.cpmsg)}) that rarely buy (${PC(x.m.close)}). Add price and who-it-is-for to the ad and a qualifying question in the welcome message instead of chasing a lower cost.`]);
+  if(x.d.I.length&&(x.lv.key==='scale'||x.lv.key==='premium'||x.lv.key==='healthy')){const t=x.d.I.find(i=>/fatigue|climbing/.test(i[0]));if(t)rec.fix.push([share*.5,`<b>${E(nm)}</b> is working but shows ${t[0].toLowerCase()}. Prepare a fresh version before costs rise.`])}
+  if(x.lv.key==='scale')rec.scale.push(`<b>${E(nm)}</b>: raise the budget about 20% every 2–3 days while cost per sale stays under ${F(c.pps)?P0(c.pps):'your profit per sale'}.`);
+  if(x.lv.key==='premium')rec.scale.push(`<b>${E(nm)}</b> has a high cost per message but strong buyers (${PC(x.m.close)} close${F(x.m.cps)?', '+P0(x.m.cps)+' per sale':''}). Keep it and scale slowly; do not judge it by cost per message.`);
+  if(x.lv.key==='watch')rec.fix.push([share*.4,`<b>${E(nm)}</b>: cost is high for the quality it brings. Reply faster, follow up and refresh the creative before deciding.`])});
+ rec.fix.sort((a,b)=>b[0]-a[0]);
+ const present=new Set(ads.map(x=>x.a.f));
+ if(!present.has('video'))rec.test.push('Test a 15–30 second UGC-style <b>video</b>. It usually wins attention and cheap reach; protect quality with the price range in the video.');
+ if(!present.has('carousel'))rec.test.push('Test a <b>carousel</b> (3–5 cards: benefit, proof, price, offer). It tends to attract more serious buyers.');
+ if(!present.has('image'))rec.test.push('Test a simple <b>static image</b> with one benefit headline and an offer badge. It is the cheapest to produce and iterate.');
+ if(fmts.length>1&&best)rec.test.push(`<b>Combination play:</b> use <b>${FM[best.k][0]}</b> as the main driver, a second format as retargeting for people who watched or messaged but did not buy, and keep about 10% on a new concept every week.`);
+ if(fmts.length>1)rec.test.push('Test the same offer in all formats with <b>different hooks</b> (problem, price, proof) so you learn whether the hook or the format creates the difference.');
+ rec.test.push('Retarget people who messaged but did not buy with a testimonial or limited-time offer (14-day window).');
+ if(!hasOd)rec.data.push('Add <b>orders</b> for each ad. Without sales data the tool can only judge cost and engagement, not quality.');
+ if(!F(c.pps))rec.data.push('Add <b>average sale value</b> and <b>profit margin</b> to see your break-even cost per message.');
+ ads.forEach(x=>{if(x.m.msg<15)rec.data.push(`<b>${E(x.a.nm||'Ad '+(S.ads.indexOf(x.a)+1))}</b> has fewer than 15 messages; keep it running before judging it.`);else if(hasOd&&F(x.m.od)&&x.m.od<3)rec.data.push(`<b>${E(x.a.nm||'Ad '+(S.ads.indexOf(x.a)+1))}</b> has fewer than 3 orders, so its close rate is not reliable yet.`)});
+ if(S.ads.some(a=>(num(a.cpm)>=0&&num(a.msg)>0)&&!(num(a.ctr)>0&&num(a.cpc)>0)))rec.data.push('Some ads are missing CTR or cost per click, so clicks, views and click-to-message rate cannot be estimated for them.');
+ /* render */
+ const tone=t=>`<span class="dxt ${t}">`;
+ const kp=(l,v,s,t)=>`<div class="kpi"><small>${l}</small><b class="${t||''}">${v}</b>${s?`<small>${s}</small>`:''}</div>`;
+ let h=`<div class="card"><h3>3. Campaign diagnosis</h3><div class="dxv ${vtone}"><b>${vt}</b><span>${vtxt}</span></div><div class="grid">${kp('Total spend',P0(tot.spend))}${kp('Messages',N0(tot.msg),P0(tot.cpmsg)+' each')}${F(tot.od)?kp('Orders',N0(tot.od),PC(tot.close)+' close rate'):''}${F(tot.cps)?kp('Cost per sale',P0(tot.cps)):''}${F(tot.roas)?kp('ROAS',X1(tot.roas),'',tot.roas>=1?'e':'p'):''}${F(tot.profit)?kp('Profit after ads',P0(tot.profit),'',tot.profit>=0?'e':'p'):''}${kp('Overall',tlv.label,'',tlv.tone)}</div>
+<h4>Conclusion</h4><p>${sc.join(' ')}</p></div>`;
+ /* format comparison */
+ h+=`<div class="card"><h3>Creative format comparison</h3><div class="sc"><table><tr><th>Format</th><th>Spend</th><th>Messages</th><th>Cost / message</th><th>CTR</th><th>Close rate</th><th>Cost / sale</th><th>Profit</th><th>Verdict</th></tr>${fmts.map(f=>`<tr><td><b>${FM[f.k][1]} ${FM[f.k][0]}</b> (${f.g.length})</td><td>${P0(f.m.spend)}</td><td>${N0(f.m.msg)}</td><td>${P0(f.m.cpmsg)}</td><td>${PC(f.m.ctr)}</td><td>${PC(f.m.close)}</td><td>${F(f.m.cps)?P0(f.m.cps):'—'}</td><td>${F(f.m.profit)?`<span class="${f.m.profit>=0?'e':'p'}">${P0(f.m.profit)}</span>`:'—'}</td><td><span class="dxt ${f.lv.tone}">${f.lv.label}</span></td></tr>`).join('')}</table></div>
+<h4>Share of spend vs share of ${hasOd?'sales':F(tot.ql)?'qualified leads':'messages'}</h4>${fmts.map(f=>{const tr=hasOd?f.m.od/tot.od:F(tot.ql)?f.m.ql/tot.ql:f.m.msg/tot.msg;return`<div class="dxbr"><span>${FM[f.k][1]} ${FM[f.k][0]}</span><div><i class="s" style="width:${Math.max(2,f.sp*100)}%"></i><em>${PC(f.sp*100)} of spend</em></div><div><i class="r" style="width:${Math.max(2,(F(tr)?tr:0)*100)}%"></i><em>${PC((F(tr)?tr:0)*100)} of ${hasOd?'sales':F(tot.ql)?'leads':'messages'}</em></div></div>`}).join('')}
+<p class="note">A format whose result share is bigger than its spend share is earning its budget; a smaller share means it is taking money from better formats.</p>`;
+ if(mix)h+=`<h4>Suggested budget mix for your next round</h4><div class="dxmix">${mix.map(x=>`<div><b>${FM[x.f.k][1]} ${FM[x.f.k][0]}</b><span>${x.p}%</span><small>now ${PC(x.f.sp*100)}</small></div>`).join('')}</div>${mixNote?`<p class="note">${mixNote}</p>`:''}`;
+ h+='</div>';
+ /* per ad */
+ h+=`<div class="card"><h3>Ad-by-ad diagnosis</h3>${ads.map(x=>{const m=x.m,d=x.d,nm=x.a.nm||'Ad '+(S.ads.indexOf(x.a)+1);const chip=(l,v,r)=>`<span class="dxc${r!=null?' '+CC[r]:''}"><small>${l}</small><b>${v}</b>${r!=null?`<em>${LAB[r]}</em>`:''}</span>`;
+  return`<details class="dxdet"${x.lv.tone==='p'||x.lv.key==='scale'||x.lv.key==='premium'?' open':''}><summary><span>${FM[x.a.f][1]} <b>${E(nm)}</b> <small>${FM[x.a.f][0]}</small></span><span class="dxt ${x.lv.tone}">${x.lv.label}</span>${x.lv.low?'<span class="dxt a">Low data</span>':''}</summary>
+<div class="dxchips">${chip('Cost / message',P0(m.cpmsg))}${chip('Messages',N0(m.msg))}${chip('CTR',PC(m.ctr),d.R.ctr)}${chip('Frequency',F(m.fq)?(+m.fq.toFixed(1)):'—',d.R.fq)}${chip('CPC',P0(m.cpc),d.R.cpc)}${F(m.cpk)?chip('Cost / 1,000 views',P0(m.cpk),d.R.cpk):''}${F(m.cm)?chip('Click → message',PC(m.cm)):''}${F(m.close)?chip('Close rate',PC(m.close)):''}${F(m.cps)?chip('Cost / sale',P0(m.cps)):''}${F(m.profit)?chip('Profit',P0(m.profit)):''}</div>
+<p><b>What it means:</b> ${x.lv.key==='premium'?'Messages cost more here, but they turn into buyers. This is a quality-over-volume ad.':x.lv.key==='scale'?'Cost and quality are both good. This is your best candidate to scale.':x.lv.key==='cheaplow'?'The cost per message is low, but those messages rarely become sales. You are paying for attention, not intent.':x.lv.key==='rebuild'?'Cost is not justified by the results it brings.':x.lv.key==='watch'?'Results are acceptable but not strong. Improve before scaling.':x.lv.key==='healthy'?'Results are healthy against '+(x.lv.qb||'your numbers')+'.':'Quality cannot be judged yet.'}${x.lv.basis?` <small>(Cost judged against ${x.lv.basis}${x.lv.qb?'; quality against '+x.lv.qb:''}.)</small>`:''}</p>
+${d.I.length?`<p><b>Issues found:</b></p><ul>${d.I.map(i=>`<li><b>${i[0]}.</b> ${i[1]}</li>`).join('')}</ul>`:''}<p><b>What to do:</b></p><ul>${d.w.map(t=>`<li>${t}</li>`).join('')}</ul></details>`}).join('')}</div>`;
+ /* recommendations */
+ const blk=(t,arr,ic)=>arr.length?`<h4>${ic} ${t}</h4><ul>${arr.map(a=>`<li>${Array.isArray(a)?a[1]:a}</li>`).join('')}</ul>`:'';
+ h+=`<div class="card"><h3>Recommendations</h3>${blk('Fix first',rec.fix,'🔧')}${blk('Scale',rec.scale,'📈')}${blk('Test next',rec.test.slice(0,5),'🧪')}${blk('Data to add',rec.data.slice(0,5),'🧾')}${!rec.fix.length&&!rec.scale.length?'<p>Nothing is clearly broken or ready to scale yet. Keep collecting data and test one new creative per format.</p>':''}
+<div class="flag ok"><b>Why cost per message alone misleads:</b> a low cost per message with no sales means you attract the wrong people; a high cost per message with strong sales means you attract buyers. Always compare cost per message with <b>close rate and cost per sale</b>.</div></div>`;
+ out.innerHTML=h}
+
+window.dxInit=function(){const root=$('out');
+ const upd=()=>{save();run()};
+ $('dxpl').onchange=e=>{S.pl=e.target.value;S.ex=false;upd()};
+ [['dxval','val'],['dxmar','mar'],['dxcr','cr']].forEach(([id,k])=>{$(id).oninput=e=>{S[k]=e.target.value;S.ex=false;upd()}});
+ const ads=$('dxads');
+ ads.oninput=ads.onchange=e=>{const t=e.target;if(t.dataset.i==null)return;S.ads[+t.dataset.i][t.dataset.k]=t.value;S.ex=false;upd()};
+ ads.onclick=e=>{const b=e.target.closest('[data-rm]');if(b&&S.ads.length>1){S.ads.splice(+b.dataset.rm,1);S.ex=false;redraw()}};
+ $('dxadd').onclick=()=>{if(S.ads.length>=9)return;S.ads.push(blank());S.ex=false;redraw();const last=ads.querySelector('.dxad:last-child input[data-k=cpm]');if(last)last.focus()};
+ $('dxex').onclick=()=>{S=JSON.parse(JSON.stringify(EX));save();redraw();rebindCtx()};
+ $('dxclr').onclick=()=>{S={pl:S.pl,val:'',mar:'',cr:'',ads:[blank()],ex:false};save();redraw();rebindCtx()};
+ function redraw(){ads.innerHTML=S.ads.map((a,i)=>adHTML(i)).join('');save();run()}
+ function rebindCtx(){$('dxpl').value=S.pl;$('dxval').value=S.val;$('dxmar').value=S.mar;$('dxcr').value=S.cr;run()}
+ run()};
 })();
 
 tabs.forEach(([k,n,ic])=>{const b=document.createElement('button');b.innerHTML=`<span aria-hidden="true">${ic}</span>${n}`;b.dataset.k=k;b.onclick=()=>show(k);nav.appendChild(b)});mnInit();
