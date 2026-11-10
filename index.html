@@ -252,6 +252,8 @@ td .e{color:var(--ex);font-weight:700}td .p{color:var(--po);font-weight:700}
 .dxchips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.dxc{border:1px solid var(--bd);border-radius:8px;padding:4px 8px;display:flex;flex-direction:column;font-size:.8rem}.dxc small{color:var(--mu)}.dxc em{font-style:normal;font-size:.7rem}
 .dxc.e em{color:var(--ex)}.dxc.g em{color:var(--go)}.dxc.a em{color:var(--av)}.dxc.p em{color:var(--po)}
 @media(max-width:600px){.dxbr{grid-template-columns:1fr}}
+.dxsteps{display:flex;gap:8px;margin:0 0 12px}.dxsteps span{flex:1;text-align:center;padding:8px;border:1px solid var(--bd);border-radius:10px;font-weight:700;font-size:.85rem;color:var(--mu);cursor:pointer}.dxsteps span.on{color:var(--ac);border-color:var(--ac)}
+#dxp1[hidden],#dxp2[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -2287,11 +2289,12 @@ function ctxHTML(){return`<div class="ff"><div><label for="dxpl">Platform</label
 <div><label for="dxmar">Profit margin (%, optional)</label><input id="dxmar" inputmode="decimal" placeholder="e.g. 40" value="${E(S.mar)}"></div>
 <div><label for="dxcr">Usual close rate (%, optional)</label><input id="dxcr" inputmode="decimal" placeholder="messages that buy, e.g. 15" value="${E(S.cr)}"></div></div><p class="note" id="dxec" style="margin-top:8px"></p>`}
 V.dx=()=>`<div class="banner">${art.dx}<h2>Diagnose your ads</h2></div><p class="sub">Enter the real numbers for each ad and pick its format (static image, video or carousel). The tool rates every ad, compares your format mix and tells you what to scale, fix or pause. It judges cost per message by what a message is worth to <b>your</b> business, not by a fixed peso target.</p>
-<div class="card"><h3>1. Your campaign</h3>${ctxHTML()}</div>
+<div class="dxsteps" role="tablist"><span id="dxs1" class="on">1 · Enter your data</span><span id="dxs2">2 · See the diagnosis</span></div>
+<div id="dxp1"><div class="card"><h3>1. Your campaign</h3>${ctxHTML()}</div>
 <div class="card"><h3>2. Overall campaign results <small style="font-weight:400">(optional)</small></h3><p class="note" style="margin:0 0 8px">Enter the campaign totals from Ads Manager here. Leave it blank and the tool adds up your ads below. Sales, orders and exact amounts are only needed if you have them.</p><div class="ff">${cfld('cpm','Cost per message (₱)','e.g. 18')}${cfld('msg','Number of messages','e.g. 166')}${cfld('ctr','Click-through rate (%)','e.g. 1.4')}${cfld('fq','Frequency','e.g. 2.4')}${cfld('cpc','Cost per click (₱)','e.g. 6')}${cfld('ql','Qualified leads (optional)','e.g. 58')}${cfld('od','Orders / sales (optional)','e.g. 15')}${cfld('rv','Exact sales amount (₱, optional)','e.g. 27000')}</div></div>
 <div class="card"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center"><h3 style="margin:0">3. Your ads</h3><div class="dxbt"><button class="btn alt" type="button" id="dxadd">+ Add ad</button><button class="btn alt" type="button" id="dxex">Load example</button><button class="btn alt" type="button" id="dxclr">Clear all</button></div></div><p class="note" id="dxexn" style="margin:6px 0 10px"></p><div id="dxads">${S.ads.map((a,i)=>adHTML(i)).join('')}</div></div>
-<div id="dxr" aria-live="polite"></div>
-<p class="note">Cost per click and CTR are used to estimate clicks and views, so enter them from the same ad and date range. The more ads and orders you enter, the more reliable the comparison. Fewer than 15 messages or 3 orders per ad is directional only.</p>`;
+<p class="note">Cost per click and CTR are used to estimate clicks and views, so enter them from the same ad and date range. The more ads and orders you enter, the more reliable the comparison. Fewer than 15 messages or 3 orders per ad is directional only.</p><button class="btn" type="button" id="dxgo" style="margin-top:6px">Diagnose my ads →</button><p class="note" id="dxerr" style="color:var(--po)"></p></div>
+<div id="dxp2" hidden><div class="dxbt" style="margin-bottom:10px"><button class="btn alt" type="button" id="dxback">← Edit data</button></div><div id="dxr" aria-live="polite"></div></div>`;
 
 function ctxOf(){const val=num(S.val),mar=num(S.mar),cr=num(S.cr);return{pl:S.pl,val,mar,cr,pps:(F(val)&&F(mar))?val*mar/100:NaN}}
 function run(){const c=ctxOf(),out=$('dxr');if(!out)return;
@@ -2358,7 +2361,7 @@ function run(){const c=ctxOf(),out=$('dxr');if(!out)return;
  /* render */
  const tone=t=>`<span class="dxt ${t}">`;
  const kp=(l,v,s,t)=>`<div class="kpi"><small>${l}</small><b class="${t||''}">${v}</b>${s?`<small>${s}</small>`:''}</div>`;
- let h=`<div class="card"><h3>4. Campaign diagnosis</h3><div class="dxv ${vtone}"><b>${vt}</b><span>${vtxt}</span></div><div class="grid">${kp('Total spend',P0(tot.spend))}${kp('Messages',N0(tot.msg),P0(tot.cpmsg)+' each')}${F(tot.od)?kp('Orders',N0(tot.od),PC(tot.close)+' close rate'):''}${F(tot.cps)?kp('Cost per sale',P0(tot.cps)):''}${F(tot.roas)?kp('ROAS',X1(tot.roas),'',tot.roas>=1?'e':'p'):''}${F(tot.profit)?kp('Profit after ads',P0(tot.profit),'',tot.profit>=0?'e':'p'):''}${kp('Overall',tlv.label,'',tlv.tone)}</div>
+ let h=`<div class="card"><h3>Campaign diagnosis</h3><div class="dxv ${vtone}"><b>${vt}</b><span>${vtxt}</span></div><div class="grid">${kp('Total spend',P0(tot.spend))}${kp('Messages',N0(tot.msg),P0(tot.cpmsg)+' each')}${F(tot.od)?kp('Orders',N0(tot.od),PC(tot.close)+' close rate'):''}${F(tot.cps)?kp('Cost per sale',P0(tot.cps)):''}${F(tot.roas)?kp('ROAS',X1(tot.roas),'',tot.roas>=1?'e':'p'):''}${F(tot.profit)?kp('Profit after ads',P0(tot.profit),'',tot.profit>=0?'e':'p'):''}${kp('Overall',tlv.label,'',tlv.tone)}</div>
 <h4>Conclusion</h4><p>${sc.join(' ')}</p></div>`;
  /* format comparison */
  if(ads.length)h+=`<div class="card"><h3>Creative format comparison</h3><div class="sc"><table><tr><th>Format</th><th>Spend</th><th>Messages</th><th>Cost / message</th><th>CTR</th><th>Close rate</th><th>Cost / sale</th><th>Profit</th><th>Verdict</th></tr>${fmts.map(f=>`<tr><td><b>${FM[f.k][1]} ${FM[f.k][0]}</b> (${f.g.length})</td><td>${P0(f.m.spend)}</td><td>${N0(f.m.msg)}</td><td>${P0(f.m.cpmsg)}</td><td>${PC(f.m.ctr)}</td><td>${PC(f.m.close)}</td><td>${F(f.m.cps)?P0(f.m.cps):'—'}</td><td>${F(f.m.profit)?`<span class="${f.m.profit>=0?'e':'p'}">${P0(f.m.profit)}</span>`:'—'}</td><td><span class="dxt ${f.lv.tone}">${f.lv.label}</span></td></tr>`).join('')}</table></div>
@@ -2379,6 +2382,11 @@ ${d.I.length?`<p><b>Issues found:</b></p><ul>${d.I.map(i=>`<li><b>${i[0]}.</b> $
  out.innerHTML=h}
 
 window.dxInit=function(){const root=$('out');
+ const page=n=>{$('dxp1').hidden=n!==1;$('dxp2').hidden=n!==2;$('dxs1').className=n===1?'on':'';$('dxs2').className=n===2?'on':'';window.scrollTo({top:0,behavior:'smooth'})};
+ $('dxgo').onclick=()=>{run();const ok=$('dxr').querySelector('.dxv');$('dxerr').textContent=ok?'':'Enter cost per message and number of messages for the overall campaign or for at least one ad first.';if(ok)page(2)};
+ $('dxback').onclick=()=>page(1);
+ $('dxs1').onclick=()=>page(1);$('dxs2').onclick=()=>$('dxgo').click();
+ page(1);
  const upd=()=>{save();run()};
  $('dxpl').onchange=e=>{S.pl=e.target.value;S.ex=false;upd()};
  [['dxval','val'],['dxmar','mar'],['dxcr','cr']].forEach(([id,k])=>{$(id).oninput=e=>{S[k]=e.target.value;S.ex=false;upd()}});
