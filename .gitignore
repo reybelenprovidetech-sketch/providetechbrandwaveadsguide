@@ -1,5 +1,0 @@
-.env.local
-.env*
-node_modules
-private.debug.js
-VERCEL-ENV-VALUES.txt
